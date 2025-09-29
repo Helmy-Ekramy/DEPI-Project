@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-top">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-laptop"></i> TechStore
+                    </a>
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" class="search-bar" placeholder="Search for products...">
+                    </div>
+                    <div class="user-actions">
+                        <a href="account.html" class="action-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </a>
+                        <a href="cart.html" class="action-btn" style="position: relative;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="cart-count">3</span>
+                        </a>
+                        <button class="mobile-menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="navbar-bottom">
+                    <ul class="main-menu">
+                        <li class="has-dropdown">
+                            <a href="#">Computer Components <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="has-dropdown">
+                                    <a href="#">Processor <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Intel</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Graphics Cards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">NVIDIA</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Motherboards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">AMD</a></li>
+                                        <li><a href="#">Intel</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">RAM <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">DDR4</a></li>
+                                        <li><a href="#">DDR5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">SSD</a></li>
+                                <li><a href="#">HDD</a></li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cases <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Case + PSU Bundles</a></li>
+                                        <li><a href="#">Case + Cooler Bundles</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cooling <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Air Coolers</a></li>
+                                        <li><a href="#">Liquid Coolers</a></li>
+                                        <li><a href="#">Fans</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Power Supplies</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Laptops <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Laptops</a></li>
+                                <li><a href="#">Business Laptops</a></li>
+                                <li><a href="#">Ultrabooks</a></li>
+                                <li><a href="#">Workstations</a></li>
+                                <li><a href="#">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Pre-built PCs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming PCs</a></li>
+                                <li><a href="#">Workstation PCs</a></li>
+                                <li><a href="#">Budget PCs</a></li>
+                                <li><a href="#">Custom Builds</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Monitors <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Monitors</a></li>
+                                <li><a href="#">4K Monitors</a></li>
+                                <li><a href="#">Ultrawide Monitors</a></li>
+                                <li><a href="#">Professional Monitors</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Keyboards</a></li>
+                                <li><a href="#">Mice</a></li>
+                                <li><a href="#">Headsets</a></li>
+                                <li><a href="#">Gaming Chairs</a></li>
+                                <li><a href="#">VR Headsets</a></li>
+                                <li><a href="#">Webcams</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="utility-links">
+                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                            <i class="fas fa-map-marker-alt"></i> Find Us
+                        </a>
+                        <a href="track-order.html" class="utility-link">
+                            <i class="fas fa-box"></i> Track Order
+                        </a>
+                        <a href="contact.html" class="contact-button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="account-section">
+            <div class="container">
+                <h1 class="section-title">Your TechStore Account</h1>
+                <p class="section-subtitle">Manage your account, track orders, and unlock exclusive offers.</p>
+                <div class="account-options">
+                    <div class="account-card">
+                        <i class="fas fa-user-plus account-icon"></i>
+                        <h3>Create an Account</h3>
+                        <p>Join TechStore to enjoy personalized recommendations and faster checkouts.</p>
+                        <a href="signup.html" class="account-cta">Sign Up</a>
+                    </div>
+                    <div class="account-card">
+                        <i class="fas fa-sign-in-alt account-icon"></i>
+                        <h3>Log In</h3>
+                        <p>Access your account to view orders, manage your profile, and more.</p>
+                        <a href="login.html" class="account-cta">Log In</a>
+                    </div>
+                    <div class="account-card">
+                        <i class="fas fa-user-cog account-icon"></i>
+                        <h3>Manage Account</h3>
+                        <p>Update your profile, change your password, or view your order history.</p>
+                        <a href="manage-account.html" class="account-cta">Manage</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>About TechStore</h4>
+                    <p>Your trusted source for high-quality tech products since 2010.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; 2025 TechStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+

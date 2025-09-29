@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - TechStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container navbar-top">
+                <a href="index.html" class="logo"><i class="fas fa-laptop-code"></i> TechStore</a>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-bar" placeholder="Search for products...">
+                </div>
+                <div class="user-actions">
+                    <a href="favorites.html" class="action-btn">
+                        <i class="fas fa-heart"></i>
+                        <span>Favorites</span>
+                        <span class="favorite-count">0</span>
+                    </a>
+                    <a href="cart.html" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="account.html" class="action-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Account</span>
+                    </a>
+                </div>
+            </div>
+            <div class="container navbar-bottom">
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+                <ul class="main-menu">
+                    <li><a href="/">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/products/laptops">Laptops</a></li>
+                            <li><a href="/products/desktops">Desktops</a></li>
+                            <li><a href="/products/accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="utility-links">
+                    <a href="track-order.html" class="utility-link"><i class="fas fa-truck"></i> Track Order</a>
+                    <a href="faq.html" class="utility-link"><i class="fas fa-question-circle"></i> FAQ</a>
+                    <a href="contact.html" class="contact-button">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="favorites-section" data-aos="fade-up">
+            <div class="container">
+                <h1 class="section-title" data-aos="fade-up" data-aos-delay="100">Your Favorite Products</h1>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Browse and manage your saved items.</p>
+                <div class="products-grid" id="favorites-grid">
+                    <!-- Example product cards (to be populated dynamically) -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="" alt="Ultra Laptop">
+                        <h3>Ultra Laptop X1</h3>
+                        <p>$1699.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="1"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <!-- Empty state message -->
+                    <div class="empty-favorites" style="display: none;">
+                        <p>No favorite products yet. Start adding items to your favorites!</p>
+                        <a href="/products" class="product-cta">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>About TechStore</h4>
+                <p>TechStore offers cutting-edge PCs, laptops, and accessories to elevate your tech experience.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/products">Shop</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@techstore.com</p>
+                <p><i class="fas fa-phone"></i> +1 (800) 987-6543</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-copyright">&copy; 2025 TechStore. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 120
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            document.querySelector('.main-menu').classList.toggle('active');
+        });
+
+        // Handle empty favorites
+        const favoritesGrid = document.getElementById('favorites-grid');
+        const productCards = favoritesGrid.querySelectorAll('.product-card');
+        const emptyMessage = favoritesGrid.querySelector('.empty-favorites');
+
+        if (productCards.length === 0) {
+            emptyMessage.style.display = 'block';
+        }
+
+        // Remove favorite (placeholder for backend integration)
+        document.querySelectorAll('.remove-favorite').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                fetch(`/favorites/remove/${productId}`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.closest('.product-card').remove();
+                            document.querySelector('.favorite-count').textContent = data.favoriteCount;
+                            if (favoritesGrid.querySelectorAll('.product-card').length === 0) {
+                                emptyMessage.style.display = 'block';
+                            }
+                        }
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
