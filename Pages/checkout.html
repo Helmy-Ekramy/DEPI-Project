@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Category Management</title>
+    <title>TechStore - Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -134,8 +134,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="about.html" class="utility-link">
-                            <i class="fas fa-info-circle"></i> About Us
+                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                            <i class="fas fa-map-marker-alt"></i> Find Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,61 +150,79 @@
     </header>
 
     <main>
-        <section class="category-management-section">
+        <section class="checkout-section">
             <div class="container">
-                <h1 class="section-title">Category Management</h1>
-                <p class="section-subtitle">Add, edit, or delete product categories.</p>
-                <div class="category-form">
-                    <h2>Add New Category</h2>
-                    <form action="/category-management/add" method="POST">
-                        <div class="form-group">
-                            <label for="category-name">Category Name</label>
-                            <input type="text" id="category-name" name="category-name" placeholder="Enter category name" required>
+                <h1 class="section-title">Checkout</h1>
+                <p class="section-subtitle">Enter your shipping and payment details to complete your order.</p>
+                <div class="checkout-content">
+                    <div class="checkout-form">
+                        <h2>Shipping Information</h2>
+                        <form action="/place-order" method="POST" class="auth-form">
+                            <div class="form-group">
+                                <label for="full-name">Full Name</label>
+                                <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" name="zip" placeholder="Enter your ZIP code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" name="country" required>
+                                    <option value="">Select a country</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                </select>
+                            </div>
+                            <h2>Payment Information</h2>
+                            <div class="form-group">
+                                <label for="payment-method">Payment Method</label>
+                                <select id="payment-method" name="payment-method" required>
+                                    <option value="">Select a payment method</option>
+                                    <option value="credit-card">Credit Card</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="bank-transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="card-details" style="display: none;">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" name="card-number" placeholder="Enter your card number">
+                            </div>
+                            <button type="submit" class="auth-submit">Place Order</button>
+                        </form>
+                    </div>
+                    <div class="cart-summary">
+                        <h2>Order Summary</h2>
+                        <div class="summary-item">
+                            <p>NVIDIA GeForce RTX 4090 x 1</p>
+                            <p>$1,599.99</p>
                         </div>
-                        <div class="form-group">
-                            <label for="parent-category">Parent Category (Optional)</label>
-                            <select id="parent-category" name="parent-category">
-                                <option value="">None</option>
-                                <option value="1">Computer Components</option>
-                                <option value="2">Laptops</option>
-                                <option value="3">Pre-built PCs</option>
-                            </select>
+                        <div class="summary-item">
+                            <p>Corsair K70 RGB Mechanical Keyboard x 2</p>
+                            <p>$259.98</p>
                         </div>
-                        <button type="submit" class="auth-submit">Add Category</button>
-                    </form>
-                </div>
-                <div class="category-table">
-                    <h2>Existing Categories</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Parent Category</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Computer Components</td>
-                                <td>-</td>
-                                <td>
-                                    <a href="#" class="table-action">Edit</a>
-                                    <a href="#" class="table-action delete">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Processors</td>
-                                <td>Computer Components</td>
-                                <td>
-                                    <a href="#" class="table-action">Edit</a>
-                                    <a href="#" class="table-action delete">Delete</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$1,859.97</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>Free</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span>$1,859.97</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -292,23 +310,10 @@
             document.querySelector('.main-menu').classList.toggle('active');
         });
 
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
-        });
-
-        // Delete confirmation
-        document.querySelectorAll('.table-action.delete').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm('Are you sure you want to delete this category?')) {
-                    console.log('Delete category:', this.closest('tr').querySelector('td').textContent);
-                    // Trigger backend delete endpoint (e.g., /category-management/delete/{id})
-                }
-            });
+        // Show/hide card details based on payment method
+        document.querySelector('#payment-method').addEventListener('change', function() {
+            const cardDetails = document.querySelector('#card-details');
+            cardDetails.style.display = this.value === 'credit-card' ? 'block' : 'none';
         });
     </script>
 </body>

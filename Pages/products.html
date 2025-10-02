@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - About Us</title>
+    <title>TechStore - Products</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -134,8 +134,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="about.html" class="utility-link">
-                            <i class="fas fa-info-circle"></i> About Us
+                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                            <i class="fas fa-map-marker-alt"></i> Find Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,26 +150,55 @@
     </header>
 
     <main>
-        <section class="about-section">
+        <section class="products-section">
             <div class="container">
-                <h1 class="section-title">About TechStore</h1>
-                <p class="section-subtitle">Your trusted partner for high-performance PCs, laptops, and accessories.</p>
-                <div class="about-content">
-                    <div class="about-image">
-                        <img src="images/th.webp" alt="TechStore Team">
+                <h1 class="section-title">Shop All Products</h1>
+                <p class="section-subtitle">Browse our wide selection of PCs, laptops, and accessories.</p>
+                <div class="products-filter">
+                    <div class="filter-group">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="">All Categories</option>
+                            <option value="processors">Processors</option>
+                            <option value="graphics-cards">Graphics Cards</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
                     </div>
-                    <div class="about-text">
-                        <h2>Our Mission</h2>
-                        <p>At TechStore, we are passionate about empowering gamers, professionals, and tech enthusiasts with the best hardware and accessories. Our mission is to deliver top-quality products with exceptional customer service.</p>
-                        <h2>Our Story</h2>
-                        <p>Founded in 2010, TechStore started as a small retailer with a vision to make high-performance technology accessible to everyone. Today, we are a leading e-commerce platform, offering a wide range of PCs, laptops, and accessories from top brands.</p>
-                        <h2>Why Choose Us?</h2>
-                        <ul>
-                            <li>Curated selection of premium products</li>
-                            <li>Fast and reliable shipping</li>
-                            <li>Dedicated customer support</li>
-                            <li>Competitive prices and exclusive deals</li>
-                        </ul>
+                    <div class="filter-group">
+                        <label for="sort">Sort By:</label>
+                        <select id="sort" name="sort">
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="name-desc">Name: Z to A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="../images/zd170.jpg" alt="NVIDIA RTX 4090">
+                        <h3>NVIDIA GeForce RTX 4090</h3>
+                        <p>$1,599.99</p>
+                        <a href="" class="product-cta">View Product</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="../images/zm234-1.jpg" alt="Intel Core i9">
+                        <h3>Intel Core i9-13900K</h3>
+                        <p>$589.99</p>
+                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="../images/zu563.jpg" alt="Corsair K70">
+                        <h3>Corsair K70 RGB Mechanical Keyboard</h3>
+                        <p>$129.99</p>
+                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="../images/zh535.jpg" alt="ASUS ROG Laptop">
+                        <h3>ASUS ROG Strix Scar 17</h3>
+                        <p>$2,499.99</p>
+                        <a href="product-detail.html" class="product-cta">View Product</a>
                     </div>
                 </div>
             </div>
@@ -258,13 +287,17 @@
             document.querySelector('.main-menu').classList.toggle('active');
         });
 
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
+        // Filter and sort (client-side example)
+        document.querySelector('#category').addEventListener('change', function() {
+            console.log(`Filter by category: ${this.value}`);
+            // Trigger backend fetch with category filter
+        });
+
+        document.querySelector('#sort').addEventListener('change', function() {
+            console.log(`Sort by: ${this.value}`);
+            // Trigger backend fetch with sort option
         });
     </script>
+
 </body>
 </html>

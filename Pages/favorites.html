@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Management - TechTrend Innovations</title>
+    <title>Favorites - TechStore</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container navbar-top">
-                <a href="/" class="logo"><i class="fas fa-laptop-code"></i> TechTrend</a>
+                <a href="../index.html" class="logo"><i class="fas fa-laptop-code"></i> TechStore</a>
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-bar" placeholder="Search for products...">
                 </div>
                 <div class="user-actions">
                     <a href="favorites.html" class="action-btn">
-                            <i class="fas fa-heart"></i>
-                            <span>Favorites</span>
-                            <span class="favorite-count">0</span>
+                        <i class="fas fa-heart"></i>
+                        <span>Favorites</span>
+                        <span class="favorite-count">0</span>
                     </a>
                     <a href="cart.html" class="action-btn">
                         <i class="fas fa-shopping-cart"></i>
@@ -36,7 +37,7 @@
             <div class="container navbar-bottom">
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
                 <ul class="main-menu">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="has-dropdown">
                         <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
@@ -57,52 +58,94 @@
         </nav>
     </header>
 
-    <section class="category-management-section">
-        <div class="container">
-            <h1 class="section-title">Order Management</h1>
-            <p class="section-subtitle">View and manage customer orders.</p>
-
-            <div class="category-table">
-                <h2>Order List</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1001</td>
-                            <td>John Doe</td>
-                            <td>$1499.98</td>
-                            <td>Processing</td>
-                            <td>2025-09-25</td>
-                            <td>
-                                <a href="/order-management/view/1001" class="table-action">View</a>
-                                <a href="/order-management/update/1001" class="table-action">Update</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#1002</td>
-                            <td>Jane Smith</td>
-                            <td>$59.99</td>
-                            <td>Shipped</td>
-                            <td>2025-09-24</td>
-                            <td>
-                                <a href="/order-management/view/1002" class="table-action">View</a>
-                                <a href="/order-management/update/1002" class="table-action">Update</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main>
+        <section class="favorites-section" data-aos="fade-up">
+            <div class="container">
+                <h1 class="section-title" data-aos="fade-up" data-aos-delay="100">Your Favorite Products</h1>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Browse and manage your saved items.</p>
+                <div class="products-grid" id="favorites-grid">
+                    <!-- Example product cards (to be populated dynamically) -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="../images/zc134_1_1.jpg" alt="Ultra Laptop">
+                        <h3>Ultra Laptop X1</h3>
+                        <p>$1699.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="1"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <!-- Empty state message -->
+                    <div class="empty-favorites" style="display: none;">
+                        <p>No favorite products yet. Start adding items to your favorites!</p>
+                        <a href="products.html" class="product-cta">Shop Now</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container footer-grid">
@@ -180,12 +223,47 @@
         </div>
     </footer>
 
-
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 120
+        });
+
+        // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
             document.querySelector('.main-menu').classList.toggle('active');
         });
-    </script>
 
+        // Handle empty favorites
+        const favoritesGrid = document.getElementById('favorites-grid');
+        const productCards = favoritesGrid.querySelectorAll('.product-card');
+        const emptyMessage = favoritesGrid.querySelector('.empty-favorites');
+
+        if (productCards.length === 0) {
+            emptyMessage.style.display = 'block';
+        }
+
+        // Remove favorite (placeholder for backend integration)
+        document.querySelectorAll('.remove-favorite').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                fetch(`/favorites/remove/${productId}`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.closest('.product-card').remove();
+                            document.querySelector('.favorite-count').textContent = data.favoriteCount;
+                            if (favoritesGrid.querySelectorAll('.product-card').length === 0) {
+                                emptyMessage.style.display = 'block';
+                            }
+                        }
+                    });
+            });
+        });
+    </script>
 </body>
 </html>

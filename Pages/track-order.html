@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Account</title>
+    <title>TechStore - Track Order</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -134,8 +134,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
-                            <i class="fas fa-map-marker-alt"></i> Find Us
+                        <a href="about.html" class="utility-link">
+                            <i class="fas fa-info-circle"></i> About Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,28 +150,25 @@
     </header>
 
     <main>
-        <section class="account-section">
+        <section class="track-order-section">
             <div class="container">
-                <h1 class="section-title">Your TechStore Account</h1>
-                <p class="section-subtitle">Manage your account, track orders, and unlock exclusive offers.</p>
-                <div class="account-options">
-                    <div class="account-card">
-                        <i class="fas fa-user-plus account-icon"></i>
-                        <h3>Create an Account</h3>
-                        <p>Join TechStore to enjoy personalized recommendations and faster checkouts.</p>
-                        <a href="signup.html" class="account-cta">Sign Up</a>
-                    </div>
-                    <div class="account-card">
-                        <i class="fas fa-sign-in-alt account-icon"></i>
-                        <h3>Log In</h3>
-                        <p>Access your account to view orders, manage your profile, and more.</p>
-                        <a href="login.html" class="account-cta">Log In</a>
-                    </div>
-                    <div class="account-card">
-                        <i class="fas fa-user-cog account-icon"></i>
-                        <h3>Manage Account</h3>
-                        <p>Update your profile, change your password, or view your order history.</p>
-                        <a href="manage-account.html" class="account-cta">Manage</a>
+                <h1 class="section-title">Track Your Order</h1>
+                <p class="section-subtitle">Enter your order ID to check the status of your delivery.</p>
+                <div class="track-order-content">
+                    <form action="/track-order/submit" method="POST" class="track-order-form">
+                        <div class="form-group">
+                            <label for="order-id">Order ID</label>
+                            <input type="text" id="order-id" name="order-id" placeholder="Enter your order ID" required>
+                        </div>
+                        <button type="submit" class="auth-submit">Track Order</button>
+                    </form>
+                    <div class="order-status" style="display: none;">
+                        <h2>Order Status</h2>
+                        <p><strong>Order ID:</strong> #123456</p>
+                        <p><strong>Status:</strong> Shipped</p>
+                        <p><strong>Estimated Delivery:</strong> October 5, 2025</p>
+                        <p><strong>Carrier:</strong> FedEx</p>
+                        <p><strong>Tracking Number:</strong> <a href="tel:+201280469393">01280469393</a></p>
                     </div>
                 </div>
             </div>
@@ -259,9 +256,23 @@
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-menu').classList.toggle('active');
         });
+
+        // Search bar functionality (example)
+        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                console.log(`Search for: ${this.value}`);
+                // Trigger backend search endpoint (e.g., /products?search=query)
+            }
+        });
+
+        // Track order form submission (example)
+        document.querySelector('.track-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orderId = document.querySelector('#order-id').value;
+            console.log(`Tracking order: ${orderId}`);
+            // Simulate showing order status (replace with AJAX call to backend)
+            document.querySelector('.order-status').style.display = 'block';
+        });
     </script>
 </body>
 </html>
-
-
-

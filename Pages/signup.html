@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Track Order</title>
+    <title>TechStore - Sign Up</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -134,8 +134,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="about.html" class="utility-link">
-                            <i class="fas fa-info-circle"></i> About Us
+                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                            <i class="fas fa-map-marker-alt"></i> Find Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,26 +150,31 @@
     </header>
 
     <main>
-        <section class="track-order-section">
+        <section class="auth-section">
             <div class="container">
-                <h1 class="section-title">Track Your Order</h1>
-                <p class="section-subtitle">Enter your order ID to check the status of your delivery.</p>
-                <div class="track-order-content">
-                    <form action="/track-order/submit" method="POST" class="track-order-form">
+                <div class="auth-card">
+                    <h1 class="auth-title">Create Your Account</h1>
+                    <p class="auth-subtitle">Join TechStore for a personalized shopping experience.</p>
+                    <form action="/signup" method="POST" class="auth-form">
                         <div class="form-group">
-                            <label for="order-id">Order ID</label>
-                            <input type="text" id="order-id" name="order-id" placeholder="Enter your order ID" required>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                         </div>
-                        <button type="submit" class="auth-submit">Track Order</button>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="auth-submit">Sign Up</button>
+                        <p class="auth-link">Already have an account? <a href="login.html">Log In</a></p>
                     </form>
-                    <div class="order-status" style="display: none;">
-                        <h2>Order Status</h2>
-                        <p><strong>Order ID:</strong> #123456</p>
-                        <p><strong>Status:</strong> Shipped</p>
-                        <p><strong>Estimated Delivery:</strong> October 5, 2025</p>
-                        <p><strong>Carrier:</strong> FedEx</p>
-                        <p><strong>Tracking Number:</strong> <a href="tel:+201280469393">01280469393</a></p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -256,23 +261,7 @@
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-menu').classList.toggle('active');
         });
-
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
-        });
-
-        // Track order form submission (example)
-        document.querySelector('.track-order-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const orderId = document.querySelector('#order-id').value;
-            console.log(`Tracking order: ${orderId}`);
-            // Simulate showing order status (replace with AJAX call to backend)
-            document.querySelector('.order-status').style.display = 'block';
-        });
     </script>
+
 </body>
 </html>

@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Product Detail</title>
+    <title>TechStore - Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -150,66 +150,28 @@
     </header>
 
     <main>
-        <section class="product-detail-section">
+        <section class="account-section">
             <div class="container">
-                <div class="product-detail-content">
-                    <div class="product-detail-image">
-                        <img src="images/zu439.jpg" alt="NVIDIA RTX 4090">
+                <h1 class="section-title">Your TechStore Account</h1>
+                <p class="section-subtitle">Manage your account, track orders, and unlock exclusive offers.</p>
+                <div class="account-options">
+                    <div class="account-card">
+                        <i class="fas fa-user-plus account-icon"></i>
+                        <h3>Create an Account</h3>
+                        <p>Join TechStore to enjoy personalized recommendations and faster checkouts.</p>
+                        <a href="signup.html" class="account-cta">Sign Up</a>
                     </div>
-                    <div class="product-detail-info">
-                        <h1 class="product-title">NVIDIA GeForce RTX 4090</h1>
-                        <p class="product-price">$1,599.99</p>
-                        <p class="product-availability">In Stock</p>
-                        <div class="product-quantity">
-                            <label for="quantity">Quantity:</label>
-                            <div class="quantity-selector">
-                                <button class="quantity-btn" data-action="decrease">-</button>
-                                <input type="number" id="quantity" value="1" min="1" class="quantity-input">
-                                <button class="quantity-btn" data-action="increase">+</button>
-                            </div>
-                        </div>
-                        <button class="add-to-cart-btn">Add to Cart</button>
-                        <div class="product-description">
-                            <h3>Product Description</h3>
-                            <p>The NVIDIA GeForce RTX 4090 is the ultimate graphics card for gamers and creators, featuring 24GB GDDR6X memory, DLSS 3.0, and unparalleled performance for 4K gaming and professional workloads.</p>
-                        </div>
-                        <div class="product-specifications">
-                            <h3>Specifications</h3>
-                            <ul>
-                                <li><strong>CUDA Cores:</strong> 16384</li>
-                                <li><strong>Memory:</strong> 24GB GDDR6X</li>
-                                <li><strong>Boost Clock:</strong> 2.52 GHz</li>
-                                <li><strong>Interface:</strong> PCIe 4.0</li>
-                            </ul>
-                        </div>
+                    <div class="account-card">
+                        <i class="fas fa-sign-in-alt account-icon"></i>
+                        <h3>Log In</h3>
+                        <p>Access your account to view orders, manage your profile, and more.</p>
+                        <a href="login.html" class="account-cta">Log In</a>
                     </div>
-                </div>
-                <div class="product-reviews">
-                    <h2>Customer Reviews</h2>
-                    <div class="review">
-                        <p><strong>John D.</strong> - ★★★★★</p>
-                        <p>Absolutely phenomenal performance! Runs all my games at max settings without breaking a sweat.</p>
-                    </div>
-                    <div class="review">
-                        <p><strong>Sarah M.</strong> - ★★★★☆</p>
-                        <p>Great card, but it's quite expensive. Worth it for professionals or serious gamers.</p>
-                    </div>
-                </div>
-                <div class="related-products">
-                    <h2>Related Products</h2>
-                    <div class="related-products-grid">
-                        <div class="product-card">
-                            <img src="images/zl830-1.jpg" alt="RTX 4080">
-                            <h3>NVIDIA GeForce RTX 4080</h3>
-                            <p>$1,199.99</p>
-                            <a href="#" class="product-cta">View Product</a>
-                        </div>
-                        <div class="product-card">
-                            <img src="images/zu563.jpg" alt="AMD 7900">
-                            <h3>AMD Radeon RX 7900 XTX</h3>
-                            <p>$999.99</p>
-                            <a href="#" class="product-cta">View Product</a>
-                        </div>
+                    <div class="account-card">
+                        <i class="fas fa-user-cog account-icon"></i>
+                        <h3>Manage Account</h3>
+                        <p>Update your profile, change your password, or view your order history.</p>
+                        <a href="manage-account.html" class="account-cta">Manage</a>
                     </div>
                 </div>
             </div>
@@ -297,28 +259,9 @@
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-menu').classList.toggle('active');
         });
-
-        // Quantity adjustment
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const action = this.dataset.action;
-                const input = this.parentElement.querySelector('.quantity-input');
-                let value = parseInt(input.value);
-                if (action === 'increase') {
-                    input.value = value + 1;
-                } else if (action === 'decrease' && value > 1) {
-                    input.value = value - 1;
-                }
-                // Trigger update to backend (e.g., via fetch)
-            });
-        });
-
-        // Add to cart (example client-side action)
-        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
-            const quantity = document.querySelector('#quantity').value;
-            alert(`Added ${quantity} item(s) to cart!`);
-            // Trigger backend POST request to /cart/add
-        });
     </script>
 </body>
 </html>
+
+
+

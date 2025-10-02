@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Order Confirmation</title>
+    <title>TechStore - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -33,7 +33,7 @@
                         <a href="cart.html" class="action-btn" style="position: relative;">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Cart</span>
-                            <span class="cart-count">0</span>
+                            <span class="cart-count">3</span>
                         </a>
                         <button class="mobile-menu-btn">
                             <i class="fas fa-bars"></i>
@@ -134,8 +134,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
-                            <i class="fas fa-map-marker-alt"></i> Find Us
+                        <a href="about.html" class="utility-link">
+                            <i class="fas fa-info-circle"></i> About Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,45 +150,87 @@
     </header>
 
     <main>
-        <section class="order-confirmation-section">
+        <section class="dashboard-section">
             <div class="container">
-                <h1 class="section-title">Order Confirmed!</h1>
-                <p class="section-subtitle">Thank you for your purchase. You'll receive an email confirmation soon.</p>
-                <div class="order-confirmation-content">
-                    <div class="order-details">
-                        <h2>Order Details</h2>
-                        <p><strong>Order Number:</strong> #123456</p>
-                        <p><strong>Order Date:</strong> September 26, 2025</p>
-                        <p><strong>Estimated Delivery:</strong> October 3, 2025</p>
-                        <h3>Shipping Information</h3>
-                        <p>John Doe</p>
-                        <p>123 Tech Street, Suite 100</p>
-                        <p>New York, NY 10001, USA</p>
-                        <h3>Order Summary</h3>
-                        <div class="summary-item">
-                            <p>NVIDIA GeForce RTX 4090 x 1</p>
-                            <p>$1,599.99</p>
-                        </div>
-                        <div class="summary-item">
-                            <p>Corsair K70 RGB Mechanical Keyboard x 2</p>
-                            <p>$259.98</p>
-                        </div>
-                        <div class="summary-row">
-                            <span>Subtotal</span>
-                            <span>$1,859.97</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Shipping</span>
-                            <span>Free</span>
-                        </div>
-                        <div class="summary-row summary-total">
-                            <span>Total</span>
-                            <span>$1,859.97</span>
-                        </div>
+                <h1 class="section-title">Admin Dashboard</h1>
+                <p class="section-subtitle">Manage products, orders, categories, and users.</p>
+                <div class="dashboard-content">
+                    <div class="dashboard-card">
+                        <h3>Products</h3>
+                        <p>Manage your product inventory.</p>
+                        <a href="product-management.html" class="dashboard-cta">View Products</a>
                     </div>
-                    <div class="order-actions">
-                        <a href="#" class="track-order-btn">Track Your Order</a>
-                        <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                    <div class="dashboard-card">
+                        <h3>Orders</h3>
+                        <p>View and update order statuses.</p>
+                        <a href="order-management.html" class="dashboard-cta">View Orders</a>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Categories</h3>
+                        <p>Add or edit product categories.</p>
+                        <a href="category-management.html" class="dashboard-cta">Manage Categories</a>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Users</h3>
+                        <p>Manage customer accounts.</p>
+                        <a href="user-management.html" class="dashboard-cta">Manage Users</a>
+                    </div>
+                    <div class="dashboard-table" style="width:600px;">
+                        <h2>Recent Orders</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#123456</td>
+                                    <td>John Doe</td>
+                                    <td>Shipped</td>
+                                    <td>$1,299.99</td>
+                                    <td><a href="#" class="table-action">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#123457</td>
+                                    <td>Jane Smith</td>
+                                    <td>Processing</td>
+                                    <td>$799.50</td>
+                                    <td><a href="#" class="table-action">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="dashboard-table" style="width:500px;margin-left: 350px;">
+                        <h2>Low Stock Products</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>P001</td>
+                                    <td>Intel Core i9</td>
+                                    <td>5</td>
+                                    <td><a href="#" class="table-action">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td>P002</td>
+                                    <td>NVIDIA RTX 3080</td>
+                                    <td>3</td>
+                                    <td><a href="#" class="table-action">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -276,7 +318,14 @@
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-menu').classList.toggle('active');
         });
-    </script>
 
+        // Search bar functionality (example)
+        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                console.log(`Search for: ${this.value}`);
+                // Trigger backend search endpoint (e.g., /products?search=query)
+            }
+        });
+    </script>
 </body>
 </html>

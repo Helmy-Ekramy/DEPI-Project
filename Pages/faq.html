@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Products</title>
+    <title>TechStore - FAQ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <script src="js.js" defer></script>
+
 </head>
 <body>
     <header class="main-header">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-top">
-                    <a href="index.html" class="logo">
+                    <a href="../index.html" class="logo">
                         <i class="fas fa-laptop"></i> TechStore
                     </a>
                     <div class="search-container">
@@ -134,8 +136,8 @@
                         </li>
                     </ul>
                     <div class="utility-links">
-                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
-                            <i class="fas fa-map-marker-alt"></i> Find Us
+                        <a href="about.html" class="utility-link">
+                            <i class="fas fa-info-circle"></i> About Us
                         </a>
                         <a href="track-order.html" class="utility-link">
                             <i class="fas fa-box"></i> Track Order
@@ -150,55 +152,34 @@
     </header>
 
     <main>
-        <section class="products-section">
+        <section class="faq-section">
             <div class="container">
-                <h1 class="section-title">Shop All Products</h1>
-                <p class="section-subtitle">Browse our wide selection of PCs, laptops, and accessories.</p>
-                <div class="products-filter">
-                    <div class="filter-group">
-                        <label for="category">Category:</label>
-                        <select id="category" name="category">
-                            <option value="">All Categories</option>
-                            <option value="processors">Processors</option>
-                            <option value="graphics-cards">Graphics Cards</option>
-                            <option value="laptops">Laptops</option>
-                            <option value="accessories">Accessories</option>
-                        </select>
+                <h1 class="section-title">Frequently Asked Questions</h1>
+                <p class="section-subtitle">Find answers to common questions about shopping with TechStore.</p>
+                <div class="faq-content">
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is your return policy?</h3>
+                        <p class="faq-answer">We offer a 30-day return policy for most products in their original condition. Please check our <a href="#">Returns</a> page for detailed instructions.</p>
                     </div>
-                    <div class="filter-group">
-                        <label for="sort">Sort By:</label>
-                        <select id="sort" name="sort">
-                            <option value="price-asc">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
-                            <option value="name-asc">Name: A to Z</option>
-                            <option value="name-desc">Name: Z to A</option>
-                        </select>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How long does shipping take?</h3>
+                        <p class="faq-answer">Standard shipping typically takes 3-7 business days within the US. Expedited options are available at checkout.</p>
                     </div>
-                </div>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <img src="images/zu412.jpg" alt="NVIDIA RTX 4090">
-                        <h3>NVIDIA GeForce RTX 4090</h3>
-                        <p>$1,599.99</p>
-                        <a href="" class="product-cta">View Product</a>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do you offer international shipping?</h3>
+                        <p class="faq-answer">Yes, we ship to select international destinations. Shipping costs and times vary by location. Please see our <a href="#">Shipping</a> page for details.</p>
                     </div>
-                    <div class="product-card">
-                        <img src="images/zm234-1.jpg" alt="Intel Core i9">
-                        <h3>Intel Core i9-13900K</h3>
-                        <p>$589.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How can I track my order?</h3>
+                        <p class="faq-answer">You can track your order using the order ID provided in your confirmation email. Visit our <a href="track-order.html">Track Order</a> page to check the status.</p>
                     </div>
-                    <div class="product-card">
-                        <img src="images/zu563.jpg" alt="Corsair K70">
-                        <h3>Corsair K70 RGB Mechanical Keyboard</h3>
-                        <p>$129.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What payment methods do you accept?</h3>
+                        <p class="faq-answer">We accept major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. All transactions are secure.</p>
                     </div>
-                    <div class="product-card">
-                        <img src="images/zh535.jpg" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I cancel or modify my order?</h3>
+                        <p class="faq-answer">Orders can be canceled or modified within 24 hours of placement. Please contact our support team at <a href="mailto:support@techstore.com">support@techstore.com</a>.</p>
                     </div>
                 </div>
             </div>
@@ -287,17 +268,21 @@
             document.querySelector('.main-menu').classList.toggle('active');
         });
 
-        // Filter and sort (client-side example)
-        document.querySelector('#category').addEventListener('change', function() {
-            console.log(`Filter by category: ${this.value}`);
-            // Trigger backend fetch with category filter
+        // Search bar functionality (example)
+        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                console.log(`Search for: ${this.value}`);
+                // Trigger backend search endpoint (e.g., /products?search=query)
+            }
         });
 
-        document.querySelector('#sort').addEventListener('change', function() {
-            console.log(`Sort by: ${this.value}`);
-            // Trigger backend fetch with sort option
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
         });
     </script>
-
 </body>
 </html>
