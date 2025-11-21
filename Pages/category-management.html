@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Category Management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -286,30 +288,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
-        });
-
-        // Delete confirmation
-        document.querySelectorAll('.table-action.delete').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm('Are you sure you want to delete this category?')) {
-                    console.log('Delete category:', this.closest('tr').querySelector('td').textContent);
-                    // Trigger backend delete endpoint (e.g., /category-management/delete/{id})
-                }
-            });
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

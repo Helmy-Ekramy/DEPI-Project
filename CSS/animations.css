@@ -1,0 +1,508 @@
+/* ==============================================
+   ENHANCED TYPOGRAPHY & ANIMATIONS
+   ============================================== */
+
+/* Import Modern Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+/* ==============================================
+   1. TYPOGRAPHY SYSTEM
+   ============================================== */
+
+/* Primary Font: Poppins for headings */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.hero-title,
+.product-title,
+.auth-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Secondary Font: Inter for body text */
+body,
+p,
+span,
+a,
+input,
+button,
+textarea,
+select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+/* Typography Scale */
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ==============================================
+   2. PRODUCT CARD ANIMATIONS
+   ============================================== */
+
+.product-card {
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Product CTA Button Animation */
+.product-cta,
+.promotion-cta {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.product-cta::before,
+.promotion-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.product-cta:hover::before,
+.promotion-cta:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.product-cta:active,
+.promotion-cta:active {
+  transform: scale(0.95);
+}
+
+/* ==============================================
+   3. NAVIGATION ANIMATIONS
+   ============================================== */
+
+.main-menu > li > a {
+  position: relative;
+  transition: color 0.5s ease;
+}
+
+.main-menu > li > a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-menu > li > a:hover::after {
+  width: 100%;
+}
+
+/* Utility Links Hover */
+.utility-link {
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.utility-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.5s ease;
+}
+
+.utility-link:hover::before {
+  width: 100%;
+}
+
+/* ==============================================
+   4. BUTTON ANIMATIONS
+   ============================================== */
+
+.hero-cta,
+.contact-button,
+.checkout-btn,
+.auth-submit,
+.account-cta,
+.track-order-btn,
+.dashboard-cta,
+.add-to-cart-btn {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.hero-cta::before,
+.contact-button::before,
+.checkout-btn::before,
+.auth-submit::before,
+.account-cta::before,
+.track-order-btn::before,
+.dashboard-cta::before,
+.add-to-cart-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.hero-cta:hover::before,
+.contact-button:hover::before,
+.checkout-btn:hover::before,
+.auth-submit:hover::before,
+.account-cta:hover::before,
+.track-order-btn:hover::before,
+.dashboard-cta:hover::before,
+.add-to-cart-btn:hover::before {
+  left: 100%;
+}
+
+.hero-cta:hover,
+.contact-button:hover,
+.checkout-btn:hover,
+.auth-submit:hover,
+.account-cta:hover,
+.track-order-btn:hover,
+.dashboard-cta:hover,
+.add-to-cart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+}
+
+.hero-cta:active,
+.contact-button:active,
+.checkout-btn:active,
+.auth-submit:active,
+.account-cta:active,
+.track-order-btn:active,
+.dashboard-cta:active,
+.add-to-cart-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* ==============================================
+   5. FORM INPUT ANIMATIONS
+   ============================================== */
+
+
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid #d1d5db;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Floating Label Effect */
+.form-group.focused label {
+  transform: translateY(-8px) scale(0.95);
+  color: #3498db;
+}
+
+.form-group label {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+}
+
+/* Input Glow Animation */
+@keyframes inputGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+  }
+}
+
+
+
+/* ==============================================
+   6. CARD HOVER EFFECTS
+   ============================================== */
+
+.testimonial-card,
+.promotion-card,
+.account-card,
+.dashboard-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.testimonial-card::before,
+.promotion-card::before,
+.account-card::before,
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.testimonial-card:hover::before,
+.promotion-card:hover::before,
+.account-card:hover::before,
+.dashboard-card:hover::before {
+  opacity: 1;
+}
+
+.testimonial-card:hover,
+.promotion-card:hover,
+.account-card:hover,
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ==============================================
+   7. HERO SECTION ANIMATIONS
+   ============================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-background {
+  animation: heroZoom 20s infinite ease-in-out;
+  will-change: transform;
+}
+
+@keyframes heroZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.hero-content h1 {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-content p {
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.hero-cta {
+  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================================
+   8. ICON ANIMATIONS
+   ============================================== */
+
+.account-icon,
+.action-btn i {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.account-card:hover .account-icon,
+.action-btn:hover i {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Cart Count Badge Animation */
+.cart-count,
+.favorite-count {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* ==============================================
+   9. DROPDOWN ANIMATIONS
+   ============================================== */
+
+.dropdown-menu {
+  animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-menu a:hover {
+  transform: translateX(5px);
+}
+
+/* ==============================================
+   10. LOADING & SKELETON STATES
+   ============================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ==============================================
+   11. FAQ ACCORDION ANIMATION
+   ============================================== */
+
+.faq-question {
+  transition: all 0.5s ease;
+}
+
+.faq-question:hover {
+  color: #3498db;
+  padding-left: 10px;
+}
+
+.faq-question.active::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-question.active + .faq-answer {
+  max-height: 500px;
+}
+
+/* ==============================================
+   12. SCROLL ANIMATIONS UTILITIES
+   ============================================== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================================
+   13. PERFORMANCE OPTIMIZATIONS
+   ============================================== */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for accessibility */
+/*@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}*/
+
+/* ==============================================
+   14. RESPONSIVE ANIMATION ADJUSTMENTS
+   ============================================== */
+
+@media (max-width: 768px) {
+  .product-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .hero-content h1,
+  .hero-content p,
+  .hero-cta {
+    animation-duration: 0.6s;
+  }
+}

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Checkout</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -174,7 +176,7 @@
                                 <label for="zip">ZIP Code</label>
                                 <input type="text" id="zip" name="zip" placeholder="Enter your ZIP code" required>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="country">Country</label>
                                 <select id="country" name="country" required>
                                     <option value="">Select a country</option>
@@ -182,6 +184,10 @@
                                     <option value="CA">Canada</option>
                                     <option value="UK">United Kingdom</option>
                                 </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="PhoneNumber">PhoneNumber</label>
+                                <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Enter your PhoneNumber" required>
                             </div>
                             <h2>Payment Information</h2>
                             <div class="form-group">
@@ -304,17 +310,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-
-        // Show/hide card details based on payment method
-        document.querySelector('#payment-method').addEventListener('change', function() {
-            const cardDetails = document.querySelector('#card-details');
-            cardDetails.style.display = this.value === 'credit-card' ? 'block' : 'none';
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

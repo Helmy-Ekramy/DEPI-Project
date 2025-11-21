@@ -6,7 +6,10 @@
     <title>Favorites - TechStore</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -66,7 +69,7 @@
                 <div class="products-grid" id="favorites-grid">
                     <!-- Example product cards (to be populated dynamically) -->
                     <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-                        <img src="../images/zc134_1_1.jpg" alt="Ultra Laptop">
+                        <img src="../images/zc134_1_1.jpg" loading="lazy" alt="Ultra Laptop">
                         <h3>Ultra Laptop X1</h3>
                         <p>$1699.99</p>
                         <div class="product-actions">
@@ -75,7 +78,7 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -84,7 +87,7 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -93,7 +96,7 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -102,7 +105,7 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -111,7 +114,16 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
+                        <h3>Pro Wireless Mouse</h3>
+                        <p>$49.99</p>
+                        <div class="product-actions">
+                            <a href="product-detail.html" loading="lazy" class="product-cta">View Details</a>
+                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -120,16 +132,7 @@
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
-                        <h3>Pro Wireless Mouse</h3>
-                        <p>$49.99</p>
-                        <div class="product-actions">
-                            <a href="product-detail.html" class="product-cta">View Details</a>
-                            <button class="remove-favorite" data-product-id="2"><i class="fas fa-trash"></i> Remove</button>
-                        </div>
-                    </div>
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="../images/zhzh-0.jpg" alt="Pro Mouse">
+                        <img src="../images/zhzh-0.jpg" loading="lazy" alt="Pro Mouse">
                         <h3>Pro Wireless Mouse</h3>
                         <p>$49.99</p>
                         <div class="product-actions">
@@ -265,5 +268,6 @@
             });
         });
     </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

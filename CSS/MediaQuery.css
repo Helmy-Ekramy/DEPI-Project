@@ -1,0 +1,316 @@
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+@media (max-width: 1200px) {
+  .search-container {
+    max-width: 450px;
+  }
+
+  .main-menu {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navbar-top {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .search-container {
+    order: 3;
+    max-width: 100%;
+    margin: 15px 0 0;
+  }
+
+  .navbar-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .main-menu {
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+
+  .utility-links {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .product-detail-content,
+  .checkout-content,
+  .about-content,
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .account-options {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .cart-content,
+  .products-grid,
+  .promotions-grid,
+  .testimonials-grid,
+  .order-confirmation-content {
+    flex-direction: column;
+  }
+
+  .navbar-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-menu {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    display: none;
+  }
+
+  .main-menu.active {
+    display: flex;
+  }
+
+  .main-menu > li > a {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    background-color: #4b5563;
+  }
+
+  .nested {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    background-color: #6b7280;
+    margin-left: 20px;
+  }
+
+  .utility-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 180px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .hero-section {
+    height: 80vh;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .cart-item-image img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-item-details {
+    padding: 0;
+  }
+
+  .cart-item-total {
+    padding: 0;
+  }
+
+  .product-detail-image img {
+    max-width: 100%;
+  }
+
+  .product-title {
+    font-size: 1.8rem;
+  }
+
+  .related-products-grid,
+  .products-grid,
+  .promotions-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-table table,
+  .category-table table,
+  .user-table table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .auth-title {
+    font-size: 1.8rem;
+  }
+
+  .auth-card {
+    padding: 30px;
+  }
+
+  .account-options {
+    grid-template-columns: 1fr;
+  }
+
+  .order-details,
+  .contact-info {
+    text-align: center;
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    position: relative;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #1f2937;
+    flex: 1;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  td[data-label="Actions"] {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-contact {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .action-btn i {
+    font-size: 1.2rem;
+  }
+
+  .action-btn span {
+    font-size: 0.8rem;
+  }
+
+  .contact-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .hero-cta {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .account-card,
+  .dashboard-card,
+  .category-form,
+  .category-table,
+  .user-table {
+    padding: 20px;
+  }
+
+  .account-section {
+    padding: 2rem 0;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .auth-form select {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-submit,
+  .account-cta {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .product-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

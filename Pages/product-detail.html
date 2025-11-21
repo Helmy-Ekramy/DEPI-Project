@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Product Detail</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -153,7 +155,7 @@
         <section class="product-detail-section">
             <div class="container">
                 <div class="product-detail-content">
-                    <div class="product-detail-image">
+                    <div class="product-detail-image" role="img">
                         <img src="../images/zu439.jpg" alt="NVIDIA RTX 4090">
                     </div>
                     <div class="product-detail-info">
@@ -199,16 +201,76 @@
                     <h2>Related Products</h2>
                     <div class="related-products-grid">
                         <div class="product-card">
-                            <img src="../images/zl830-1.jpg" alt="RTX 4080">
+                            <img src="../images/zl830-1.jpg" loading="lazy" alt="RTX 4080">
                             <h3>NVIDIA GeForce RTX 4080</h3>
                             <p>$1,199.99</p>
-                            <a href="#" class="product-cta">View Product</a>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
                         </div>
                         <div class="product-card">
-                            <img src="../images/zu563.jpg" alt="AMD 7900">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
                             <h3>AMD Radeon RX 7900 XTX</h3>
                             <p>$999.99</p>
-                            <a href="#" class="product-cta">View Product</a>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
+                        </div>
+                        <div class="product-card">
+                            <img src="../images/zu563.jpg" loading="lazy" alt="AMD 7900">
+                            <h3>AMD Radeon RX 7900 XTX</h3>
+                            <p>$999.99</p>
+                            <a href="product-detail.html" class="product-cta">View Product</a>
                         </div>
                     </div>
                 </div>
@@ -292,33 +354,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-
-        // Quantity adjustment
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const action = this.dataset.action;
-                const input = this.parentElement.querySelector('.quantity-input');
-                let value = parseInt(input.value);
-                if (action === 'increase') {
-                    input.value = value + 1;
-                } else if (action === 'decrease' && value > 1) {
-                    input.value = value - 1;
-                }
-                // Trigger update to backend (e.g., via fetch)
-            });
-        });
-
-        // Add to cart (example client-side action)
-        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
-            const quantity = document.querySelector('#quantity').value;
-            alert(`Added ${quantity} item(s) to cart!`);
-            // Trigger backend POST request to /cart/add
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

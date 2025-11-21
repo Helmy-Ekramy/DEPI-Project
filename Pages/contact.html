@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Contact Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -179,8 +181,8 @@
                     </div>
                     <div class="contact-info">
                         <h2>Contact Information</h2>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, New York, NY 10001, USA</p>
-                        <p><i class="fas fa-phone"></i> +1 (800) 555-1234</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Beni-Suef, Egypt</p>
+                        <p><i class="fas fa-phone"></i> +201280469393</p>
                         <p><i class="fas fa-envelope"></i> support@techstore.com</p>
                         <h3>Business Hours</h3>
                         <p>Monday - Friday: 9 AM - 6 PM</p>
@@ -275,19 +277,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Account</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
 </head>
 <body>
     <header class="main-header">
@@ -132,18 +134,18 @@
                                 <li><a href="#">Webcams</a></li>
                             </ul>
                         </li>
+                        <div class="utility-links">
+                            <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                                <i class="fas fa-map-marker-alt"></i> Find Us
+                            </a>
+                            <a href="track-order.html" class="utility-link">
+                                <i class="fas fa-box"></i> Track Order
+                            </a>
+                            <a href="contact.html" class="contact-button">
+                                Contact Us
+                            </a>
+                        </div>
                     </ul>
-                    <div class="utility-links">
-                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
-                            <i class="fas fa-map-marker-alt"></i> Find Us
-                        </a>
-                        <a href="track-order.html" class="utility-link">
-                            <i class="fas fa-box"></i> Track Order
-                        </a>
-                        <a href="contact.html" class="contact-button">
-                            Contact Us
-                        </a>
-                    </div>
                 </div>
             </div>
         </nav>
@@ -156,22 +158,22 @@
                 <p class="section-subtitle">Manage your account, track orders, and unlock exclusive offers.</p>
                 <div class="account-options">
                     <div class="account-card">
-                        <i class="fas fa-user-plus account-icon"></i>
+                        <i class="fas fa-user-plus account-icon fa-2x"></i>
                         <h3>Create an Account</h3>
                         <p>Join TechStore to enjoy personalized recommendations and faster checkouts.</p>
                         <a href="signup.html" class="account-cta">Sign Up</a>
                     </div>
                     <div class="account-card">
-                        <i class="fas fa-sign-in-alt account-icon"></i>
+                        <i class="fas fa-sign-in-alt account-icon fa-2x"></i>
                         <h3>Log In</h3>
                         <p>Access your account to view orders, manage your profile, and more.</p>
                         <a href="login.html" class="account-cta">Log In</a>
                     </div>
                     <div class="account-card">
-                        <i class="fas fa-user-cog account-icon"></i>
+                        <i class="fas fa-user-cog account-icon fa-2x"></i>
                         <h3>Manage Account</h3>
                         <p>Update your profile, change your password, or view your order history.</p>
-                        <a href="manage-account.html" class="account-cta">Manage</a>
+                        <a href="manage-account.html" style="margin-inline: auto;" class="account-cta">Manage</a>
                     </div>
                 </div>
             </div>
@@ -254,12 +256,7 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
 

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - About Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
 </head>
 <body>
     <header class="main-header">
@@ -40,6 +42,7 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="navbar-bottom">
                     <ul class="main-menu">
                         <li class="has-dropdown">
@@ -155,8 +158,8 @@
                 <h1 class="section-title">About TechStore</h1>
                 <p class="section-subtitle">Your trusted partner for high-performance PCs, laptops, and accessories.</p>
                 <div class="about-content">
-                    <div class="about-image">
-                        <img src="../images/th.webp" alt="TechStore Team">
+                    <div class="about-image" role="img">
+                        <img src="../images/th.webp"alt="TechStore Team">
                     </div>
                     <div class="about-text">
                         <h2>Our Mission</h2>
@@ -252,19 +255,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-
-        // Search bar functionality (example)
-        document.querySelector('.search-bar').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                console.log(`Search for: ${this.value}`);
-                // Trigger backend search endpoint (e.g., /products?search=query)
-            }
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
