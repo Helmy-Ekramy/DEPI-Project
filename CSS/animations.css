@@ -1,12 +1,24 @@
 /* ==============================================
-   ENHANCED TYPOGRAPHY & ANIMATIONS
+   1. MODERN FONT IMPORTS
    ============================================== */
+@font-face {
+  font-family: "Roboto-bold";
+  src: url('../WebFonts/Roboto-Bold.woff2') format('woff2'),
+      url('../WebFonts/Roboto-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url('../WebFonts/Roboto-Regular.woff') format('woff'),
+      url('../WebFonts/Roboto-Regular.woff2') format('woff2');
+}
 
-/* Import Modern Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+:root{
+  --bold    :    "Roboto-bold";
+  --Regular :    "Roboto-Regular";
+}
 
 /* ==============================================
-   1. TYPOGRAPHY SYSTEM
+   2. TYPOGRAPHY SYSTEM
    ============================================== */
 
 /* Primary Font: Poppins for headings */
@@ -15,7 +27,7 @@ h1, h2, h3, h4, h5, h6,
 .hero-title,
 .product-title,
 .auth-title {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--bold),var(--Regular), sans-serif , system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue';
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -30,8 +42,10 @@ input,
 button,
 textarea,
 select {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Typography Scale */
@@ -47,66 +61,184 @@ select {
 }
 
 /* ==============================================
-   2. PRODUCT CARD ANIMATIONS
+   3. RESPONSIVE NAVIGATION SYSTEM
    ============================================== */
 
-.product-card {
-  position: relative;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, box-shadow;
+/* Desktop Navigation - Default */
+.navbar-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
 }
 
-.product-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+.main-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
 }
 
-.product-card img {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.utility-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
-.product-card:hover img {
-  transform: scale(1.05);
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  transition: transform 0.3s ease;
 }
 
-/* Product CTA Button Animation */
-.product-cta,
-.promotion-cta {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s ease;
+/* Mobile Navigation Styles */
+@media (max-width: 1024px) {
+  .navbar-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    align-self: flex-end;
+    z-index: 1001;
+  }
+
+  .mobile-menu-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .mobile-menu-btn.active {
+    transform: rotate(90deg);
+  }
+
+  /* Hide main menu and utility links by default */
+  .main-menu,
+  .utility-links {
+    display: none;
+    width: 100%;
+  }
+
+  /* Show when active */
+  .main-menu.active,
+  .utility-links.active {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .main-menu.active {
+    background-color: #2c3e50;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .main-menu > li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .main-menu > li:last-child {
+    border-bottom: none;
+  }
+
+  .main-menu > li > a {
+    padding: 15px 15px;
+    display: block;
+    width: 100%;
+  }
+
+  /* Dropdown adjustments for mobile */
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    background-color: #34495e;
+    margin-left: 15px;
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+
+  .nested {
+    position: static;
+    width: 100%;
+    background-color: #3d566e;
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+
+  /* Utility links mobile styling */
+  .utility-links.active {
+    background-color: #2c3e50;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .utility-link,
+  .contact-button {
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 6px;
+    background-color: rgba(52, 152, 219, 0.1);
+  }
+
+  .contact-button {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  }
 }
 
-.product-cta::before,
-.promotion-cta::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
+/* Tablet Responsive Adjustments */
+@media (max-width: 768px) {
+  body {
+    padding-top: 160px;
+  }
 
-.product-cta:hover::before,
-.promotion-cta:hover::before {
-  width: 300px;
-  height: 300px;
-}
+  .navbar-top {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 
-.product-cta:active,
-.promotion-cta:active {
-  transform: scale(0.95);
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .search-container {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 15px 0 0;
+  }
+
+  .user-actions {
+    gap: 15px;
+  }
+
+  .action-btn span {
+    display: none;
+  }
+
+  .action-btn i {
+    font-size: 1.4rem;
+  }
 }
 
 /* ==============================================
-   3. NAVIGATION ANIMATIONS
+   4. NAVIGATION ANIMATIONS
    ============================================== */
 
+/* Main Menu Link Underline Effect */
 .main-menu > li > a {
   position: relative;
   transition: color 0.5s ease;
@@ -127,7 +259,7 @@ select {
   width: 100%;
 }
 
-/* Utility Links Hover */
+/* Utility Links Hover Effect */
 .utility-link {
   position: relative;
   transition: all 0.5s ease;
@@ -148,8 +280,257 @@ select {
   width: 100%;
 }
 
+/* Dropdown Menu Animation */
+.dropdown-menu {
+  animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-menu a:hover {
+  transform: translateX(5px);
+}
+
+/* Navbar Scroll Effects */
+.main-header.scrolled {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  animation: navbarSlideDown 0.3s ease;
+}
+
+@keyframes navbarSlideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+.main-header.scrolled .navbar {
+  padding: 8px 0;
+  transition: padding 0.3s ease;
+}
+
 /* ==============================================
-   4. BUTTON ANIMATIONS
+   5. SEARCH BAR ANIMATIONS
+   ============================================== */
+
+.search-container {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-bar {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-bar:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+.search-icon {
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus + .search-icon,
+.search-container:hover .search-icon {
+  color: #3498db;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ==============================================
+   6. HERO SECTION ANIMATIONS
+   ============================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient Background Animation */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(52, 152, 219, 0.1),
+    rgba(41, 128, 185, 0.1),
+    rgba(142, 68, 173, 0.1),
+    rgba(52, 152, 219, 0.1)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Background Zoom */
+.hero-background {
+  animation: heroZoom 20s infinite ease-in-out;
+  will-change: transform;
+}
+
+@keyframes heroZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Hero Content Animations */
+.hero-content h1 {
+  animation: heroTitleAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes heroTitleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.hero-content p {
+  animation: heroSubtitleAppear 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes heroSubtitleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero CTA with Float Effect */
+.hero-cta {
+  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both,
+             buttonFloat 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ==============================================
+   7. PRODUCT CARD ANIMATIONS
+   ============================================== */
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+/* Card Hover Effect with 3D Tilt */
+.product-card:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Shine Effect on Hover */
+/* .product-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s;
+  opacity: 0;
+}
+
+.product-card:hover::before {
+  left: 100%;
+  opacity: 1;
+} */
+
+/* Image Zoom with Ken Burns Effect */
+.product-card img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.product-card:hover img {
+  transform: scale(1.1) rotate(1deg);
+}
+
+/* Staggered Card Reveal Animation */
+.products-grid .product-card,
+.promotions-grid .promotion-card {
+  opacity: 0;
+  animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Staggered Animation Delays */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+.product-card:nth-child(5) { animation-delay: 0.5s; }
+.product-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ==============================================
+   8. BUTTON ANIMATIONS
    ============================================== */
 
 .hero-cta,
@@ -159,12 +540,16 @@ select {
 .account-cta,
 .track-order-btn,
 .dashboard-cta,
-.add-to-cart-btn {
+.add-to-cart-btn,
+.product-cta,
+.promotion-cta {
   position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
+/* Button Shine Effect */
 .hero-cta::before,
 .contact-button::before,
 .checkout-btn::before,
@@ -172,14 +557,16 @@ select {
 .account-cta::before,
 .track-order-btn::before,
 .dashboard-cta::before,
-.add-to-cart-btn::before {
+.add-to-cart-btn::before,
+.product-cta::before,
+.promotion-cta::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
 
@@ -190,10 +577,13 @@ select {
 .account-cta:hover::before,
 .track-order-btn:hover::before,
 .dashboard-cta:hover::before,
-.add-to-cart-btn:hover::before {
+.add-to-cart-btn:hover::before,
+.product-cta:hover::before,
+.promotion-cta:hover::before {
   left: 100%;
 }
 
+/* Button Hover State */
 .hero-cta:hover,
 .contact-button:hover,
 .checkout-btn:hover,
@@ -201,11 +591,14 @@ select {
 .account-cta:hover,
 .track-order-btn:hover,
 .dashboard-cta:hover,
-.add-to-cart-btn:hover {
+.add-to-cart-btn:hover,
+.product-cta:hover,
+.promotion-cta:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
 }
 
+/* Button Active State */
 .hero-cta:active,
 .contact-button:active,
 .checkout-btn:active,
@@ -213,16 +606,81 @@ select {
 .account-cta:active,
 .track-order-btn:active,
 .dashboard-cta:active,
-.add-to-cart-btn:active {
-  transform: translateY(-1px);
+.add-to-cart-btn:active,
+.product-cta:active,
+.promotion-cta:active {
+  transform: translateY(-1px) scale(0.95);
   box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
+/* Ripple Effect on Click */
+.product-cta::after,
+.promotion-cta::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.product-cta:hover::after,
+.promotion-cta:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
 /* ==============================================
-   5. FORM INPUT ANIMATIONS
+   9. RIPPLE EFFECT SYSTEM
    ============================================== */
 
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
 
+.ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::before {
+  width: 300px;
+  height: 300px;
+  transition: width 0s, height 0s;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: rippleAnimation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnimation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ==============================================
+   10. FORM INPUT ANIMATIONS
+   ============================================== */
 
 .form-group input,
 .form-group textarea,
@@ -240,30 +698,24 @@ select {
 }
 
 /* Floating Label Effect */
-.form-group.focused label {
-  transform: translateY(-8px) scale(0.95);
-  color: #3498db;
-}
-
 .form-group label {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left center;
 }
 
-/* Input Glow Animation */
-@keyframes inputGlow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
-  }
+.form-group.focused label {
+  transform: translateY(-8px) scale(0.95);
+  color: #3498db;
 }
 
-
+/* Input Glow Animation */
+@keyframes inputGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(52, 152, 219, 0.4); }
+}
 
 /* ==============================================
-   6. CARD HOVER EFFECTS
+   11. CARD HOVER EFFECTS
    ============================================== */
 
 .testimonial-card,
@@ -274,6 +726,7 @@ select {
   position: relative;
 }
 
+/* Card Gradient Overlay */
 .testimonial-card::before,
 .promotion-card::before,
 .account-card::before,
@@ -306,131 +759,526 @@ select {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
+/* Testimonial Quote Mark Animation */
+.testimonial-card::after {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  font-size: 100px;
+  color: rgba(52, 152, 219, 0.1);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.testimonial-card:hover::after {
+  transform: scale(1.2) rotate(10deg);
+  color: rgba(52, 152, 219, 0.2);
+}
+
 /* ==============================================
-   7. HERO SECTION ANIMATIONS
+   12. ICON ANIMATIONS
    ============================================== */
 
-.hero-section {
+.account-icon,
+.action-btn i,
+.utility-link i {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.account-card:hover .account-icon,
+.action-btn:hover i,
+.utility-link:hover i {
+  animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-10px) scale(1.1); }
+  50% { transform: translateY(0) scale(1.05); }
+  75% { transform: translateY(-5px) scale(1.08); }
+}
+
+/* Cart Count Badge Pulse */
+.cart-count,
+.favorite-count {
+  animation: badgePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(231, 76, 60, 0);
+  }
+}
+
+/* ==============================================
+   13. GLOW & NEON EFFECTS
+   ============================================== */
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5),
+                0 0 10px rgba(52, 152, 219, 0.3),
+                0 0 15px rgba(52, 152, 219, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8),
+                0 0 20px rgba(52, 152, 219, 0.5),
+                0 0 30px rgba(52, 152, 219, 0.3);
+  }
+}
+
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+/* Neon Text Effect */
+.neon-text {
+  color: #fff;
+  text-shadow:
+    0 0 5px #3498db,
+    0 0 10px #3498db,
+    0 0 20px #3498db,
+    0 0 40px #3498db,
+    0 0 80px #3498db;
+  animation: neonFlicker 1.5s infinite alternate;
+}
+
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 5px #3498db,
+      0 0 10px #3498db,
+      0 0 20px #3498db,
+      0 0 40px #3498db,
+      0 0 80px #3498db;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* ==============================================
+   14. TEXT EFFECTS & ANIMATIONS
+   ============================================== */
+
+/* Text Reveal */
+@keyframes textReveal {
+  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+.text-reveal {
+  animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Gradient Text Animation */
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c, #3498db);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 3s ease infinite;
+}
+
+/* Typing Cursor Effect */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  margin-left: 5px;
+}
+
+/* ==============================================
+   15. GRADIENT BORDER ANIMATION
+   ============================================== */
+
+@keyframes borderRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gradient-border {
+  position: relative;
+  background: #ffffff;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3498db, #9b59b6, #e74c3c, #f39c12, #3498db);
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderRotate 3s linear infinite;
+}
+
+/* ==============================================
+   16. IMAGE EFFECTS
+   ============================================== */
+
+.image-reveal {
   position: relative;
   overflow: hidden;
 }
 
-.hero-background {
-  animation: heroZoom 20s infinite ease-in-out;
-  will-change: transform;
+.image-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transition: left 0.5s;
+  z-index: 1;
 }
 
-@keyframes heroZoom {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.hero-content h1 {
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hero-content p {
-  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
-}
-
-.hero-cta {
-  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.image-reveal:hover::before {
+  left: 100%;
 }
 
 /* ==============================================
-   8. ICON ANIMATIONS
+   17. PARTICLES BACKGROUND
    ============================================== */
 
-.account-icon,
-.action-btn i {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.particles-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.account-card:hover .account-icon,
-.action-btn:hover i {
-  transform: scale(1.15) rotate(5deg);
-}
-
-/* Cart Count Badge Animation */
-.cart-count,
-.favorite-count {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
-}
-
-/* ==============================================
-   9. DROPDOWN ANIMATIONS
-   ============================================== */
-
-.dropdown-menu {
-  animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.dropdown-menu a {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dropdown-menu a:hover {
-  transform: translateX(5px);
-}
-
-/* ==============================================
-   10. LOADING & SKELETON STATES
-   ============================================== */
-
-@keyframes shimmer {
+@keyframes floatParticle {
   0% {
-    background-position: -1000px 0;
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
   }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
   100% {
-    background-position: 1000px 0;
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
   }
 }
 
-.loading-skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(52, 152, 219, 0.5);
+  border-radius: 50%;
+  animation: floatParticle 15s linear infinite;
+}
+
+.particle:nth-child(2n) {
+  width: 6px;
+  height: 6px;
+  animation-duration: 20s;
+}
+
+.particle:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+  animation-duration: 12s;
 }
 
 /* ==============================================
-   11. FAQ ACCORDION ANIMATION
+   18. MORPHING SHAPES
+   ============================================== */
+
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 60% 30% 70% / 40% 70% 40% 50%; }
+  75% { border-radius: 70% 30% 50% 50% / 30% 50% 70% 50%; }
+}
+
+.morph-shape {
+  animation: morph 8s ease-in-out infinite;
+}
+
+/* ==============================================
+   19. CARD STACK EFFECT
+   ============================================== */
+
+.card-stack {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.card-stack::before,
+.card-stack::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: -5px;
+  background: inherit;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.card-stack::after {
+  top: 10px;
+  left: 10px;
+  opacity: 0.25;
+}
+
+.card-stack:hover::before {
+  transform: translateY(-5px);
+  opacity: 0.7;
+}
+
+.card-stack:hover::after {
+  transform: translateY(-10px);
+  opacity: 0.4;
+}
+
+/* ==============================================
+   20. PROGRESS BAR ANIMATION
+   ============================================== */
+
+@keyframes progressSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+  background: #ecf0f1;
+  border-radius: 10px;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.5), transparent);
+  animation: progressSlide 2s linear infinite;
+}
+
+/* ==============================================
+   21. TOOLTIP SYSTEM
+   ============================================== */
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip::before,
+.tooltip::after {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tooltip::before {
+  content: attr(data-tooltip);
+  background: #2c3e50;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.tooltip::after {
+  content: '';
+  border: 6px solid transparent;
+  border-top-color: #2c3e50;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==============================================
+   22. HOVER LIFT & BOUNCE EFFECTS
+   ============================================== */
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Elastic Bounce */
+@keyframes elasticBounce {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.05); }
+}
+
+.elastic-bounce {
+  animation: elasticBounce 0.6s ease-in-out;
+}
+
+/* ==============================================
+   23. SLIDE IN ANIMATIONS
+   ============================================== */
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slideInFromLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-right {
+  animation: slideInFromRight 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Notification Slide In */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification {
+  animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==============================================
+   24. SCROLL REVEAL ANIMATIONS
+   ============================================== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Different Reveal Directions */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.reveal-left.revealed,
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade In Utility */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================================
+   25. STAGGER CHILDREN ANIMATION
+   ============================================== */
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* ==============================================
+   26. FAQ ACCORDION ANIMATION
    ============================================== */
 
 .faq-question {
@@ -457,42 +1305,102 @@ select {
 }
 
 /* ==============================================
-   12. SCROLL ANIMATIONS UTILITIES
+   27. LOADING ANIMATIONS
    ============================================== */
 
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* Loading Spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(52, 152, 219, 0.1);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Skeleton Loading */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.loading-skeleton,
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Global Loader */
+#global-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }
 
 /* ==============================================
-   13. PERFORMANCE OPTIMIZATIONS
+   28. FOOTER ANIMATIONS
    ============================================== */
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.footer {
+  position: relative;
+  overflow: hidden;
 }
 
-/* Reduce motion for accessibility */
-/*@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}*/
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3498db, transparent);
+  animation: footerLineSlide 3s linear infinite;
+}
+
+@keyframes footerLineSlide {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
 
 /* ==============================================
-   14. RESPONSIVE ANIMATION ADJUSTMENTS
+   29. PARALLAX SCROLL EFFECT
+   ============================================== */
+
+.parallax-bg {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ==============================================
+   30. MICRO-INTERACTIONS
+   ============================================== */
+
+/* Checkbox Animation */
+input[type="checkbox"] {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+  transform: scale(1.1);
+}
+
+/* Focus Ring */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.3);
+}
+
+/* ==============================================
+   31. RESPONSIVE ADJUSTMENTS
    ============================================== */
 
 @media (max-width: 768px) {
@@ -505,4 +1413,60 @@ select {
   .hero-cta {
     animation-duration: 0.6s;
   }
+
+  .testimonial-card::after {
+    font-size: 60px;
+  }
 }
+
+/* ==============================================
+   32. PERFORMANCE OPTIMIZATIONS
+   ============================================== */
+
+/* Hardware Acceleration */
+.product-card,
+.hero-cta,
+.navbar,
+.dropdown-menu,
+.testimonial-card,
+.promotion-card,
+.account-card,
+.dashboard-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Will-Change Properties */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ==============================================
+   33. ACCESSIBILITY - REDUCED MOTION
+   ============================================== */
+
+/* @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+} */
+
+/* ==============================================
+   END OF TECHSTORE COMPLETE ANIMATION SYSTEM
+   ============================================== */

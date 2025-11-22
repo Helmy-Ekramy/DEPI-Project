@@ -167,12 +167,13 @@ body {
   font-size: 0.8rem;
   font-weight: 700;
   position: absolute;
-  top: -0.3125rem;
-  right: -0.3125rem;
+  top: -10px;
+  right: -10px;
 }
 
 .favorite-count {
   background-color: #e91e63;
+  right: 2px;
 }
 
 /* Navbar Bottom Section */
@@ -515,7 +516,7 @@ body {
   border-radius: 1.875rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;
   gap: 0.3125rem;
