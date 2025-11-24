@@ -13,6 +13,7 @@
 }
 
 :root{
+  --main-color: #f8fafc;
   --bold    :    "Roboto-bold";
   --Regular :    "Roboto-Regular";
 }
@@ -53,8 +54,9 @@ body {
 }
 
 .navbar {
-  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-  color: #ffffff;
+  background: #ffffff;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* Navbar Top Section */
@@ -63,14 +65,14 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: .9375rem 0;
-  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0.0625rem solid #e5e7eb;
 }
 
 .logo {
   font-size: 2rem;
   font-weight: 700;
   text-decoration: none;
-  color: #ffffff;
+  color: #1f2937;
   display: flex;
   align-items: center;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -98,22 +100,22 @@ body {
 .search-bar {
   width: 100%;
   padding: 0.75rem 1.25rem 0.75rem 2.8125rem;
-  border: none;
+  border: 0.0625rem solid #d1d5db;
   border-radius: 1.5625rem;
-  background-color: #374151;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #1f2937;
   font-size: 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .search-bar:focus {
   outline: none;
-  background-color: #4b5563;
+  border-color: #3b82f6;
   box-shadow: 0 0 0.5rem rgba(59, 130, 246, 0.3);
 }
 
 .search-bar::placeholder {
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .search-icon {
@@ -121,7 +123,7 @@ body {
   left: 0.9375rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: #6b7280;
   font-size: 1rem;
 }
 
@@ -137,7 +139,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #ffffff;
+  color: #1f2937;
   font-size: 0.9rem;
   font-weight: 600;
   position: relative;
@@ -195,7 +197,7 @@ body {
 }
 
 .main-menu > li > a {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
@@ -262,9 +264,10 @@ body {
 }
 
 .dropdown-menu a:hover {
-  background-color: #3b82f6;
-  color: #ffffff;
-  padding-left: 1.5625rem;
+  /* background-color: #3b82f6; */
+  color: #3b82f6;
+  /* padding-left: 1.5625rem; */
+  
 }
 
 .nested {
@@ -291,7 +294,7 @@ body {
 }
 
 .utility-link {
-  color: #d1d5db;
+  color: #585858;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -1690,14 +1693,14 @@ td {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #d1d5db;
+  color: #374151;
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.3s ease;
 }
 
 .footer-contact a:hover {
-  color: #60a5fa;
+  color: #2563eb;
 }
 
 /* ================================
@@ -1820,9 +1823,10 @@ td {
    FOOTER
    ================================ */
 .footer {
-  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-  color: #e5e7eb;
+  background: #f8fafc;
+  color: #374151;
   padding: 4rem 0 2rem;
+  border-top: 1px solid #e5e7eb;
 }
 
 .footer-grid {
@@ -1836,7 +1840,7 @@ td {
 .footer-column h4 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #111827;
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
 }
@@ -1844,7 +1848,7 @@ td {
 .footer-column p {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: #d1d5db;
+  color: #6b7280;
 }
 
 .footer-column ul {
@@ -1857,14 +1861,14 @@ td {
 }
 
 .footer-column ul li a {
-  color: #d1d5db;
+  color: #374151;
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .footer-column ul li a:hover {
-  color: #60a5fa;
+  color: #2563eb;
   transform: translateX(0.3125rem);
 }
 
@@ -1875,13 +1879,13 @@ td {
 }
 
 .social-icons a {
-  color: #d1d5db;
+  color: #6b7280;
   font-size: 1.5rem;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .social-icons a:hover {
-  color: #60a5fa;
+  color: #2563eb;
   transform: scale(1.1);
 }
 
@@ -1894,8 +1898,8 @@ td {
 .footer-copyright {
   text-align: center;
   font-size: 0.85rem;
-  color: #9ca3af;
-  border-top: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  color: #6b7280;
+  border-top: 0.0625rem solid #e5e7eb;
   padding: 1.5rem 0;
   margin: 0 auto;
   max-width: 75rem;
