@@ -353,6 +353,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 
 .hero-background {
@@ -464,13 +465,6 @@ body {
 .product-card:hover {
   transform: translateY(-0.3125rem);
   box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-  width: 100%;
-  max-width: 12.5rem;
-  border-radius: 0.5rem;
-  margin-bottom: 0.9375rem;
 }
 
 .product-card h3 {

@@ -7,8 +7,386 @@
     <link rel="stylesheet" href="CSS/all.min.css">
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/MediaQuery.css">
-    <link rel="stylesheet" href="CSS/animations-more.css">
     <link rel="stylesheet" href="CSS/animations.css">
+    <style>
+        /*
+        PROFESSIONAL & UI/UX IMPROVEMENTS (Inherited from previous step):
+        1. Refined box-shadows for a softer, premium feel.
+        2. Updated primary CTA button color to a rich Indigo gradient.
+        3. Added subtle borders for definition.
+        */
+        .carousel-section {
+            max-width: 1400px;
+            margin: 0 auto 5rem auto; /* Added extra bottom margin for separation */
+            background: white;
+            border-radius: 24px;
+            padding: 60px 40px;
+            /* Updated shadow for a softer, more professional lift */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            /* Subtle dark color change for modern look */
+            color: #1f2937;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        /* Note: .carousel-track class is shared, but IDs are unique in HTML */
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px;
+        }
+
+        .product-card {
+            min-width: 320px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            /* New soft shadow and subtle border */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            /* Refined hover shadow */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .product-images-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .image-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 3;
+        }
+
+        .image-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgb(0, 0, 0);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-dot.active {
+            background: rgb(13, 0, 250);
+            width: 20px;
+            border-radius: 3px;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.6);
+            z-index: 2;
+        }
+
+        .sales-label {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            z-index: 2;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
+            background: white;
+            /* Added subtle border */
+            border: 1px solid #f3f4f6; 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: #fee;
+        }
+
+        .favorite-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: #ef4444;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-btn.active svg {
+            fill: #ef4444;
+        }
+
+        .product-info {
+            padding: 0 4px;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-weight: 400;
+        }
+
+        .new-price {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .add-to-cart-btn , .view-product-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%); /* Professional soft gradient */
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+        }
+
+        /* Premium soft shine effect */
+        .add-to-cart-btn::before , .view-product-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
+            transition: left 0.6s ease;
+        }
+
+        .add-to-cart-btn:hover::before , .view-product-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Hover effect: lighter, modern elevation */
+        .add-to-cart-btn:hover , .view-product-btn:hover{
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #34425a 0%, #1f2938 100%); /* Brighter on hover */
+            box-shadow: 0 10px 24px rgba(27, 36, 50, 0.45);
+        }
+
+        /* Tap feel */
+        .add-to-cart-btn:active , .view-product-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(27, 36, 50, 0.25);
+        }
+
+        /* Note: .carousel-nav class is shared, but IDs in the HTML are unique */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Refined shadow */
+            transition: all 0.3s ease;
+            z-index: 10;
+            margin-inline: .9375rem;
+        }
+
+        .carousel-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-nav.prev {
+            left: -25px;
+        }
+
+        .carousel-nav.next {
+            right: -25px;
+        }
+
+        .carousel-nav svg {
+            width: 24px;
+            height: 24px;
+            fill: #1a1a1a;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .indicator {
+            width: 40px;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            /* Keep blue for contrast with the new primary button color */
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            width: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .product-card {
+                min-width: 280px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-nav.prev {
+                left: -10px;
+            }
+
+            .carousel-nav.next {
+                right: -10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-card {
+                min-width: 260px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .carousel-track {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -141,94 +519,322 @@
             </div>
         </section>
 
-        <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title">Featured Products</h2>
-                <p class="section-subtitle">Explore our top picks for gamers and professionals.</p>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <img src="images/mac-1.jpg" loading="lazy" alt="NVIDIA RTX 4090">
-                        <h3>NVIDIA GeForce RTX 4090</h3>
-                        <p>$1,599.99</p>
-                        <a href="Pages/product-detail.html" class="product-cta">View Product</a>
+        <section class="carousel-section featured-products">
+        <div class="section-header">
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">Explore our top picks for gamers and professionals.</p>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-nav prev" onclick="carousels.featured.move(-1)">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+
+            <div class="carousel-track" id="featuredCarouselTrack">
+                
+                <!-- <div class="product-card" data-card-id="0">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–20%</span>
+                            <span class="sales-label">Best Seller</span>
+                            <div class="product-images-slider">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop" alt="Premium Headphones" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&h=500&fit=crop" alt="Premium Headphones View 2" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&h=500&fit=crop" alt="Premium Headphones View 3" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Premium Wireless Headphones</h3>
+                            <div class="price-container">
+                                <span class="old-price">$299.99</span>
+                                <span class="new-price">$239.99</span>
+                            </div>
+                            <a href="Pages/product-detail.html" class="view-product-btn" onclick="addToCart(event)">View Product</a>
+                        </div>
+                </div>
+
+                <div class="product-card" data-card-id="1">
+                    <div class="product-image-wrapper">
+                        <span class="discount-badge">–35%</span>
+                        <span class="sales-label">Hot Deal</span>
+                        <div class="product-images-slider">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=500&fit=crop" alt="Smartwatch" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&h=500&fit=crop" alt="Smartwatch View 2" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&h=500&fit=crop" alt="Smartwatch View 3" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1617625802912-cad62503bea0?w=500&h=500&fit=crop" alt="Smartwatch View 4" class="product-image">
+                        </div>
+                        <div class="image-dots">
+                            <span class="image-dot active"></span>
+                            <span class="image-dot"></span>
+                            <span class="image-dot"></span>
+                            <span class="image-dot"></span>
+                        </div>
+                        <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="product-card">
-                        <img src="images/v16--1.jpg" loading="lazy" alt="Intel Core i9">
-                        <h3>Intel Core i9-13900K</h3>
-                        <p>$589.99</p>
-                        <a href="Pages/product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/za138_1.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="Pages/product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/zc134_1_1.jpg" loading="lazy" alt="Corsair K70">
-                        <h3>Corsair K70 RGB Mechanical Keyboard</h3>
-                        <p>$129.99</p>
-                        <a href="Pages/product-detail.html" class="product-cta">View Product</a>
+                    <div class="product-info">
+                        <h3 class="product-title">Smart Fitness Watch Pro</h3>
+                        <div class="price-container">
+                            <span class="old-price">$399.99</span>
+                            <span class="new-price">$259.99</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
                     </div>
                 </div>
+
+                <div class="product-card" data-card-id="2">
+                    <div class="product-image-wrapper">
+                        <span class="discount-badge">–15%</span>
+                        <span class="sales-label">New Arrival</span>
+                        <div class="product-images-slider">
+                            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&h=500&fit=crop" alt="Sunglasses" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&h=500&fit=crop" alt="Sunglasses View 2" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=500&h=500&fit=crop" alt="Sunglasses View 3" class="product-image">
+                        </div>
+                        <div class="image-dots">
+                            <span class="image-dot active"></span>
+                            <span class="image-dot"></span>
+                            <span class="image-dot"></span>
+                        </div>
+                        <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Designer Sunglasses Collection</h3>
+                        <div class="price-container">
+                            <span class="old-price">$179.99</span>
+                            <span class="new-price">$152.99</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-card-id="3">
+                    <div class="product-image-wrapper">
+                        <span class="discount-badge">–25%</span>
+                        <span class="sales-label">Limited Edition</span>
+                        <div class="product-images-slider">
+                            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop" alt="Sneakers" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=500&fit=crop" alt="Sneakers View 2" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=500&fit=crop" alt="Sneakers View 3" class="product-image">
+                        </div>
+                        <div class="image-dots">
+                            <span class="image-dot active"></span>
+                            <span class="image-dot"></span>
+                            <span class="image-dot"></span>
+                        </div>
+                        <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Premium Sport Sneakers</h3>
+                        <div class="price-container">
+                            <span class="old-price">$199.99</span>
+                            <span class="new-price">$149.99</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-card-id="4">
+                    <div class="product-image-wrapper">
+                        <span class="discount-badge">–25%</span>
+                        <span class="sales-label">Limited Edition</span>
+                        <div class="product-images-slider">
+                            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop" alt="Sneakers" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500&h=500&fit=crop" alt="Sneakers View 2" class="product-image">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=500&fit=crop" alt="Sneakers View 3" class="product-image">
+                        </div>
+                        <div class="image-dots">
+                            <span class="image-dot active"></span>
+                            <span class="image-dot"></span>
+                            <span class="image-dot"></span>
+                        </div>
+                        <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Premium Sport Sneakers</h3>
+                        <div class="price-container">
+                            <span class="old-price">$199.99</span>
+                            <span class="new-price">$149.99</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                    </div>
+                </div> -->
             </div>
+
+            <button class="carousel-nav next" onclick="carousels.featured.move(1)">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+        <div class="carousel-indicators" id="featuredIndicators"></div>
         </section>
 
-        <section class="promotions-section">
-            <div class="container">
-                <h2 class="section-title">Special Offers</h2>
-                <p class="section-subtitle">Save big on our latest deals!</p>
-                <div class="promotions-grid">
-                    <div class="promotion-card">
-                        <img src="images/zc136_1.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zd104-1.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zd169.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zd170.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zd212-1.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zh449-1.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zhzh-0.jpg" loading="lazy" alt="Gaming Bundle">
-                        <h3>Gaming Bundle Deal</h3>
-                        <p>Get a free gaming mouse with any RTX 4090 purchase!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                    <div class="promotion-card">
-                        <img src="images/zd102.jpg" loading="lazy" alt="Laptop Sale">
-                        <h3>Laptop Sale</h3>
-                        <p>Up to 20% off select gaming laptops this week only!</p>
-                        <a href="Pages/products.html" class="promotion-cta">Shop Now</a>
-                    </div>
-                </div>
+
+        <section class="carousel-section special-offers">
+            <div class="section-header">
+                <h2 class="section-title">Exclusive Special Offers</h2>
+                <p class="section-subtitle">Don't miss our time-limited discounts on best-selling tech.</p>
             </div>
+
+            <div class="carousel-container">
+                <button class="carousel-nav prev" onclick="carousels.offers.move(-1)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="carousel-track" id="offersCarouselTrack">
+                    <!-- <div class="product-card" data-card-id="100">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–30%</span>
+                            <span class="sales-label">Trending</span>
+                            <div class="product-images-slider">
+                                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=500&h=500&fit=crop" alt="Travel Backpack" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&h=500&fit=crop" alt="Travel Backpack View 2" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=500&h=500&fit=crop" alt="Travel Backpack View 3" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Travel Backpack Deluxe</h3>
+                            <div class="price-container">
+                                <span class="old-price">$149.99</span>
+                                <span class="new-price">$104.99</span>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-card-id="101">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–40%</span>
+                            <span class="sales-label">Flash Sale</span>
+                            <div class="product-images-slider">
+                                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&h=500&fit=crop" alt="Smart Speaker" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&h=500&fit=crop" alt="Smart Speaker View 2" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&h=500&fit=crop" alt="Smart Speaker View 3" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Smart Speaker with Voice Assistant</h3>
+                            <div class="price-container">
+                                <span class="old-price">$129.99</span>
+                                <span class="new-price">$77.99</span>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-card-id="102">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–50%</span>
+                            <span class="sales-label">Clearance</span>
+                            <div class="product-images-slider">
+                                <img src="https://images.unsplash.com/photo-1542393356263-8cc26e95655a?w=500&h=500&fit=crop" alt="Minimalist Watch" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1594119932147-3a18a93d937a?w=500&h=500&fit=crop" alt="Minimalist Watch View 2" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Minimalist Analog Watch</h3>
+                            <div class="price-container">
+                                <span class="old-price">$99.99</span>
+                                <span class="new-price">$49.99</span>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-card-id="103">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–10%</span>
+                            <span class="sales-label">Last Chance</span>
+                            <div class="product-images-slider">
+                                <img src="https://images.unsplash.com/photo-1543169357-bb0350d5db21?w=500&h=500&fit=crop" alt="Premium Coffee Maker" class="product-image">
+                                <img src="https://images.unsplash.com/photo-1588667823577-4402660d37e5?w=500&h=500&fit=crop" alt="Premium Coffee Maker View 2" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Smart Home Coffee Brewer</h3>
+                            <div class="price-container">
+                                <span class="old-price">$249.99</span>
+                                <span class="new-price">$224.99</span>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                        </div>
+                    </div> -->
+                </div>
+
+                <button class="carousel-nav next" onclick="carousels.offers.move(1)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="carousel-indicators" id="offersIndicators"></div>
         </section>
 
         <section class="testimonials-section">
@@ -247,6 +853,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
@@ -325,6 +932,335 @@
         </div>
     </footer>
 
-    <script src="JS/main.js"></script>
+
+    <script>
+
+        
+        // دي اللي انت قولتلي عليها بتاعت List ابقا عدل عليها.
+
+        // list of card => featured Products
+        let blackBox = "";
+        let featuredCarouselTrack = document.getElementById("featuredCarouselTrack");
+        for(let i = 0 ;i<=30 ; i++)
+        {
+            blackBox +=`<div class="product-card" data-card-id="${i}">
+                        <div class="product-image-wrapper">
+                            <span class="sales-label">Best Seller</span>
+                            <div class="product-images-slider">
+                                <img src="images/${i+1}.jpg" alt="Premium Headphones" class="product-image">
+                                <img src="images/${i+2}.jpg" alt="Premium Headphones View 2" class="product-image">
+                                <img src="images/${i+3}.jpg" alt="Premium Headphones View 3" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Premium Wireless Headphones</h3>
+                            <div class="price-container">
+                                <span class="old-price">$299.99</span>
+                                <span class="new-price">$239.99</span>
+                            </div>
+                            <a href="Pages/product-detail.html" class="add-to-cart-btn" onclick="addToCart(event)">View Product</a>
+                        </div>
+                </div>`
+        }
+        featuredCarouselTrack.innerHTML = blackBox;
+
+
+        let blackBox1 = "";
+        let offersCarouselTrack = document.getElementById("offersCarouselTrack");
+        for(let i = 100 ;i<=108 ; i++)
+        {
+            blackBox1 += `<div class="product-card" data-card-id="${i}">
+                        <div class="product-image-wrapper">
+                            <span class="discount-badge">–30%</span>
+                            <span class="sales-label">Trending</span>
+                            <div class="product-images-slider">
+                                <img src="images/${i}.jpg" alt="Travel Backpack" class="product-image">
+                                <img src="images/${i+1}.jpg" alt="Travel Backpack View 2" class="product-image">
+                                <img src="images/${i+2}.jpg" alt="Travel Backpack View 3" class="product-image">
+                            </div>
+                            <div class="image-dots">
+                                <span class="image-dot active"></span>
+                                <span class="image-dot"></span>
+                                <span class="image-dot"></span>
+                            </div>
+                            <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Travel Backpack Deluxe</h3>
+                            <div class="price-container">
+                                <span class="old-price">$149.99</span>
+                                <span class="new-price">$104.99</span>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(event)">Add to Cart</button>
+                        </div>
+                    </div>`
+        }
+        offersCarouselTrack.innerHTML = blackBox1;
+
+
+
+
+
+
+
+        // Global object to manage multiple carousels
+        const carousels = {};
+        
+        // Product image sliders state (universal for all product cards)
+        const productImageStates = {};
+        const productImageIntervals = {};
+
+        // Helper to get number of visible cards based on screen size
+        function getVisibleCards() {
+            if (window.innerWidth <= 480) return 1;
+            if (window.innerWidth <= 768) return 2;
+            return 3; 
+        }
+
+
+        // --- Core Functions for Product Image Slider ---
+
+        function changeProductImage(cardId, imageIndex) {
+            const card = document.querySelector(`[data-card-id="${cardId}"]`);
+            if (!card) return; 
+
+            const slider = card.querySelector('.product-images-slider');
+            const images = slider.querySelectorAll('.product-image');
+            const dots = card.querySelectorAll('.image-dot');
+
+            // Ensure the index is within bounds
+            imageIndex = (imageIndex + images.length) % images.length;
+            
+            productImageStates[cardId] = imageIndex;
+
+            const offset = imageIndex * 100;
+            slider.style.transform = `translateX(-${offset}%)`;
+
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === imageIndex);
+            });
+        }
+
+        function startProductImageRotation(cardId) {
+            clearInterval(productImageIntervals[cardId]);
+
+            productImageIntervals[cardId] = setInterval(() => {
+                const card = document.querySelector(`[data-card-id="${cardId}"]`);
+                if (!card) {
+                    clearInterval(productImageIntervals[cardId]);
+                    return;
+                }
+                const images = card.querySelectorAll('.product-image');
+                if (images.length <= 1) return; 
+
+                const currentImageIndex = productImageStates[cardId] || 0;
+                const nextImageIndex = (currentImageIndex + 1) % images.length;
+                changeProductImage(cardId, nextImageIndex);
+            }, 3000); 
+        }
+
+        // Initialize all product image sliders on the page
+        function initProductImageSliders() {
+            document.querySelectorAll('.product-card').forEach((card) => {
+                const cardId = card.getAttribute('data-card-id');
+                const dots = card.querySelectorAll('.image-dot');
+                const images = card.querySelectorAll('.product-image');
+
+                if (images.length > 1) {
+                    productImageStates[cardId] = 0;
+
+                    dots.forEach((dot, dotIndex) => {
+                        dot.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            changeProductImage(cardId, dotIndex);
+                            clearInterval(productImageIntervals[cardId]);
+                            setTimeout(() => startProductImageRotation(cardId), 5000); 
+                        });
+                    });
+                    startProductImageRotation(cardId);
+                } else {
+                    // Hide dots if there's only one image
+                    dots.forEach(dot => dot.style.display = 'none');
+                }
+            });
+        }
+
+        // --- Reusable Carousel Logic ---
+
+        function initializeCarousel(carouselName, trackId, indicatorsId) {
+            const track = document.getElementById(trackId);
+            const indicatorsContainer = document.getElementById(indicatorsId);
+            const cards = track ? track.querySelectorAll('.product-card') : [];
+            let currentIndex = 0;
+            let autoPlayInterval;
+
+            if (cards.length === 0 || !track) return;
+
+            // Define the carousel instance functions
+            const carousel = {
+                move: function(direction) {
+                    const totalPages = this.getTotalPages();
+                    currentIndex += direction;
+
+                    if (currentIndex < 0) {
+                        currentIndex = totalPages - 1;
+                    } else if (currentIndex >= totalPages) {
+                        currentIndex = 0;
+                    }
+                    this.update();
+                },
+
+                goToPage: function(page) {
+                    currentIndex = page;
+                    this.update();
+                },
+
+                getTotalPages: function() {
+                    const visibleCards = getVisibleCards();
+                    return Math.ceil(cards.length / visibleCards);
+                },
+
+                createIndicators: function() {
+                    if (!indicatorsContainer) return;
+                    indicatorsContainer.innerHTML = '';
+                    const totalPages = this.getTotalPages();
+                    for (let i = 0; i < totalPages; i++) {
+                        const indicator = document.createElement('div');
+                        indicator.classList.add('indicator');
+                        indicator.setAttribute('data-page', i);
+                        if (i === currentIndex) {
+                            indicator.classList.add('active');
+                        }
+                        indicator.addEventListener('click', () => this.goToPage(i));
+                        indicatorsContainer.appendChild(indicator);
+                    }
+                    if (currentIndex >= totalPages) {
+                        currentIndex = totalPages > 0 ? totalPages - 1 : 0;
+                        this.update();
+                    }
+                },
+
+                update: function() {
+                    const visibleCards = getVisibleCards();
+                    if (cards.length === 0) return;
+                    
+                    const cardWidth = cards[0].offsetWidth;
+                    const gap = parseFloat(window.getComputedStyle(track).gap) || 30;
+
+                    const offset = currentIndex * visibleCards * (cardWidth + gap); 
+                    track.style.transform = `translateX(-${offset}px)`;
+
+                    const indicators = indicatorsContainer ? indicatorsContainer.querySelectorAll('.indicator') : [];
+                    indicators.forEach((ind, idx) => {
+                        ind.classList.toggle('active', idx === currentIndex);
+                    });
+                    this.resetAutoPlay();
+                },
+
+                startAutoPlay: function() {
+                    this.stopAutoPlay(); // Ensure any existing interval is cleared
+                    autoPlayInterval = setInterval(() => {
+                        this.move(1);
+                    }, 5000);
+                },
+                
+                stopAutoPlay: function() {
+                    clearInterval(autoPlayInterval);
+                },
+
+                resetAutoPlay: function() {
+                    this.stopAutoPlay();
+                    this.startAutoPlay();
+                }
+            };
+
+            // Set up event listeners for pause on hover
+            track.closest('.carousel-container').addEventListener('mouseenter', () => {
+                carousel.stopAutoPlay();
+            });
+
+            track.closest('.carousel-container').addEventListener('mouseleave', () => {
+                carousel.startAutoPlay();
+            });
+
+            // Initial setup
+            carousel.createIndicators();
+            carousel.startAutoPlay();
+            
+            return carousel;
+        }
+
+        // --- Universal Product Functions ---
+
+        // Toggle favorite
+        function toggleFavorite(button, event) {
+            event.stopPropagation();
+            button.classList.toggle('active');
+        }
+
+        // Add to cart - UI/UX improvement with modern green feedback
+        function addToCart(event) {
+            event.stopPropagation();
+            const button = event.target;
+            const originalText = button.textContent;
+
+            // Prevent rapid clicking while animation is running
+            if (button.textContent === 'Added!') return;
+
+            button.textContent = 'Added!';
+            // Updated to a modern, vibrant green gradient for professional feedback
+            button.style.background = 'linear-gradient(135deg, #10b981 0%, #16a34a 100%)'; 
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                // Clearing the style resets it to the CSS gradient for the button (the Indigo one)
+                button.style.background = ''; 
+            }, 2000);
+        }
+
+        // --- Initialization ---
+
+        function initAll() {
+            // 1. Initialize Product Image Sliders
+            initProductImageSliders();
+            
+            // 2. Initialize Main Carousels
+            carousels.featured = initializeCarousel('featured', 'featuredCarouselTrack', 'featuredIndicators');
+            carousels.offers = initializeCarousel('offers', 'offersCarouselTrack', 'offersIndicators');
+        }
+
+        initAll();
+
+        // Recalculate on window resize (must be outside the function to run globally)
+        window.addEventListener('resize', () => {
+            // Reinitialize both carousels for responsive updates
+            if (carousels.featured) {
+                carousels.featured.createIndicators();
+                carousels.featured.goToPage(0);
+            }
+            if (carousels.offers) {
+                carousels.offers.createIndicators();
+                carousels.offers.goToPage(0);
+            }
+        });
+
+    </script>
+
+
+    <script src="js/main.js"></script>
 </body>
 </html>
