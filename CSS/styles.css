@@ -34,7 +34,7 @@ body {
     CONTAINER
    ================================ */
 .container {
-  max-width: 87.5rem;
+  max-width: 87.5rem !important;
   margin: 0 auto;
   padding: 0 1.25rem;
 }
@@ -503,10 +503,10 @@ body {
 }
 
 .remove-favorite {
-  background: #e91e63;
-  color: #ffffff;
+  /* background: #e91e63; */
+  /* color: #ffffff; */
   border: none;
-  padding: 0.625rem 1.25rem;
+  /* padding: 0.625rem 1.25rem; */
   border-radius: 1.875rem;
   font-weight: 700;
   cursor: pointer;
@@ -517,7 +517,8 @@ body {
 }
 
 .remove-favorite:hover {
-  background: #c2185b;
+  background: red;
+  color:white !important;
   transform: scale(1.05);
 }
 
@@ -1050,6 +1051,7 @@ body {
 .checkout-btn {
   display: block;
   background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  /* background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%); */
   color: #ffffff;
   padding: 0.9375rem 1.5625rem;
   border-radius: 1.5625rem;
@@ -1063,8 +1065,10 @@ body {
 
 .checkout-btn:hover {
   background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  /* background: linear-gradient(135deg, #161d29 0%, #1b2432 100%); */
   transform: translateY(-0.125rem);
   box-shadow: 0 0.375rem 0.9375rem rgba(59, 130, 246, 0.4);
+  /* box-shadow: 0 0.375rem 0.9375rem rgba(7, 18, 36, 0.4); */
 }
 
 .continue-shopping {

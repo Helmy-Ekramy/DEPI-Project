@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Track Order</title>
+    <link rel="stylesheet" href="../CSS/all.min.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    <style>
+        /* Modern Track Order Page Styles */
+        .track-hero {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .track-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .track-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .track-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        /* Track Input Card */
+        .track-input-card {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 40px;
+        }
+
+        .track-input-card h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .track-input-card p {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .track-form {
+            display: flex;
+            gap: 15px;
+        }
+
+        .track-input-group {
+            flex: 1;
+            position: relative;
+        }
+
+        .track-input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            color: #1f2937;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+
+        .track-input:focus {
+            outline: none;
+            border-color: #2a3446;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(42, 52, 70, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 18px;
+        }
+
+        .track-btn {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 52, 70, 0.3);
+            white-space: nowrap;
+        }
+
+        .track-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 52, 70, 0.4);
+        }
+
+        /* Order Status Card */
+        .order-status-card {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            display: none;
+            animation: slideInUp 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 35px;
+        }
+
+        .order-id {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1f2937;
+        }
+
+        .order-id span {
+            color: #3b82f6;
+        }
+
+        .status-badge {
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.shipped {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .status-badge.delivered {
+            background: linear-gradient(135deg, #10b981 0%, #16a34a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.processing {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Timeline */
+        .tracking-timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            padding-bottom: 50px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 27px;
+            top: 45px;
+            width: 3px;
+            height: calc(100% - 20px);
+            background: linear-gradient(180deg, #3b82f6 0%, #e5e7eb 100%);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(42, 52, 70, 0.3);
+            z-index: 2;
+        }
+
+        .timeline-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .timeline-item.active .timeline-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            }
+            50% {
+                box-shadow: 0 6px 30px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        .timeline-item.completed .timeline-icon {
+            background: linear-gradient(135deg, #10b981 0%, #16a34a 100%);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .timeline-content {
+            background: #f9fafb;
+            padding: 20px 25px;
+            border-radius: 16px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .timeline-item.active .timeline-content {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.05));
+            border-left-color: #3b82f6;
+        }
+
+        .timeline-item.completed .timeline-content {
+            background: #f9fafb;
+            border-left-color: #10b981;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Order Details Grid */
+        .order-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+            padding-top: 35px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 16px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .track-container {
+                padding: 50px 20px;
+            }
+
+            .track-input-card,
+            .order-status-card {
+                padding: 30px 20px;
+            }
+
+            .track-form {
+                flex-direction: column;
+            }
+
+            .track-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .order-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .order-details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-top">
+                    <a href="../index.html" class="logo">
+                        <i class="fas fa-laptop"></i> TechStore
+                    </a>
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" class="search-bar" placeholder="Search for products...">
+                    </div>
+                    <div class="user-actions">
+                        <a href="favorites.html" class="action-btn">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorites</span>
+                            <span class="favorite-count">0</span>
+                        </a>
+                        <a href="login.html" class="action-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </a>
+                        <a href="cart.html" class="action-btn" style="position: relative;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="cart-count">3</span>
+                        </a>
+                        <button class="mobile-menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navbar-bottom">
+                    <ul class="main-menu">
+                        <li class="has-dropdown">
+                            <a href="#">Computer Components <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="has-dropdown">
+                                    <a href="#">Processor <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Intel</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Graphics Cards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">NVIDIA</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Motherboards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">AMD</a></li>
+                                        <li><a href="#">Intel</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">RAM <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">DDR4</a></li>
+                                        <li><a href="#">DDR5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">SSD</a></li>
+                                <li><a href="#">HDD</a></li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cases <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Case + PSU Bundles</a></li>
+                                        <li><a href="#">Case + Cooler Bundles</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cooling <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Air Coolers</a></li>
+                                        <li><a href="#">Liquid Coolers</a></li>
+                                        <li><a href="#">Fans</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Power Supplies</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Laptops <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Laptops</a></li>
+                                <li><a href="#">Business Laptops</a></li>
+                                <li><a href="#">Ultrabooks</a></li>
+                                <li><a href="#">Workstations</a></li>
+                                <li><a href="#">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Pre-built PCs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming PCs</a></li>
+                                <li><a href="#">Workstation PCs</a></li>
+                                <li><a href="#">Budget PCs</a></li>
+                                <li><a href="#">Custom Builds</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Monitors <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Monitors</a></li>
+                                <li><a href="#">4K Monitors</a></li>
+                                <li><a href="#">Ultrawide Monitors</a></li>
+                                <li><a href="#">Professional Monitors</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Keyboards</a></li>
+                                <li><a href="#">Mice</a></li>
+                                <li><a href="#">Headsets</a></li>
+                                <li><a href="#">Gaming Chairs</a></li>
+                                <li><a href="#">VR Headsets</a></li>
+                                <li><a href="#">Webcams</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="utility-links">
+                        <a href="about.html" class="utility-link">
+                            <i class="fas fa-info-circle"></i> About Us
+                        </a>
+                        <a href="track-order.html" class="utility-link">
+                            <i class="fas fa-box"></i> Track Order
+                        </a>
+                        <a href="contact.html" class="contact-button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="track-hero">
+            <div class="container">
+                <h1><i class="fas fa-shipping-fast"></i> Track Your Order</h1>
+                <p>Enter your order ID to check the status of your delivery</p>
+            </div>
+        </section>
+
+        <!-- Track Order Content -->
+        <section class="track-container">
+            <!-- Input Card -->
+            <div class="track-input-card">
+                <h2>Enter Order Details</h2>
+                <p>You can find your order ID in the confirmation email</p>
+                
+                <form class="track-form" id="track-form">
+                    <div class="track-input-group">
+                        <i class="fas fa-hashtag input-icon"></i>
+                        <input type="text" class="track-input" id="order-id" placeholder="Enter Order ID (e.g., TS123456)" required>
+                    </div>
+                    <button type="submit" class="track-btn">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </form>
+            </div>
+
+            <!-- Order Status Card (Hidden by default) -->
+            <div class="order-status-card" id="order-status">
+                <div class="order-header">
+                    <div class="order-id">Order <span>#TS123456</span></div>
+                    <div class="status-badge shipped">Shipped</div>
+                </div>
+
+                <!-- Tracking Timeline -->
+                <div class="tracking-timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Order Confirmed</div>
+                            <div class="timeline-date">November 20, 2025 - 10:30 AM</div>
+                            <div class="timeline-desc">Your order has been confirmed and is being prepared for shipment.</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item completed">
+                        <div class="timeline-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Package Prepared</div>
+                            <div class="timeline-date">November 21, 2025 - 2:15 PM</div>
+                            <div class="timeline-desc">Your items have been carefully packaged and ready for shipment.</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item active">
+                        <div class="timeline-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Out for Delivery</div>
+                            <div class="timeline-date">November 22, 2025 - 8:00 AM</div>
+                            <div class="timeline-desc">Your package is on its way and will arrive today!</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Delivered</div>
+                            <div class="timeline-date">Expected by end of day</div>
+                            <div class="timeline-desc">Package will be delivered to your doorstep.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Details -->
+                <div class="order-details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Carrier</div>
+                        <div class="detail-value">FedEx Express</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Tracking Number</div>
+                        <div class="detail-value">FX987654321</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Estimated Delivery</div>
+                        <div class="detail-value">Today, 6:00 PM</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Total Items</div>
+                        <div class="detail-value">3 Products</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>About TechStore</h4>
+                <p>TechStore is your premier destination for cutting-edge PCs, laptops, and tech accessories, designed to elevate your digital experience with innovation and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="products.html">Shop Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ & Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <div class="footer-contact">
+                    <a href="mailto:support@techstore.com" target="_blank" rel="noopener" aria-label="Email">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+                        </svg>
+                        support@techstore.com
+                    </a>
+                    <a href="tel:+201280469393" target="_blank" rel="noopener" aria-label="Phone">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-7.5-7.5 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        +20 128 046 9393
+                    </a>
+                    <span aria-label="Location">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+                        </svg>
+                        Beni-Suef, Egypt
+                    </span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/omaramir1" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.64 4.77 6.08V23h-4v-6.67c0-1.59-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23h-4V8z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/your-username" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.4.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com/your-facebook-page" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://instagram.com/your-instagram-handle" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.28.261 2.15.564 2.915.307.788.718 1.458 1.384 2.126s1.338 1.077 2.126 1.384c.765.307 1.635.509 2.915.564C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.28-.06 2.15-.261 2.915-.564.788-.307 1.458-.718 2.126-1.384s1.077-1.338 1.384-2.126c.307-.765.509-1.635.564-2.915.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.28-.261-2.15-.564-2.915-.307-.788-.718-1.458-1.384-2.126s-1.338-1.077-2.126-1.384c-.765-.307-1.635-.509-2.915-.564C15.667.012 15.26 0 12 0zm0 4.1a7.9 7.9 0 1 1 0 15.8 7.9 7.9 0 0 1 0-15.8zm0 3.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zM16.9 7.5c-.7 0-1.2.6-1.2 1.2s.5 1.2 1.2 1.2 1.2-.6 1.2-1.2-.5-1.2-1.2-1.2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 TechStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('track-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const orderId = document.getElementById('order-id').value;
+            const statusCard = document.getElementById('order-status');
+            const trackBtn = this.querySelector('.track-btn');
+            
+            // Show loading state
+            const originalText = trackBtn.innerHTML;
+            trackBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Tracking...';
+            trackBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                statusCard.style.display = 'block';
+                statusCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Reset button
+                trackBtn.innerHTML = originalText;
+                trackBtn.disabled = false;
+            }, 1000);
+
+            // TODO: Implement actual order tracking API
+            console.log('Tracking order:', orderId);
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

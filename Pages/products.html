@@ -4,11 +4,410 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Products</title>
-    
     <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/animations.css">
     <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #1f2937;
+            padding-top: 80px;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .filter-btn {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 36, 50, 0.3);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 30px;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Product Card - Matching Home Page Style */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .product-images-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .image-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 3;
+        }
+
+        .image-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-dot.active {
+            background: #3b82f6;
+            width: 20px;
+            border-radius: 3px;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            z-index: 2;
+        }
+
+        .sales-label {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            z-index: 2;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 1px solid #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: #fee;
+        }
+
+        .favorite-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: #ef4444;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-btn.active svg {
+            fill: #ef4444;
+        }
+
+        .product-info {
+            padding: 0 4px;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 3em;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .new-price {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .product-cta {
+            width: 100%;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .product-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .product-cta:hover::before {
+            left: 100%;
+        }
+
+        .product-cta:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #34425a 0%, #1f2938 100%);
+            box-shadow: 0 10px 24px rgba(27, 36, 50, 0.45);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 60px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .pagination button {
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 50px;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .pagination button:hover:not(:disabled):not(.active) {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -151,100 +550,55 @@
         </nav>
     </header>
 
-    <main>
-        <section class="products-section">
-            <div class="container">
-                <h1 class="section-title">Shop All Products</h1>
-                <p class="section-subtitle">Browse our wide selection of PCs, laptops, and accessories.</p>
-                <div class="products-filter">
+    <main style="padding-block: 8rem;">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Shop All Products</h1>
+                <p class="page-subtitle">Discover our complete collection of cutting-edge technology</p>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-grid">
                     <div class="filter-group">
-                        <label for="category">Category:</label>
-                        <select id="category" name="category">
+                        <label for="category">Category</label>
+                        <select id="category">
                             <option value="">All Categories</option>
+                            <option value="graphics">Graphics Cards</option>
                             <option value="processors">Processors</option>
-                            <option value="graphics-cards">Graphics Cards</option>
                             <option value="laptops">Laptops</option>
+                            <option value="monitors">Monitors</option>
                             <option value="accessories">Accessories</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="sort">Sort By:</label>
-                        <select id="sort" name="sort">
-                            <option value="price-asc">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
-                            <option value="name-asc">Name: A to Z</option>
-                            <option value="name-desc">Name: Z to A</option>
+                        <label for="sort">Sort By</label>
+                        <select id="sort">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="products-grid">
-                    <div class="product-card">
-                        <img src="../images/zd170.jpg" loading="lazy" alt="NVIDIA RTX 4090">
-                        <h3>NVIDIA GeForce RTX 4090</h3>
-                        <p>$1,599.99</p>
-                        <a href="" class="product-cta">View Product</a>
+                    <div class="filter-group">
+                        <label for="price">Max Price</label>
+                        <input type="number" id="price" placeholder="$0 - $5000">
                     </div>
-
-                    <div class="product-card">
-                        <img src="../images/zm234-1.jpg" loading="lazy" alt="Intel Core i9">
-                        <h3>Intel Core i9-13900K</h3>
-                        <p>$589.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="../images/zu563.jpg" loading="lazy" alt="Corsair K70">
-                        <h3>Corsair K70 RGB Mechanical Keyboard</h3>
-                        <p >$129.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="../images/zh535.jpg" loading="lazy" alt="ASUS ROG Laptop">
-                        <h3>ASUS ROG Strix Scar 17</h3>
-                        <p>$2,499.99</p>
-                        <a href="product-detail.html" class="product-cta">View Product</a>
+                    <div class="filter-group">
+                        <button class="filter-btn" onclick="applyFilters()">
+                            <i class="fas fa-filter"></i> Apply Filters
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be generated here -->
+            </div>
+
+            <div class="pagination" id="paginationContainer">
+                <!-- Pagination will be generated dynamically -->
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
@@ -323,7 +677,401 @@
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
 
+    <script>
+        // Extended product data for pagination demo
+        const allProducts = [
+            {
+                id: 1,
+                title: "NVIDIA GeForce RTX 4090",
+                oldPrice: "$1,799.99",
+                newPrice: "$1,599.99",
+                discount: "–15%",
+                label: "Best Seller",
+                images: ["https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500", "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=500"]
+            },
+            {
+                id: 2,
+                title: "Intel Core i9-13900K Processor",
+                oldPrice: "$649.99",
+                newPrice: "$589.99",
+                discount: "–10%",
+                label: "Hot Deal",
+                images: ["https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=500", "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500"]
+            },
+            {
+                id: 3,
+                title: "ASUS ROG Gaming Laptop",
+                oldPrice: "$2,699.99",
+                newPrice: "$2,399.99",
+                discount: "–12%",
+                label: "Premium",
+                images: ["https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500", "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500"]
+            },
+            {
+                id: 4,
+                title: "Samsung 4K Gaming Monitor 32\"",
+                oldPrice: "$799.99",
+                newPrice: "$699.99",
+                discount: "–13%",
+                label: "Trending",
+                images: ["https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500", "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500"]
+            },
+            {
+                id: 5,
+                title: "Corsair K95 RGB Mechanical Keyboard",
+                oldPrice: "$199.99",
+                newPrice: "$149.99",
+                discount: "–25%",
+                label: "Sale",
+                images: ["https://images.unsplash.com/photo-1595225476474-87563907a212?w=500", "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500"]
+            },
+            {
+                id: 6,
+                title: "Logitech G Pro Wireless Mouse",
+                oldPrice: "$149.99",
+                newPrice: "$129.99",
+                discount: "–13%",
+                label: "Top Rated",
+                images: ["https://images.unsplash.com/photo-1527814050087-3793815479db?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },
+            {
+                id: 7,
+                title: "AMD Ryzen 9 7950X",
+                oldPrice: "$699.99",
+                newPrice: "$649.99",
+                discount: "–7%",
+                label: "New",
+                images: ["https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=500", "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=500"]
+            },
+            {
+                id: 8,
+                title: "Razer BlackWidow V3 Pro",
+                oldPrice: "$229.99",
+                newPrice: "$199.99",
+                discount: "–13%",
+                label: "Popular",
+                images: ["https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=500", "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500"]
+            },
+            {
+                id: 9,
+                title: "Dell UltraSharp 27\" 4K Monitor",
+                oldPrice: "$599.99",
+                newPrice: "$529.99",
+                discount: "–12%",
+                label: "Featured",
+                images: ["https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500", "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=500"]
+            },
+            {
+                id: 10,
+                title: "SteelSeries Arctis Pro Wireless",
+                oldPrice: "$329.99",
+                newPrice: "$279.99",
+                discount: "–15%",
+                label: "Hot",
+                images: ["https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500", "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"]
+            },
+            {
+                id: 11,
+                title: "MSI GeForce RTX 4080",
+                oldPrice: "$1,299.99",
+                newPrice: "$1,199.99",
+                discount: "–8%",
+                label: "Best Value",
+                images: ["https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=500", "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500"]
+            },
+            {
+                id: 12,
+                title: "Logitech MX Master 3S",
+                oldPrice: "$99.99",
+                newPrice: "$89.99",
+                discount: "–10%",
+                label: "Recommended",
+                images: ["https://images.unsplash.com/photo-1527814050087-3793815479db?w=500", "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500"]
+            },
+            {
+                id: 13,
+                title: "ASUS TUF Gaming VG27AQ",
+                oldPrice: "$369.99",
+                newPrice: "$329.99",
+                discount: "–11%",
+                label: "Gaming",
+                images: ["https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500", "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500"]
+            },
+            {
+                id: 14,
+                title: "Corsair Vengeance RGB Pro 32GB",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Essential",
+                images: ["https://images.unsplash.com/photo-1591799265444-d66432b91588?w=500", "https://images.unsplash.com/photo-1562976540-1502c2145186?w=500"]
+            },
+            {
+                id: 15,
+                title: "Samsung 980 PRO 2TB SSD",
+                oldPrice: "$249.99",
+                newPrice: "$219.99",
+                discount: "–12%",
+                label: "Fast",
+                images: ["https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=500", "https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=500"]
+            },
+            {
+                id: 16,
+                title: "HP Omen 16 Gaming Laptop",
+                oldPrice: "$1,799.99",
+                newPrice: "$1,599.99",
+                discount: "–11%",
+                label: "Performance",
+                images: ["https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500", "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500"]
+            },
+            {
+                id: 17,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },
+            {
+                id: 18,
+                title: "NZXT Kraken Z73 RGB",
+                oldPrice: "$279.99",
+                newPrice: "$249.99",
+                discount: "–11%",
+                label: "Cooling",
+                images: ["https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=500", "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500"]
+            },
+            {
+                id: 19,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },{
+                id: 20,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },{
+                id: 21,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },{
+                id: 22,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },{
+                id: 23,
+                title: "Logitech G Pro X Superlight",
+                oldPrice: "$159.99",
+                newPrice: "$139.99",
+                discount: "–13%",
+                label: "Pro Choice",
+                images: ["https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500", "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=500"]
+            },
+        ];
+
+        // Pagination state
+        let currentPage = 1;
+        const productsPerPage = 16;
+
+        // Generate product cards with pagination
+        function generateProducts() {
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const productsToShow = allProducts.slice(startIndex, endIndex);
+
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = productsToShow.map(product => `
+                <div class="product-card" data-card-id="${product.id}">
+                    <div class="product-image-wrapper">
+                        ${product.discount ? `<span class="discount-badge">${product.discount}</span>` : ''}
+                        ${product.label ? `<span class="sales-label">${product.label}</span>` : ''}
+                        <div class="product-images-slider">
+                            ${product.images.map(img => `<img src="${img}" alt="${product.title}" class="product-image">`).join('')}
+                        </div>
+                        <div class="image-dots">
+                            ${product.images.map((_, i) => `<span class="image-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+                        </div>
+                        <button class="favorite-btn" onclick="toggleFavorite(this, event)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="price-container">
+                            <span class="old-price">${product.oldPrice}</span>
+                            <span class="new-price">${product.newPrice}</span>
+                        </div>
+                        <a href="product-detail.html" class="product-cta" onclick="viewProduct(${product.id}, event)">View Product</a>
+                    </div>
+                </div>
+            `).join('');
+
+            initProductImageSliders();
+            updatePaginationUI();
+        }
+
+        // Update pagination UI
+        function updatePaginationUI() {
+            const totalPages = Math.ceil(allProducts.length / productsPerPage);
+            const paginationContainer = document.querySelector('.pagination');
+            
+            let paginationHTML = `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fas fa-chevron-left"></i>
+            </button>`;
+
+            // Show page numbers with ellipsis
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            if (startPage > 1) {
+                paginationHTML += `<button onclick="goToPage(1)">1</button>`;
+                if (startPage > 2) {
+                    paginationHTML += `<button disabled>...</button>`;
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<button disabled>...</button>`;
+                }
+                paginationHTML += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+
+            paginationHTML += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fas fa-chevron-right"></i>
+            </button>`;
+
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        // Go to specific page
+        function goToPage(page) {
+            const totalPages = Math.ceil(allProducts.length / productsPerPage);
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            generateProducts();
+            
+            // Smooth scroll to top of products
+            window.scrollTo({
+                top: document.querySelector('.products-grid').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        // Product image slider functionality
+        const productImageStates = {};
+        const productImageIntervals = {};
+
+        function changeProductImage(cardId, imageIndex) {
+            const card = document.querySelector(`[data-card-id="${cardId}"]`);
+            if (!card) return;
+
+            const slider = card.querySelector('.product-images-slider');
+            const images = slider.querySelectorAll('.product-image');
+            const dots = card.querySelectorAll('.image-dot');
+
+            imageIndex = (imageIndex + images.length) % images.length;
+            productImageStates[cardId] = imageIndex;
+
+            slider.style.transform = `translateX(-${imageIndex * 100}%)`;
+            dots.forEach((dot, idx) => dot.classList.toggle('active', idx === imageIndex));
+        }
+
+        function startProductImageRotation(cardId) {
+            clearInterval(productImageIntervals[cardId]);
+            productImageIntervals[cardId] = setInterval(() => {
+                const card = document.querySelector(`[data-card-id="${cardId}"]`);
+                if (!card) {
+                    clearInterval(productImageIntervals[cardId]);
+                    return;
+                }
+                const images = card.querySelectorAll('.product-image');
+                if (images.length <= 1) return;
+
+                const currentImageIndex = productImageStates[cardId] || 0;
+                const nextImageIndex = (currentImageIndex + 1) % images.length;
+                changeProductImage(cardId, nextImageIndex);
+            }, 3000);
+        }
+
+        function initProductImageSliders() {
+            document.querySelectorAll('.product-card').forEach(card => {
+                const cardId = card.getAttribute('data-card-id');
+                const dots = card.querySelectorAll('.image-dot');
+                const images = card.querySelectorAll('.product-image');
+
+                if (images.length > 1) {
+                    productImageStates[cardId] = 0;
+                    dots.forEach((dot, dotIndex) => {
+                        dot.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            changeProductImage(cardId, dotIndex);
+                            clearInterval(productImageIntervals[cardId]);
+                            setTimeout(() => startProductImageRotation(cardId), 5000);
+                        });
+                    });
+                    startProductImageRotation(cardId);
+                } else {
+                    dots.forEach(dot => dot.style.display = 'none');
+                }
+            });
+        }
+
+        function toggleFavorite(button, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            button.classList.toggle('active');
+        }
+
+        function viewProduct(id, event) {
+            event.preventDefault();
+            console.log('Viewing product:', id);
+            // Navigate to product detail page
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            currentPage = 1; // Reset to first page when filters change
+            generateProducts();
+        }
+
+        function changePage(direction) {
+            goToPage(currentPage + direction);
+        }
+
+        // Initialize
+        generateProducts();
+    </script>
+
+    <script src="../js/account.js"></script>
 </body>
 </html>

@@ -628,11 +628,11 @@ select {
   transition: width 0.6s, height 0.6s;
 }
 
-.product-cta:hover::after,
+/* .product-cta:hover::after,
 .promotion-cta:hover::after {
   width: 300px;
   height: 300px;
-}
+} */
 
 /* ==============================================
    9. RIPPLE EFFECT SYSTEM

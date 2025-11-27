@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Contact Us</title>
+    <link rel="stylesheet" href="../CSS/all.min.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    <style>
+        /* Modern Contact Page Styles */
+        .contact-hero {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Contact Form Card */
+        .contact-form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-form-card h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .contact-form-card p {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 35px;
+        }
+
+        .modern-form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .modern-form-group label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .modern-form-group input,
+        .modern-form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+
+        .modern-form-group input:focus,
+        .modern-form-group textarea:focus {
+            outline: none;
+            border-color: #2a3446;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(42, 52, 70, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .modern-form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 52, 70, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 52, 70, 0.4);
+        }
+
+        /* Contact Info Cards */
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(42, 52, 70, 0.3);
+        }
+
+        .info-card-icon i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .info-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6b7280;
+            font-size: 1.05rem;
+            padding: 10px 0;
+        }
+
+        .info-item i {
+            color: #3b82f6;
+            font-size: 18px;
+            width: 24px;
+        }
+
+        .info-item a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-item a:hover {
+            color: #2a3446;
+        }
+
+        /* Business Hours Card */
+        .hours-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .hours-time {
+            color: #6b7280;
+        }
+
+        /* Social Media Card */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            aspect-ratio: 1;
+            background: #f3f4f6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(42, 52, 70, 0.3);
+        }
+
+        /* Map Card */
+        .map-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            margin-top: 25px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-form-card {
+                padding: 35px;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-container {
+                padding: 50px 20px;
+            }
+
+            .contact-form-card {
+                padding: 30px 20px;
+            }
+
+            .info-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-top">
+                    <a href="../index.html" class="logo">
+                        <i class="fas fa-laptop"></i> TechStore
+                    </a>
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" class="search-bar" placeholder="Search for products...">
+                    </div>
+                    <div class="user-actions">
+                        <a href="favorites.html" class="action-btn">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorites</span>
+                            <span class="favorite-count">0</span>
+                        </a>
+                        <a href="login.html" class="action-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </a>
+                        <a href="cart.html" class="action-btn" style="position: relative;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="cart-count">3</span>
+                        </a>
+                        <button class="mobile-menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navbar-bottom">
+                    <ul class="main-menu">
+                        <li class="has-dropdown">
+                            <a href="#">Computer Components <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="has-dropdown">
+                                    <a href="#">Processor <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Intel</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Graphics Cards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">NVIDIA</a></li>
+                                        <li><a href="#">AMD</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Motherboards <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">AMD</a></li>
+                                        <li><a href="#">Intel</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">RAM <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">DDR4</a></li>
+                                        <li><a href="#">DDR5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">SSD</a></li>
+                                <li><a href="#">HDD</a></li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cases <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Case + PSU Bundles</a></li>
+                                        <li><a href="#">Case + Cooler Bundles</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cooling <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="dropdown-menu nested">
+                                        <li><a href="#">Air Coolers</a></li>
+                                        <li><a href="#">Liquid Coolers</a></li>
+                                        <li><a href="#">Fans</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Power Supplies</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Laptops <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Laptops</a></li>
+                                <li><a href="#">Business Laptops</a></li>
+                                <li><a href="#">Ultrabooks</a></li>
+                                <li><a href="#">Workstations</a></li>
+                                <li><a href="#">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Pre-built PCs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming PCs</a></li>
+                                <li><a href="#">Workstation PCs</a></li>
+                                <li><a href="#">Budget PCs</a></li>
+                                <li><a href="#">Custom Builds</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Monitors <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Monitors</a></li>
+                                <li><a href="#">4K Monitors</a></li>
+                                <li><a href="#">Ultrawide Monitors</a></li>
+                                <li><a href="#">Professional Monitors</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Keyboards</a></li>
+                                <li><a href="#">Mice</a></li>
+                                <li><a href="#">Headsets</a></li>
+                                <li><a href="#">Gaming Chairs</a></li>
+                                <li><a href="#">VR Headsets</a></li>
+                                <li><a href="#">Webcams</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="utility-links">
+                        <a href="about.html" class="utility-link">
+                            <i class="fas fa-info-circle"></i> About Us
+                        </a>
+                        <a href="track-order.html" class="utility-link">
+                            <i class="fas fa-box"></i> Track Order
+                        </a>
+                        <a href="contact.html" class="contact-button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <h1><i class="fas fa-envelope"></i> Get In Touch</h1>
+                <p>We're here to help! Reach out with any questions or feedback</p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="contact-container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-card">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you within 24 hours</p>
+                    
+                    <form id="contact-form">
+                        <div class="modern-form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+
+                        <div class="modern-form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="modern-form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="modern-form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required placeholder="How can we help you?">
+                        </div>
+
+                        <div class="modern-form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us more about your inquiry..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-cards">
+                    <!-- Contact Details Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <h3>Contact Information</h3>
+                        <div class="info-card-content">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Beni-Suef, Egypt</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+201280469393">+20 128 046 9393</a>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:support@techstore.com">support@techstore.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Business Hours</h3>
+                        <div class="hours-grid">
+                            <div class="hours-row">
+                                <span class="hours-day">Monday - Friday</span>
+                                <span class="hours-time">9:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="hours-row">
+                                <span class="hours-day">Saturday</span>
+                                <span class="hours-time">10:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="hours-row">
+                                <span class="hours-day">Sunday</span>
+                                <span class="hours-time">Closed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Follow Us</h3>
+                        <p style="font-size: 0.95rem; color: #6b7280; margin-bottom: 10px;">Stay connected on social media</p>
+                        <div class="social-grid">
+                            <a href="#" class="social-btn" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-btn" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-btn" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-btn" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Map Card -->
+                    <div class="map-card">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marked-alt" style="font-size: 48px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>About TechStore</h4>
+                <p>TechStore is your premier destination for cutting-edge PCs, laptops, and tech accessories, designed to elevate your digital experience with innovation and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="products.html">Shop Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ & Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <div class="footer-contact">
+                    <a href="mailto:support@techstore.com" target="_blank" rel="noopener" aria-label="Email">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+                        </svg>
+                        support@techstore.com
+                    </a>
+                    <a href="tel:+201280469393" target="_blank" rel="noopener" aria-label="Phone">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-7.5-7.5 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        +20 128 046 9393
+                    </a>
+                    <span aria-label="Location">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+                        </svg>
+                        Beni-Suef, Egypt
+                    </span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/omaramir1" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.64 4.77 6.08V23h-4v-6.67c0-1.59-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23h-4V8z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/your-username" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.4.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com/your-facebook-page" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://instagram.com/your-instagram-handle" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.28.261 2.15.564 2.915.307.788.718 1.458 1.384 2.126s1.338 1.077 2.126 1.384c.765.307 1.635.509 2.915.564C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.28-.06 2.15-.261 2.915-.564.788-.307 1.458-.718 2.126-1.384s1.077-1.338 1.384-2.126c.307-.765.509-1.635.564-2.915.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.28-.261-2.15-.564-2.915-.307-.788-.718-1.458-1.384-2.126s-1.338-1.077-2.126-1.384c-.765-.307-1.635-.509-2.915-.564C15.667.012 15.26 0 12 0zm0 4.1a7.9 7.9 0 1 1 0 15.8 7.9 7.9 0 0 1 0-15.8zm0 3.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zM16.9 7.5c-.7 0-1.2.6-1.2 1.2s.5 1.2 1.2 1.2 1.2-.6 1.2-1.2-.5-1.2-1.2-1.2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 TechStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #16a34a 100%)';
+                
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }, 1500);
+
+            // TODO: Implement actual form submission
+            console.log('Form Data:', formData);
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -4,11 +4,523 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechStore - Shopping Cart</title>
-    
     <link rel="stylesheet" href="../CSS/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/animations.css">
     <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    
+    <style>
+        /* ===================================
+           GLOBAL RESET & BASE STYLES
+           =================================== */
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* ===================================
+           HEADER & NAVIGATION
+           =================================== */
+        .main-header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: #ffffff;
+        }
+
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #3b82f6;
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #3b82f6;
+            font-size: 1.8rem;
+        }
+
+        .search-container {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: none;
+            border-radius: 25px;
+            background-color: #374151;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            background-color: #4b5563;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .action-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-count {
+            background-color: #e74c3c;
+            color: #ffffff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+
+        /* ===================================
+           MAIN CONTENT
+           =================================== */
+
+        .cart-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .cart-content {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* ===================================
+           CART ITEMS
+           =================================== */
+        .cart-items {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h3 {
+            font-size: 1.5rem;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .cart-item-details h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .cart-item-price {
+            font-size: 1.1rem;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+
+        .quantity-btn {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            background-color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .cart-item-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            padding: 0 20px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+
+        .cart-item-remove:hover {
+            color: #dc2626;
+            transform: scale(1.2);
+        }
+
+        /* ===================================
+           CART SUMMARY
+           =================================== */
+        .cart-summary {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 160px;
+        }
+
+        .cart-summary h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            font-size: 1.3rem;
+            border-top: 2px solid #d1d5db;
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn  {
+            width: 100%;
+            background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%); /* Professional soft gradient */
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+        }
+
+        /* Premium soft shine effect */
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
+            transition: left 0.6s ease;
+        }
+
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Hover effect: lighter, modern elevation */
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #34425a 0%, #1f2938 100%); /* Brighter on hover */
+            box-shadow: 0 10px 24px rgba(27, 36, 50, 0.45);
+        }
+
+        /* Tap feel */
+        .checkout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(27, 36, 50, 0.25);
+        }
+
+        .continue-shopping {
+            display: block;
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .continue-shopping:hover {
+            color: #2563eb;
+        }
+
+        /* ===================================
+           FOOTER
+           =================================== */
+        .footer {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: #e5e7eb;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .footer-column p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #d1d5db;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #60a5fa;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+        }
+
+        /* ===================================
+           RESPONSIVE
+           =================================== */
+        @media (max-width: 768px) {
+            main {
+                padding-top: 120px;
+            }
+
+            .navbar-top {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .search-container {
+                order: 3;
+                max-width: 100%;
+                margin: 15px 0 0;
+            }
+
+            .cart-content {
+                flex-direction: column;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cart-item-details,
+            .cart-item-total {
+                padding: 0;
+            }
+
+            .cart-summary {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -156,60 +668,27 @@
             <div class="container">
                 <h1 class="section-title">Your Shopping Cart</h1>
                 <p class="section-subtitle">Review your items and proceed to checkout.</p>
+                
                 <div class="cart-content">
-                    <div class="cart-items">
-                        <div class="cart-item">
-                            <div class="cart-item-image" role="img">
-                                <img src="../images/zl498.jpg" alt="NVIDIA RTX 4090">
-                            </div>
-                            <div class="cart-item-details">
-                                <h3>NVIDIA GeForce RTX 4090</h3>
-                                <p class="cart-item-price">$1,599.99</p>
-                            </div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn" data-action="decrease">-</button>
-                                <input type="number" value="1" min="1" class="quantity-input">
-                                <button class="quantity-btn" data-action="increase">+</button>
-                            </div>
-                            <div class="cart-item-total">
-                                <p>$1,599.99</p>
-                            </div>
-                            <button class="cart-item-remove"><i class="fas fa-trash"></i></button>
-                        </div>
-                        <div class="cart-item">
-                            <div class="cart-item-image" role="img">
-                                <img src="../images/zhzh-0.jpg" alt="Corsair K70">
-                            </div>
-                            <div class="cart-item-details">
-                                <h3>Corsair K70 RGB Mechanical Keyboard</h3>
-                                <p class="cart-item-price">$129.99</p>
-                            </div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn" data-action="decrease">-</button>
-                                <input type="number" value="2" min="1" class="quantity-input">
-                                <button class="quantity-btn" data-action="increase">+</button>
-                            </div>
-                            <div class="cart-item-total">
-                                <p>$259.98</p>
-                            </div>
-                            <button class="cart-item-remove"><i class="fas fa-trash"></i></button>
-                        </div>
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be dynamically inserted here -->
                     </div>
+                    
                     <div class="cart-summary">
                         <h2>Cart Summary</h2>
                         <div class="summary-row">
                             <span>Subtotal</span>
-                            <span>$1,859.97</span>
+                            <span id="subtotal">$0.00</span>
                         </div>
                         <div class="summary-row">
                             <span>Shipping</span>
-                            <span>Free</span>
+                            <span id="shipping">Free</span>
                         </div>
                         <div class="summary-row summary-total">
                             <span>Total</span>
-                            <span>$1,859.97</span>
+                            <span id="total">$0.00</span>
                         </div>
-                        <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+                        <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
                         <a href="../index.html" class="continue-shopping">Continue Shopping</a>
                     </div>
                 </div>
@@ -292,6 +771,170 @@
             <p>&copy; 2025 TechStore. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // ===================================
+        // CART DATA & STATE MANAGEMENT
+        // ===================================
+        let cartItems = [
+            {
+                id: 1,
+                name: 'NVIDIA GeForce RTX 4090',
+                price: 1599.99,
+                quantity: 1,
+                image: '../images/102.jpg'
+            },
+            {
+                id: 2,
+                name: 'Corsair K70 RGB Mechanical Keyboard',
+                price: 129.99,
+                quantity: 2,
+                image: '../images/103.jpg'
+            },
+            {
+                id: 3,
+                name: 'Logitech G Pro Wireless Mouse',
+                price: 149.99,
+                quantity: 1,
+                image: '../images/104.jpg'
+            }
+        ];
+
+        // ===================================
+        // RENDER CART
+        // ===================================
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some items to get started!</p>
+                        <a href="index.html" class="checkout-btn" style="max-width: 200px; margin: 0 auto;">Start Shopping</a>
+                    </div>
+                `;
+                updateSummary();
+                return;
+            }
+
+            let html = '';
+            cartItems.forEach(item => {
+                const itemTotal = (item.price * item.quantity).toFixed(2);
+                html += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" value="${item.quantity}" min="1" class="quantity-input" 
+                                   onchange="setQuantity(${item.id}, this.value)" readonly>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="cart-item-total">
+                            <p>$${itemTotal}</p>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeItem(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            updateSummary();
+        }
+
+        // ===================================
+        // UPDATE QUANTITY
+        // ===================================
+        function updateQuantity(itemId, change) {
+            const item = cartItems.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(itemId);
+                } else {
+                    renderCart();
+                }
+            }
+        }
+
+        function setQuantity(itemId, value) {
+            const quantity = parseInt(value);
+            if (quantity > 0) {
+                const item = cartItems.find(i => i.id === itemId);
+                if (item) {
+                    item.quantity = quantity;
+                    renderCart();
+                }
+            }
+        }
+
+        // ===================================
+        // REMOVE ITEM
+        // ===================================
+        function removeItem(itemId) {
+            if (confirm('Remove this item from cart?')) {
+                cartItems = cartItems.filter(item => item.id !== itemId);
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        // ===================================
+        // UPDATE SUMMARY
+        // ===================================
+        function updateSummary() {
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 0 ? (subtotal >= 100 ? 0 : 9.99) : 0;
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // ===================================
+        // UPDATE CART COUNT
+        // ===================================
+        function updateCartCount() {
+            const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // ===================================
+        // PROCEED TO CHECKOUT
+        // ===================================
+        function proceedToCheckout() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Save cart to localStorage for checkout page
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            window.location.href = 'checkout.html';
+        }
+
+        // ===================================
+        // INITIALIZE
+        // ===================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            updateCartCount();
+        });
+    </script>
 
     <script src="../js/main.js"></script>
 </body>
