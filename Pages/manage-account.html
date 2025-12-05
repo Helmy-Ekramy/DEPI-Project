@@ -1,749 +1,1483 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TechStore - My Account</title>
-    <link rel="stylesheet" href="../CSS/all.min.css" />
-    <link rel="stylesheet" href="../CSS/styles.css" />
-    <link rel="stylesheet" href="../CSS/MediaQuery.css" />
-    <link rel="stylesheet" href="../CSS/animations .css" />
-    <link rel="stylesheet" href="../CSS/account.css" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore Account - Professional Dashboard</title>
+    <link rel="stylesheet" href="../CSS/all.min.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/MediaQuery.css">
+    <link rel="stylesheet" href="../CSS/account.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-  <body>
-    <!-- Header -->
+        :root {
+            --primary: #202732;
+            --primary-dark: #121923;
+            --accent: #2b7079;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-body: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --text-muted: #9ca3af;
+            --radius: 12px;
+            --radius-lg: 24px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #cffafe 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .account-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 8rem 2rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(43, 112, 121, 0.2);
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(43, 112, 121, 0.3);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .user-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-email {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .progress-box {
+            background: rgba(43, 112, 121, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(43, 112, 121, 0.2);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 999px;
+            transition: width 0.5s ease;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: rgba(43, 112, 121, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 8px 20px rgba(43, 112, 121, 0.3);
+        }
+
+        .menu-item i {
+            width: 20px;
+            font-size: 1.1rem;
+        }
+
+        .menu-item.signout {
+            color: var(--danger);
+            margin-top: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        .menu-item.signout:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Content Area */
+        .content-area {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            min-height: 600px;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(43, 112, 121, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-padding {
+            padding: 2rem;
+        }
+
+        .order-image, .wishlist-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .order-content, .wishlist-content {
+            padding: 1.5rem;
+        }
+
+        .order-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-id {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-delivered {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-processing {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .order-footer, .wishlist-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            gap: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(43, 112, 121, 0.1);
+        }
+
+        .input-hint {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .input-hint.success {
+            color: var(--success);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 20000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--bg-body);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        /* Address Cards */
+        .address-card {
+            position: relative;
+        }
+
+        .address-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--success);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .add-new-card {
+            border: 2px dashed var(--border);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-new-card:hover {
+            border-color: var(--accent);
+            background: rgba(43, 112, 121, 0.05);
+        }
+
+        .add-new-card i {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Profile Section Specific */
+        .profile-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-card-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .profile-card-body {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-body);
+        }
+
+        .profile-note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .account-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .account-container {
+                padding: 1.5rem;
+            }
+
+            .content-area {
+                padding: 2rem;
+            }
+
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .content-header h1 {
+                font-size: 2rem;
+            }
+
+            .order-footer, .wishlist-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .address-actions {
+                flex-direction: column;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
     <header class="main-header">
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-top">
-            <a href="../index.html" class="logo">
-              <i class="fas fa-laptop"></i> TechStore
-            </a>
-            <div class="search-container">
-              <i class="fas fa-search search-icon"></i>
-              <input
-                type="search"
-                class="search-bar"
-                placeholder="Search for products..."
-              />
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-top">
+                    <a href="../index.html" class="logo">
+                        <i class="fas fa-laptop"></i> TechStore
+                    </a>
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" class="search-bar" placeholder="Search for products...">
+                    </div>
+                    <div class="user-actions">
+                        <a href="favorites.html" class="action-btn">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorites</span>
+                            <span class="favorite-count">0</span>
+                        </a>
+                        <a href="login.html" class="action-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </a>
+                        <a href="cart.html" class="action-btn" style="position: relative;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <span class="cart-count">3</span>
+                        </a>
+                        <button class="mobile-menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="navbar-bottom">
+                    <ul class="main-menu">
+                        <li class="has-dropdown">
+                            <a href="#">Computer Components <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="has-dropdown">
+                                    <a href="#">Processor</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Graphics Cards</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Motherboards</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">RAM</a>
+                                </li>
+                                <li><a href="#">SSD</a></li>
+                                <li><a href="#">HDD</a></li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cases</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Cooling</a>
+                                </li>
+                                <li><a href="#">Power Supplies</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Laptops <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Laptops</a></li>
+                                <li><a href="#">Business Laptops</a></li>
+                                <li><a href="#">Ultrabooks</a></li>
+                                <li><a href="#">Workstations</a></li>
+                                <li><a href="#">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Pre-built PCs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming PCs</a></li>
+                                <li><a href="#">Workstation PCs</a></li>
+                                <li><a href="#">Budget PCs</a></li>
+                                <li><a href="#">Custom Builds</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Monitors <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gaming Monitors</a></li>
+                                <li><a href="#">4K Monitors</a></li>
+                                <li><a href="#">Ultrawide Monitors</a></li>
+                                <li><a href="#">Professional Monitors</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Keyboards</a></li>
+                                <li><a href="#">Mice</a></li>
+                                <li><a href="#">Headsets</a></li>
+                                <li><a href="#">Gaming Chairs</a></li>
+                                <li><a href="#">VR Headsets</a></li>
+                                <li><a href="#">Webcams</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="utility-links">
+                        <a href="https://maps.app.goo.gl/iZ44U6y6xJkN5DWa7" target="_blank" class="utility-link">
+                            <i class="fas fa-map-marker-alt"></i> Find Us
+                        </a>
+                        <a href="track-order.html" class="utility-link">
+                            <i class="fas fa-box"></i> Track Order
+                        </a>
+                        <a href="contact.html" class="contact-button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="user-actions">
-              <a href="favorites.html" class="action-btn">
-                <i class="fas fa-heart"></i>
-                <span>Favorites</span>
-                <span class="favorite-count">0</span>
-              </a>
-              <a href="account.html" class="action-btn">
-                <i class="fas fa-user"></i>
-                <span>Account</span>
-              </a>
-              <a href="cart.html" class="action-btn" style="position: relative">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Cart</span>
-                <span class="cart-count">3</span>
-              </a>
-              <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="navbar-bottom">
-            <ul class="main-menu">
-              <li class="has-dropdown">
-                <a href="#"
-                  >Computer Components <i class="fas fa-chevron-down"></i
-                ></a>
-                <ul class="dropdown-menu">
-                  <li class="has-dropdown">
-                    <a href="#"
-                      >Processor <i class="fas fa-chevron-right"></i
-                    ></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">Intel</a></li>
-                      <li><a href="#">AMD</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-dropdown">
-                    <a href="#"
-                      >Graphics Cards <i class="fas fa-chevron-right"></i
-                    ></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">NVIDIA</a></li>
-                      <li><a href="#">AMD</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-dropdown">
-                    <a href="#"
-                      >Motherboards <i class="fas fa-chevron-right"></i
-                    ></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">AMD</a></li>
-                      <li><a href="#">Intel</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-dropdown">
-                    <a href="#">RAM <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">DDR4</a></li>
-                      <li><a href="#">DDR5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">SSD</a></li>
-                  <li><a href="#">HDD</a></li>
-                  <li class="has-dropdown">
-                    <a href="#">Cases <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">Case + PSU Bundles</a></li>
-                      <li><a href="#">Case + Cooler Bundles</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-dropdown">
-                    <a href="#">Cooling <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu nested">
-                      <li><a href="#">Air Coolers</a></li>
-                      <li><a href="#">Liquid Coolers</a></li>
-                      <li><a href="#">Fans</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Power Supplies</a></li>
-                </ul>
-              </li>
-              <li class="has-dropdown">
-                <a href="#">Laptops <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Gaming Laptops</a></li>
-                  <li><a href="#">Business Laptops</a></li>
-                  <li><a href="#">Ultrabooks</a></li>
-                  <li><a href="#">Workstations</a></li>
-                  <li><a href="#">View All</a></li>
-                </ul>
-              </li>
-              <li class="has-dropdown">
-                <a href="#"
-                  >Pre-built PCs <i class="fas fa-chevron-down"></i
-                ></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Gaming PCs</a></li>
-                  <li><a href="#">Workstation PCs</a></li>
-                  <li><a href="#">Budget PCs</a></li>
-                  <li><a href="#">Custom Builds</a></li>
-                </ul>
-              </li>
-              <li class="has-dropdown">
-                <a href="#">Monitors <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Gaming Monitors</a></li>
-                  <li><a href="#">4K Monitors</a></li>
-                  <li><a href="#">Ultrawide Monitors</a></li>
-                  <li><a href="#">Professional Monitors</a></li>
-                </ul>
-              </li>
-              <li class="has-dropdown">
-                <a href="#">Accessories <i class="fas fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Keyboards</a></li>
-                  <li><a href="#">Mice</a></li>
-                  <li><a href="#">Headsets</a></li>
-                  <li><a href="#">Gaming Chairs</a></li>
-                  <li><a href="#">VR Headsets</a></li>
-                  <li><a href="#">Webcams</a></li>
-                </ul>
-              </li>
-            </ul>
-            <div class="utility-links">
-              <a href="about.html" class="utility-link">
-                <i class="fas fa-info-circle"></i> About Us
-              </a>
-              <a href="track-order.html" class="utility-link">
-                <i class="fas fa-box"></i> Track Order
-              </a>
-              <a href="contact.html" class="contact-button"> Contact Us </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+        </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="account-page">
-      <div class="account-container">
-        <!-- Sidebar -->
-        <aside class="account-sidebar">
-          <div class="sidebar-header">
-            <div class="avatar-placeholder">
-              <!-- <i class="fas fa-user"></i> -->
-              <div class="avatar-placeholder" style="overflow: hidden;">
-              <img src="../images/photo Omar.jpg" style="width: 100%;height: 100%;object-fit: cover;object-position:center;" alt="user photo">
-            </div>
-            </div>
-            <div>
-              <h3 class="user-name">Omar Amir</h3>
-              <p class="user-email">omaramir278@hotmail.com</p>
-            </div>
-          </div>
 
-          <div class="profile-progress">
-            <div class="progress-info">
-              <span>Profile Completion</span>
-              <strong>78%</strong>
-            </div>
-            <div class="progress-track">
-              <div class="progress-done"></div>
-            </div>
-            <small>Complete your profile to unlock rewards</small>
-          </div>
-
-          <nav class="sidebar-menu">
-            <a href="#" class="menu-item active" data-section="profile">
-              <i class="fas fa-user"></i> My Profile
-            </a>
-            <a href="#" class="menu-item" data-section="orders">
-              <i class="fas fa-shopping-bag"></i> Orders
-              <span class="badge">3</span>
-            </a>
-            <a href="#" class="menu-item" data-section="wishlist">
-              <i class="fas fa-heart"></i> Wishlist
-              <span class="badge">3</span>
-            </a>
-            <a href="#" class="menu-item" data-section="addresses">
-              <i class="fas fa-map-marker-alt"></i> Addresses
-            </a>
-            <a href="#" class="menu-item" data-section="notifications">
-              <i class="fas fa-bell"></i> Notifications
-            </a>
-            <a href="#" class="menu-item signout">
-              <i class="fas fa-sign-out-alt"></i> Sign Out
-            </a>
-          </nav>
-        </aside>
-
-        <!-- Content Sections -->
-        <div class="account-content-wrapper">
-          <!-- Profile Section -->
-          <section id="profile" class="account-content active">
-            <div class="content-header">
-              <h1>My Profile</h1>
-              <p>Manage your personal information</p>
-            </div>
-
-            <div class="form-section">
-              <h2>Personal Information</h2>
-              <div class="profile-card">
-                <div class="profile-card-header">Account Details</div>
-                <div class="profile-card-body">
-                  <div class="form-grid">
-                    <div class="input-group">
-                      <label for="full-name">Full Name</label>
-                      <input type="text" id="full-name" value="Omar Amir" />
+    <main>
+        <div class="account-container">
+            <aside class="sidebar">
+                <div class="profile-header">
+                    <div class="avatar">
+                        <img src="../images/photo Omar.jpg" alt="Omar Amir Photo">
                     </div>
-                    <div class="input-group">
-                      <label for="email">Email Address</label>
-                      <input
-                        type="email"
-                        id="email"
-                        value="omaramir278@hotmail.com"
-                        disabled
-                      />
-                      <small class="input-hint success"
-                        >✓ Verified • Cannot be changed</small
-                      >
+                    <h3 class="user-name" id="sidebarUserName">Omar Amir</h3>
+                    <p class="user-email" id="sidebarUserEmail">omaramir278@hotmail.com</p>
+                </div>
+
+                <div class="progress-box">
+                    <div class="progress-label">
+                        <span>Profile Complete</span>
+                        <strong id="profileProgress">78%</strong>
                     </div>
-                    <div class="input-group">
-                      <label for="phone">Phone Number</label>
-                      <input type="tel" id="phone" value="+20 1280469393" />
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 78%"></div>
                     </div>
-                  </div>
-                  <div class="form-actions">
-                    <button type="button" class="btn-primary">
-                      Save Changes
-                    </button>
-                    <button type="button" class="btn-secondary">Cancel</button>
-                  </div>
                 </div>
-              </div>
-              <p class="profile-note">
-                Your email is used for login and order notifications. Contact
-                support to change it.
-              </p>
-            </div>
-          </section>
 
-          <!-- Orders Section -->
-          <section id="orders" class="account-content">
-            <div class="content-header">
-              <h1>My Orders</h1>
-              <p>Track, review, and manage all your purchases</p>
-            </div>
+                <nav>
+                    <a class="menu-item active" onclick="showSection('profile')">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a class="menu-item" onclick="showSection('orders')">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a class="menu-item" onclick="showSection('wishlist')">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                    </a>
+                    <a class="menu-item" onclick="showSection('addresses')">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Addresses</span>
+                    </a>
+                    <a class="menu-item signout" onclick="signOut()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sign Out</span>
+                    </a>
+                </nav>
+            </aside>
 
-            <div class="order-stats">
-              <div class="stat-card delivered">
-                <i class="fas fa-truck"></i>
-                <h3>3 Delivered</h3>
-                <p>This month</p>
-              </div>
-              <div class="stat-card processing">
-                <i class="fas fa-box-open"></i>
-                <h3>2 Processing</h3>
-                <p>On the way</p>
-              </div>
-              <div class="stat-card total">
-                <i class="fas fa-history"></i>
-                <h3>47 Total</h3>
-                <p>All time</p>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <h2>Recent Orders</h2>
-              <div class="order-item">
-                <div class="order-header">
-                  <div>
-                    <strong>Order #TS9921</strong>
-                    <span> • 18 Mar 2025</span>
-                  </div>
-                  <span class="status-delivered">Delivered</span>
-                </div>
-                <div class="order-body">
-                  <img
-                    src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400"
-                    alt="RTX 4090"
-                  />
-                  <div class="order-info">
-                    <h4>ASUS ROG Strix GeForce RTX 4090</h4>
-                    <p>Qty: 1 • White Edition</p>
-                  </div>
-                  <div class="order-price">
-                    <strong>EGP 119,999</strong>
-                    <button class="btn-primary">Track Order</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="view-all-orders">
-                <button class="btn-primary">View All Orders (47)</button>
-              </div>
-            </div>
-          </section>
-
-          <!-- Wishlist Section -->
-          <section id="wishlist" class="account-content">
-            <div class="content-header">
-              <h1>My Wishlist</h1>
-              <p>Your saved items • <strong>3 products</strong></p>
-            </div>
-
-            <div class="wishlist-grid">
-              <!-- Item 1 -->
-              <div class="wishlist-item">
-                <div class="wishlist-img-wrapper">
-                  <img
-                    src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600"
-                    alt="RTX 5090"
-                  />
-                  <button class="remove-wishlist">
-                    <i class="fas fa-times"></i>
-                  </button>
-                  <span class="badge-outstock">Out of Stock</span>
-                </div>
-                <div class="wishlist-content">
-                  <h3>NVIDIA GeForce RTX 5090 Founders Edition</h3>
-                  <p>Next-Gen Flagship • 32GB GDDR7 • 2025 Release</p>
-                  <div class="wishlist-actions">
-                    <strong class="price">EGP 149,999</strong>
-                    <button class="btn-primary">
-                      <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
-                  </div>
-                  <a href="#" class="notify-link">Notify me when available</a>
-                </div>
-              </div>
-
-              <!-- Item 2 -->
-              <div class="wishlist-item">
-                <div class="wishlist-img-wrapper">
-                  <img
-                    src="https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=600"
-                    alt="Intel Core i9"
-                  />
-                  <button class="remove-wishlist">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-                <div class="wishlist-content">
-                  <h3>Intel Core i9-15900K (Arrow Lake)</h3>
-                  <p>24 Cores • 32 Threads • LGA 1851</p>
-                  <div class="wishlist-actions">
-                    <div>
-                      <strong class="price">EGP 42,900</strong>
-                      <del class="old-price">EGP 48,500</del>
+            <main class="content-area">
+                <section id="profile-section" class="content-section active">
+                    <div class="content-header">
+                        <div>
+                            <h1>My Profile</h1>
+                            <p>Manage your personal information</p>
+                        </div>
                     </div>
-                    <button class="btn-primary">
-                      <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
-                  </div>
-                  <div class="discount-badge">12% OFF • Limited Time</div>
-                </div>
-              </div>
 
-              <!-- Item 3 -->
-              <div class="wishlist-item">
-                <div class="wishlist-img-wrapper">
-                  <img src="../images/zu526.jpg" alt="ROG Ally X" />
-                  <button class="remove-wishlist">
-                    <i class="fas fa-times"></i>
-                  </button>
-                  <span class="badge-instock">In Stock</span>
-                </div>
-                <div class="wishlist-content">
-                  <h3>ASUS ROG Ally X (2025)</h3>
-                  <p>AMD Ryzen Z2 Extreme • 2TB SSD • 120Hz</p>
-                  <div class="wishlist-actions">
-                    <strong class="price">EGP 64,999</strong>
-                    <button class="btn-primary">
-                      <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+                    <div id="profileAlert"></div>
 
-          <!-- Addresses Section -->
-          <section id="addresses" class="account-content">
-            <div class="content-header">
-              <h1>Delivery Addresses</h1>
-              <p>Manage where you want your orders delivered</p>
-            </div>
-
-            <div class="form-section">
-              <div class="add-address-btn">
-                <button class="btn-primary">
-                  <i class="fas fa-plus"></i> Add New Address
-                </button>
-              </div>
-
-              <div class="addresses-grid">
-                <!-- Default Address -->
-                <div class="address-card default">
-                  <div class="address-label">
-                    <i class="fas fa-star"></i> Default Address
-                  </div>
-                  <div class="address-body">
-                    <h3>Omar Amir</h3>
-                    <p>
-                      123 Building 45, Street 9<br />
-                      Maadi Al Khabiri, Cairo<br />
-                      Egypt<br />
-                      <strong>+20 128 046 9393</strong>
-                    </p>
-                    <div class="address-actions">
-                      <button class="btn-primary">
-                        <i class="fas fa-edit"></i> Edit
-                      </button>
-                      <button class="btn-secondary">
-                        <i class="fas fa-trash"></i> Remove
-                      </button>
+                    <div class="profile-card">
+                        <div class="profile-card-header">Account Details</div>
+                        <div class="profile-card-body">
+                            <form id="profileForm" onsubmit="saveProfile(event)">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName" value="Omar Amir" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" value="omaramir278@hotmail.com" disabled>
+                                        <small class="input-hint success">✓ Verified • Cannot be changed</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" value="+20 1280469393" required>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                    <button type="button" class="btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                            <p class="profile-note">Your email is used for login and order notifications. Contact support to change it.</p>
+                        </div>
                     </div>
-                  </div>
-                </div>
+                </section>
 
-                <!-- Home -->
-                <div class="address-card">
-                  <div class="address-label home">
-                    <i class="fas fa-home"></i> Home
-                  </div>
-                  <div class="address-body">
-                    <h3>Omar Amir</h3>
-                    <p>
-                      Villa 88, Compound Al Rehab<br />
-                      New Cairo, Cairo Governorate<br />
-                      Egypt<br />
-                      <strong>+20 128 046 9393</strong>
-                    </p>
-                    <div class="address-actions">
-                      <button class="btn-primary">
-                        <i class="fas fa-edit"></i> Edit
-                      </button>
-                      <button class="btn-secondary">
-                        <i class="fas fa-trash"></i> Remove
-                      </button>
+                <section id="orders-section" class="content-section">
+                    <div class="content-header">
+                        <div>
+                            <h1>My Orders</h1>
+                            <p>Track and manage your purchases</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="window.location.href='products.html'">
+                            <i class="fas fa-shopping-cart"></i> Continue Shopping
+                        </button>
                     </div>
-                    <button class="set-default">Set as Default</button>
-                  </div>
-                </div>
 
-                <!-- Work -->
-                <div class="address-card">
-                  <div class="address-label work">
-                    <i class="fas fa-briefcase"></i> Work
-                  </div>
-                  <div class="address-body">
-                    <h3>Omar Amir</h3>
-                    <p>
-                      Office 1203, Smart Village<br />
-                      6th of October City, Giza<br />
-                      Egypt<br />
-                      <strong>+20 128 046 9393</strong>
-                    </p>
-                    <div class="address-actions">
-                      <button class="btn-primary">
-                        <i class="fas fa-edit"></i> Edit
-                      </button>
-                      <button class="btn-secondary">
-                        <i class="fas fa-trash"></i> Remove
-                      </button>
+                    <div id="ordersGrid" class="grid-3"></div>
+                </section>
+
+                <section id="wishlist-section" class="content-section">
+                    <div class="content-header">
+                        <div>
+                            <h1>Wishlist</h1>
+                            <p>Your saved items</p>
+                        </div>
+                        <button class="btn btn-outline" onclick="clearWishlist()">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
                     </div>
-                    <button class="set-default">Set as Default</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <!-- Notifications Section -->
-          <section id="notifications" class="account-content">
-            <div class="content-header">
-              <h1>Notifications</h1>
-              <p>Stay updated with your orders, offers, and account activity</p>
-            </div>
+                    <div id="wishlistGrid" class="grid-3"></div>
+                </section>
 
-            <div class="notification-tabs">
-              <button class="tab-btn active" data-tab="all">
-                <i class="fas fa-bell"></i> All Notifications
-                <span class="badge">12</span>
-              </button>
-              <button class="tab-btn" data-tab="orders">
-                <i class="fas fa-shopping-bag"></i> Orders
-                <span class="badge">5</span>
-              </button>
-              <button class="tab-btn" data-tab="promotions">
-                <i class="fas fa-gift"></i> Promotions
-                <span class="badge">4</span>
-              </button>
-              <button class="tab-btn" data-tab="account">
-                <i class="fas fa-user-cog"></i> Account
-                <span class="badge">3</span>
-              </button>
-            </div>
+                <section id="addresses-section" class="content-section">
+                    <div class="content-header">
+                        <div>
+                            <h1>Saved Addresses</h1>
+                            <p>Manage your delivery locations</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openAddressModal()">
+                            <i class="fas fa-plus"></i> Add New Address
+                        </button>
+                    </div>
 
-            <div class="notifications-list">
-              <!-- Notification 1 -->
-              <div class="notif-item unread" data-type="orders">
-                <div class="notif-icon primary">
-                  <i class="fas fa-truck"></i>
-                </div>
-                <div class="notif-content">
-                  <div class="notif-header">
-                    <h4>Your order has been shipped!</h4>
-                    <small>2 hours ago</small>
-                  </div>
-                  <p>
-                    Order #TS9921 (RTX 4090) is on its way! Expected delivery:
-                    <strong>Tomorrow, 22 Mar</strong>
-                  </p>
-                  <a href="#" class="notif-link">Track Package</a>
-                </div>
-              </div>
-
-              <!-- Notification 2 -->
-              <div class="notif-item" data-type="promotions">
-                <div class="notif-icon warning">
-                  <i class="fas fa-tag"></i>
-                </div>
-                <div class="notif-content">
-                  <div class="notif-header">
-                    <h4>Price dropped on your wishlist!</h4>
-                    <small>5 hours ago</small>
-                  </div>
-                  <p>
-                    Intel Core i9-15900K is now
-                    <strong style="color: var(--success)">EGP 42,900</strong>
-                    (was EGP 48,500)
-                  </p>
-                  <button class="btn-primary small">Add to Cart Now</button>
-                </div>
-              </div>
-
-              <!-- Notification 3 -->
-              <div class="notif-item" data-type="promotions">
-                <div class="notif-icon success">
-                  <i class="fas fa-box-open"></i>
-                </div>
-                <div class="notif-content">
-                  <div class="notif-header">
-                    <h4>RTX 5090 is now available!</h4>
-                    <small>1 day ago</small>
-                  </div>
-                  <p>
-                    The product you've been waiting for is finally in stock.
-                    Limited units!
-                  </p>
-                  <button class="btn-primary small">View Product</button>
-                </div>
-              </div>
-
-              <!-- Notification 4 -->
-              <div class="notif-item" data-type="account">
-                <div class="notif-icon indigo">
-                  <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="notif-content">
-                  <div class="notif-header">
-                    <h4>New login detected</h4>
-                    <small>2 days ago</small>
-                  </div>
-                  <p>
-                    We noticed a login from a new device in Cairo, Egypt on 21
-                    Mar 2025 at 3:42 PM.
-                  </p>
-                  <a href="#" class="notif-link">Was this you?</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="mark-all-read">
-              <button class="btn-secondary">Mark All as Read</button>
-            </div>
-          </section>
+                    <div id="addressAlert"></div>
+                    <div id="addressesGrid" class="grid-2"></div>
+                </section>
+            </main>
         </div>
-      </div>
+
+        <div id="addressModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add New Address</h2>
+                    <button class="modal-close" onclick="closeAddressModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form id="addressForm" onsubmit="saveAddress(event)">
+                    <input type="hidden" id="addressId">
+                    <div class="form-group">
+                        <label>Address Label</label>
+                        <input type="text" id="addressLabel" placeholder="e.g., Home, Work, Office" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="addressName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="addressPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input type="text" id="addressStreet" placeholder="House number and street name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="addressCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label>State / Province</label>
+                        <input type="text" id="addressState" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="text" id="addressPostal" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="addressDefault" style="width: auto; cursor: pointer;">
+                            <span>Set as default address</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" onclick="closeAddressModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Address
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-column">
-          <h4>About TechStore</h4>
-          <p>
-            TechStore is your premier destination for cutting-edge PCs, laptops,
-            and tech accessories, designed to elevate your digital experience
-            with innovation and quality.
-          </p>
-        </div>
-        <div class="footer-column">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="products.html">Shop Products</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="faq.html">FAQ & Support</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Customer Service</h4>
-          <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Contact Us</h4>
-          <div class="footer-contact">
-            <a
-              href="mailto:support@techstore.com"
-              target="_blank"
-              rel="noopener"
-              aria-label="Email"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"
-                />
-              </svg>
-              support@techstore.com
-            </a>
-            <a
-              href="tel:+201280469393"
-              target="_blank"
-              rel="noopener"
-              aria-label="Phone"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-7.5-7.5 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                />
-              </svg>
-              +20 128 046 9393
-            </a>
-            <span aria-label="Location">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
-                />
-              </svg>
-              Beni-Suef, Egypt
-            </span>
-          </div>
-          <div class="social-icons">
-            <a
-              href="https://www.linkedin.com/in/omaramir1"
-              target="_blank"
-              rel="noopener"
-              aria-label="LinkedIn"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.64 4.77 6.08V23h-4v-6.67c0-1.59-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23h-4V8z"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://github.com/your-username"
-              target="_blank"
-              rel="noopener"
-              aria-label="GitHub"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.4.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://facebook.com/your-facebook-page"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook Page"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                />
-              </svg>
-            </a>
 
-            <a
-              href="https://instagram.com/your-instagram-handle"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram Profile"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.28.261 2.15.564 2.915.307.788.718 1.458 1.384 2.126s1.338 1.077 2.126 1.384c.765.307 1.635.509 2.915.564C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.28-.06 2.15-.261 2.915-.564.788-.307 1.458-.718 2.126-1.384s1.077-1.338 1.384-2.126c.307-.765.509-1.635.564-2.915.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.28-.261-2.15-.564-2.915-.307-.788-.718-1.458-1.384-2.126s-1.338-1.077-2.126-1.384c-.765-.307-1.635-.509-2.915-.564C15.667.012 15.26 0 12 0zm0 4.1a7.9 7.9 0 1 1 0 15.8 7.9 7.9 0 0 1 0-15.8zm0 3.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zM16.9 7.5c-.7 0-1.2.6-1.2 1.2s.5 1.2 1.2 1.2 1.2-.6 1.2-1.2-.5-1.2-1.2-1.2z"
-                />
-              </svg>
-            </a>
-          </div>
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>About TechStore</h4>
+                <p>TechStore is your premier destination for cutting-edge PCs, laptops, and tech accessories, designed to elevate your digital experience with innovation and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="products.html">Shop Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ & Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <div class="footer-contact">
+                    <a href="mailto:support@techstore.com" target="_blank" rel="noopener" aria-label="Email">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+                        </svg>
+                        support@techstore.com
+                    </a>
+                    <a href="tel:+201280469393" target="_blank" rel="noopener" aria-label="Phone">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-7.5-7.5 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        +20 128 046 9393
+                    </a>
+                    <span aria-label="Location">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+                        </svg>
+                        Beni-Suef, Egypt
+                    </span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/omaramir1" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.64 4.77 6.08V23h-4v-6.67c0-1.59-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23h-4V8z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/your-username" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.4.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com/your-facebook-page" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://instagram.com/your-instagram-handle" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.28.261 2.15.564 2.915.307.788.718 1.458 1.384 2.126s1.338 1.077 2.126 1.384c.765.307 1.635.509 2.915.564C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.28-.06 2.15-.261 2.915-.564.788-.307 1.458-.718 2.126-1.384s1.077-1.338 1.384-2.126c.307-.765.509-1.635.564-2.915.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.28-.261-2.15-.564-2.915-.307-.788-.718-1.458-1.384-2.126s-1.338-1.077-2.126-1.384c-.765-.307-1.635-.509-2.915-.564C15.667.012 15.26 0 12 0zm0 4.1a7.9 7.9 0 1 1 0 15.8 7.9 7.9 0 0 1 0-15.8zm0 3.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zM16.9 7.5c-.7 0-1.2.6-1.2 1.2s.5 1.2 1.2 1.2 1.2-.6 1.2-1.2-.5-1.2-1.2-1.2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="footer-copyright">
-        <p>&copy; 2025 TechStore. All rights reserved.</p>
-      </div>
+        <div class="footer-copyright">
+            <p>© 2025 TechStore. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script>
+    // ===================================
+    // LOCAL STORAGE PERSISTENCE FUNCTIONS
+    // ===================================
+    const ADDRESSES_KEY = 'userAddresses';
+
+    /**
+     * Retrieves addresses from localStorage, or initializes with the provided data.
+     */
+    function getLocalAddresses(initialData) {
+        const stored = localStorage.getItem(ADDRESSES_KEY);
+        if (stored) {
+            return JSON.parse(stored);
+        }
+        // If no data in localStorage, use the initial hardcoded data and save it.
+        saveLocalAddresses(initialData);
+        return initialData;
+    }
+
+    /**
+     * Saves the current addresses array to localStorage.
+     */
+    function saveLocalAddresses(newAddresses) {
+        localStorage.setItem(ADDRESSES_KEY, JSON.stringify(newAddresses));
+    }
+
+    // ===================================
+    // DATA STORAGE (MODIFIED FOR FIX)
+    // ===================================
+    let orders = [
+        { id: '#TS9921', title: 'ASUS ROG Strix GeForce RTX 4090', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600', price: 119999, qty: 1, date: '18 Mar 2025', status: 'delivered' },
+        { id: '#TS9920', title: 'Intel Core i9-15900K Processor', image: 'https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=600', price: 42900, qty: 1, date: '20 Mar 2025', status: 'delivered' },
+        // FIX: The third order object was missing the 'status' property, causing the TypeError.
+        { id: '#TS9919', title: 'ASUS ROG Ally X Gaming Handheld', image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600', price: 64999, qty: 1, date: '15 Mar 2025', status: 'processing' } 
+    ];
+
+    let wishlist = [
+        { id: 1, title: 'MacBook Pro M3 Max', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600', price: 189999, specs: '16" • 64GB RAM • 2TB SSD' },
+        { id: 2, title: 'Sony WH-1000XM5 Headphones', image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?w=600', price: 12999, specs: 'Noise Cancelling • Wireless' },
+        { id: 3, title: 'LG UltraGear 27" 4K Monitor', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600', price: 24999, specs: '4K • 144Hz • HDR' }
+    ];
+
+    // Initialize addresses using the new persistence function
+    let addresses = getLocalAddresses([
+        {
+            id: 1,
+            label: 'Home',
+            name: 'Omar Amir',
+            phone: '+20 109 876 5432',
+            street: '123 Street Name',
+            city: 'Nasr City',
+            state: 'Cairo', // Mapped to State/Country field in checkout
+            postal: '11371',
+            isDefault: true
+        },
+        {
+            id: 2,
+            label: 'Work',
+            name: 'Omar Amir',
+            phone: '+20 109 876 5432',
+            street: '456 Office Building',
+            city: 'New Cairo',
+            state: 'Cairo',
+            postal: '11835',
+            isDefault: false
+        }
+    ]);
+
+
+    // Navigation
+    function showSection(sectionName) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+        
+        document.getElementById(sectionName + '-section').classList.add('active');
+        event.target.closest('.menu-item').classList.add('active');
+
+        if (sectionName === 'orders') renderOrders();
+        if (sectionName === 'wishlist') renderWishlist();
+        if (sectionName === 'addresses') renderAddresses();
+    }
+
+    // Profile Management (functions remain the same)
+    function saveProfile(e) {
+        e.preventDefault();
+        const name = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        
+        document.getElementById('sidebarUserName').textContent = name;
+        document.getElementById('sidebarUserEmail').textContent = email;
+        
+        showAlert('profileAlert', 'Profile updated successfully!', 'success');
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const fields = ['fullName', 'email', 'phone', 'dob'];
+        let filled = fields.filter(f => document.getElementById(f).value).length;
+        let progress = Math.round((filled / fields.length) * 100);
+        
+        document.getElementById('profileProgress').textContent = progress + '%';
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function confirmDeleteAccount() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            showAlert('profileAlert', 'Account deletion request submitted. You will receive a confirmation email.', 'danger');
+        }
+    }
+
+    // Orders Management (functions remain the same)
+    function renderOrders() {
+        const grid = document.getElementById('ordersGrid');
+        
+        if (orders.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column: 1/-1;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>No Orders Yet</h3>
+                    <p>Start shopping to see your orders here</p>
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Start Shopping</button>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = orders.map(order => {
+            const statusDisplay = order.status 
+                ? `${order.status.charAt(0).toUpperCase() + order.status.slice(1)}` 
+                : 'N/A';
+            
+            return `
+                <div class="card">
+                    <img src="${order.image}" alt="${order.title}" class="order-image">
+                    <div class="order-content">
+                        <div class="order-header-row">
+                            <span class="order-id">${order.id}</span>
+                            <span class="status-badge status-${order.status}">${statusDisplay}</span>
+                        </div>
+                        <h3 class="product-title">${order.title}</h3>
+                        <p class="product-meta">Qty: ${order.qty} • ${order.date}</p>
+                        <div class="order-footer">
+                            <span class="price">EGP ${order.price.toLocaleString()}</span>
+                            <button class="btn btn-primary btn-sm" onclick="trackOrder('${order.id}')">
+                                <i class="fas fa-truck"></i> Track
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function trackOrder(orderId) {
+        alert(`Tracking order ${orderId}...\n\nStatus: In Transit\nExpected Delivery: 2-3 business days`);
+    }
+
+    // Wishlist Management (functions remain the same)
+    function renderWishlist() {
+        const grid = document.getElementById('wishlistGrid');
+        
+        if (wishlist.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column: 1/-1;">
+                    <i class="fas fa-heart"></i>
+                    <h3>Your Wishlist is Empty</h3>
+                    <p>Add items you love to your wishlist</p>
+                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Browse Products</button>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = wishlist.map(item => `
+            <div class="card">
+                <img src="${item.image}" alt="${item.title}" class="wishlist-image">
+                <div class="wishlist-content">
+                    <h3 class="product-title">${item.title}</h3>
+                    <p class="product-meta">${item.specs}</p>
+                    <div class="wishlist-footer">
+                        <span class="price">EGP ${item.price.toLocaleString()}</span>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(${item.id})">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="removeFromWishlist(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function addToCart(id) {
+        const item = wishlist.find(i => i.id === id);
+        alert(`"${item.title}" added to cart!`);
+    }
+
+    function removeFromWishlist(id) {
+        if (confirm('Remove this item from wishlist?')) {
+            wishlist = wishlist.filter(i => i.id !== id);
+            renderWishlist();
+        }
+    }
+
+    function clearWishlist() {
+        if (confirm('Are you sure you want to clear your entire wishlist?')) {
+            wishlist = [];
+            renderWishlist();
+        }
+    }
+
+    // Address Management (MODIFIED)
+    function renderAddresses() {
+        const grid = document.getElementById('addressesGrid');
+        
+        const addressCards = addresses.map(addr => `
+            <div class="card card-padding address-card">
+                ${addr.isDefault ? '<div class="address-badge"><i class="fas fa-check"></i> Default</div>' : ''}
+                <h4 style="margin-bottom: 1rem; font-size: 1.2rem;">${addr.label}</h4>
+                <p style="line-height: 1.8;">
+                    ${addr.name}<br>
+                    ${addr.street}<br>
+                    ${addr.city}, ${addr.state}<br>
+                    ${addr.postal}<br>
+                    ${addr.phone}
+                </p>
+                <div class="address-actions">
+                    ${!addr.isDefault ? `<button class="btn btn-success btn-sm" onclick="setDefaultAddress(${addr.id})">
+                        <i class="fas fa-check"></i> Set Default
+                    </button>` : ''}
+                    <button class="btn btn-outline btn-sm" onclick="editAddress(${addr.id})">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteAddress(${addr.id})">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        const addNewCard = `
+            <div class="card card-padding add-new-card" onclick="openAddressModal()">
+                <i class="fas fa-plus"></i>
+                <h4>Add New Address</h4>
+            </div>
+        `;
+
+        grid.innerHTML = addressCards + addNewCard;
+    }
+
+    function openAddressModal(addressId = null) {
+        const modal = document.getElementById('addressModal');
+        const form = document.getElementById('addressForm');
+        const title = document.getElementById('modalTitle');
+        
+        form.reset();
+        
+        if (addressId) {
+            const addr = addresses.find(a => a.id === addressId);
+            title.textContent = 'Edit Address';
+            document.getElementById('addressId').value = addr.id;
+            document.getElementById('addressLabel').value = addr.label;
+            document.getElementById('addressName').value = addr.name;
+            document.getElementById('addressPhone').value = addr.phone;
+            document.getElementById('addressStreet').value = addr.street;
+            document.getElementById('addressCity').value = addr.city;
+            document.getElementById('addressState').value = addr.state;
+            document.getElementById('addressPostal').value = addr.postal;
+            document.getElementById('addressDefault').checked = addr.isDefault;
+        } else {
+            title.textContent = 'Add New Address';
+            document.getElementById('addressId').value = '';
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function closeAddressModal() {
+        document.getElementById('addressModal').classList.remove('active');
+    }
+
+    function saveAddress(e) {
+        e.preventDefault();
+        
+        const id = document.getElementById('addressId').value;
+        const isDefaultChecked = document.getElementById('addressDefault').checked;
+        
+        const newAddress = {
+            id: id || Date.now(),
+            label: document.getElementById('addressLabel').value,
+            name: document.getElementById('addressName').value,
+            phone: document.getElementById('addressPhone').value,
+            street: document.getElementById('addressStreet').value,
+            city: document.getElementById('addressCity').value,
+            state: document.getElementById('addressState').value,
+            postal: document.getElementById('addressPostal').value,
+            isDefault: isDefaultChecked
+        };
+
+        if (newAddress.isDefault) {
+            addresses.forEach(a => a.isDefault = false);
+        }
+
+        if (id) {
+            const index = addresses.findIndex(a => a.id == id);
+            addresses[index] = newAddress;
+            showAlert('addressAlert', 'Address updated successfully!', 'success');
+        } else {
+            addresses.push(newAddress);
+            showAlert('addressAlert', 'Address added successfully!', 'success');
+        }
+        
+        // SAVE ADDRESSES TO LOCAL STORAGE
+        saveLocalAddresses(addresses);
+
+        closeAddressModal();
+        renderAddresses();
+    }
+
+    function editAddress(id) {
+        openAddressModal(id);
+    }
+
+    function deleteAddress(id) {
+        if (confirm('Are you sure you want to delete this address?')) {
+            addresses = addresses.filter(a => a.id !== id);
+            
+            // SAVE ADDRESSES TO LOCAL STORAGE
+            saveLocalAddresses(addresses);
+            
+            renderAddresses();
+            showAlert('addressAlert', 'Address deleted successfully!', 'danger');
+        }
+    }
+
+    function setDefaultAddress(id) {
+        addresses.forEach(a => a.isDefault = (a.id === id));
+        
+        // SAVE ADDRESSES TO LOCAL STORAGE
+        saveLocalAddresses(addresses);
+        
+        renderAddresses();
+        showAlert('addressAlert', 'Default address updated!', 'success');
+    }
+
+    // Utility Functions (showAlert remains the same)
+    function showAlert(containerId, message, type) {
+        const container = document.getElementById(containerId);
+        const icon = type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle';
+        
+        container.innerHTML = `
+            <div class="alert alert-${type}">
+                <i class="fas fa-${icon}"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        setTimeout(() => {
+            container.innerHTML = '';
+        }, 5000);
+    }
+
+    // Initialize on load
+    window.addEventListener('load', () => {
+        renderOrders();
+        renderWishlist();
+        renderAddresses();
+        updateProgress();
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('addressModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeAddressModal();
+        }
+    });
+    </script>
+
     <script src="../js/account.js"></script>
-  </body>
+    <script src="../js/main.js"></script>
+</body>
 </html>

@@ -8,25 +8,47 @@
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/animations.css">
     <link rel="stylesheet" href="../CSS/MediaQuery.css">
-    
+
     <style>
+        /* ===================================
+           CSS VARIABLES FOR THEMEING
+           =================================== */
+        :root {
+            --color-primary: #3b82f6; /* Blue */
+            --color-secondary: #111827; /* Dark Gray/Black */
+            --color-text-dark: #1f2937;
+            --color-text-light: #6b7280;
+            --color-success: #10b981;
+            --color-error: #ef4444;
+            --color-background-page: #f9fafb;
+            --color-background-card: #ffffff;
+            --color-border-light: #e5e7eb;
+            --color-border-medium: #d1d5db;
+            --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius-base: 8px;
+        }
+
         /* ===================================
            GLOBAL RESET & BASE STYLES
            =================================== */
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
+            font-family: var(--font-family-base);
+            background-color: var(--color-background-page);
+            color: var(--color-text-dark);
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
         /* ===================================
            HEADER & NAVIGATION
            =================================== */
         .main-header {
-            background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: var(--color-background-card);
+            box-shadow: var(--shadow-md);
             position: fixed;
             top: 0;
             left: 0;
@@ -35,8 +57,8 @@
         }
 
         .navbar {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-text-dark) 100%);
+            color: var(--color-background-card);
         }
 
         .navbar-top {
@@ -51,23 +73,24 @@
             font-size: 2rem;
             font-weight: 700;
             text-decoration: none;
-            color: #ffffff;
+            color: var(--color-background-card);
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
         }
 
         .logo:hover {
-            color: #3b82f6;
+            color: var(--color-primary);
             transform: scale(1.05);
         }
 
         .logo i {
             margin-right: 10px;
-            color: #3b82f6;
+            color: var(--color-primary);
             font-size: 1.8rem;
         }
 
+        /* Progress Steps */
         .checkout-progress {
             flex-grow: 1;
             max-width: 500px;
@@ -87,7 +110,7 @@
         }
 
         .progress-step.active {
-            color: #3b82f6;
+            color: var(--color-primary);
             font-weight: 600;
         }
 
@@ -103,23 +126,24 @@
         /* ===================================
            MAIN CONTENT
            =================================== */
-           
+
         .checkout-section {
-            padding: 80px 0;
-            background-color: #ffffff;
+            padding: 10rem 0;
+            background-color: var(--color-background-card);
+            min-height: 80vh;
         }
 
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #111827;
+            color: var(--color-secondary);
             margin-bottom: 20px;
             text-align: center;
         }
 
         .section-subtitle {
             font-size: 1.1rem;
-            color: #6b7280;
+            color: var(--color-text-light);
             margin-bottom: 40px;
             text-align: center;
         }
@@ -139,26 +163,26 @@
         }
 
         .form-section {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
+            background: var(--color-background-page);
+            border: 1px solid var(--color-border-light);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
         }
 
         .form-section h2 {
             font-size: 1.6rem;
             font-weight: 600;
             margin-bottom: 20px;
-            color: #1f2937;
+            color: var(--color-text-dark);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .form-section h2 i {
-            color: #3b82f6;
+            color: var(--color-primary);
         }
 
         .form-grid {
@@ -184,7 +208,7 @@
         }
 
         .form-group label .required {
-            color: #ef4444;
+            color: var(--color-error);
         }
 
         .form-group input,
@@ -192,11 +216,11 @@
         .form-group textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
+            border: 2px solid var(--color-border-medium);
+            border-radius: var(--border-radius-base);
             font-size: 1rem;
-            color: #1f2937;
-            background-color: #ffffff;
+            color: var(--color-text-dark);
+            background-color: var(--color-background-card);
             transition: all 0.3s ease;
         }
 
@@ -204,10 +228,11 @@
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--color-primary);
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
+        /* Payment Methods */
         .payment-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -230,16 +255,16 @@
             justify-content: center;
             gap: 10px;
             padding: 15px;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
+            border: 2px solid var(--color-border-medium);
+            border-radius: var(--border-radius-base);
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #ffffff;
+            background: var(--color-background-card);
         }
 
         .payment-method input[type="radio"]:checked + label {
-            border-color: #3b82f6;
-            background: #eff6ff;
+            border-color: var(--color-primary);
+            background: #eff6ff; /* Light blue background */
         }
 
         .payment-method label i {
@@ -256,14 +281,14 @@
         .order-summary {
             flex: 1;
             min-width: 300px;
-            background-color: #f9fafb;
-            border: 1px solid #e5e7eb;
+            background-color: var(--color-background-page);
+            border: 1px solid var(--color-border-light);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
             height: fit-content;
             position: sticky;
-            top: 140px;
+            top: 140px; /* Adjusted to be below fixed header */
         }
 
         .order-summary h2 {
@@ -277,13 +302,13 @@
             align-items: center;
             gap: 15px;
             padding: 15px 0;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--color-border-light);
         }
 
         .order-item-image {
             width: 60px;
             height: 60px;
-            border-radius: 8px;
+            border-radius: var(--border-radius-base);
             overflow: hidden;
             flex-shrink: 0;
         }
@@ -301,19 +326,19 @@
         .order-item-name {
             font-size: 0.95rem;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-dark);
             margin-bottom: 5px;
         }
 
         .order-item-quantity {
             font-size: 0.85rem;
-            color: #6b7280;
+            color: var(--color-text-light);
         }
 
         .order-item-price {
             font-size: 1rem;
             font-weight: 600;
-            color: #3b82f6;
+            color: var(--color-primary);
         }
 
         .summary-row {
@@ -322,23 +347,22 @@
             font-size: 1rem;
             margin: 15px 0;
             padding-bottom: 10px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--color-border-light);
         }
 
         .summary-total {
             font-weight: 700;
             font-size: 1.4rem;
-            border-top: 2px solid #d1d5db;
+            border-top: 2px solid var(--color-border-medium);
             padding-top: 15px;
             margin-top: 10px;
-            color: #1f2937;
+            color: var(--color-text-dark);
         }
 
         .place-order-btn {
             width: 100%;
-            /* background: linear-gradient(135deg, #10b981 0%, #059669 100%); */
             background: linear-gradient(135deg, #2a3446 0%, #1b2432 100%);
-            color: #ffffff;
+            color: var(--color-background-card);
             padding: 16px 25px;
             border-radius: 25px;
             font-size: 1.2rem;
@@ -348,11 +372,15 @@
             border: none;
             cursor: pointer;
             margin-top: 20px;
+            display: flex; /* For alignment of text/spinner */
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .place-order-btn:hover {
             transform: translateY(-3px);
-            background: linear-gradient(135deg, #34425a 0%, #1f2938 100%); /* Brighter on hover */
+            background: linear-gradient(135deg, #34425a 0%, #1f2938 100%);
             box-shadow: 0 10px 24px rgba(27, 36, 50, 0.45);
         }
 
@@ -360,6 +388,7 @@
             background: #6b7178;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .secure-checkout {
@@ -368,12 +397,12 @@
             justify-content: center;
             gap: 8px;
             margin-top: 15px;
-            color: #6b7280;
+            color: var(--color-text-light);
             font-size: 0.9rem;
         }
 
         .secure-checkout i {
-            color: #10b981;
+            color: var(--color-success);
         }
 
         /* ===================================
@@ -382,7 +411,7 @@
         .success-message {
             display: none;
             background: #f0fdf4;
-            border: 2px solid #10b981;
+            border: 2px solid var(--color-success);
             border-radius: 12px;
             padding: 30px;
             text-align: center;
@@ -396,7 +425,7 @@
 
         .success-message i {
             font-size: 4rem;
-            color: #10b981;
+            color: var(--color-success);
             margin-bottom: 20px;
         }
 
@@ -415,7 +444,7 @@
         .order-number {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #3b82f6;
+            color: var(--color-primary);
             margin: 20px 0;
         }
 
@@ -423,10 +452,10 @@
            FOOTER
            =================================== */
         .footer {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-text-dark) 100%);
             color: #e5e7eb;
             padding: 40px 0 20px;
-            margin-top: 80px;
+            /* margin-top: 80px; */
         }
 
         .footer-copyright {
@@ -436,10 +465,23 @@
             padding: 20px 0;
         }
 
+        /* Font Awesome spinner for loading state */
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
         /* ===================================
            RESPONSIVE
            =================================== */
         @media (max-width: 768px) {
+            .main-header {
+                padding-bottom: 0;
+            }
             main {
                 padding-top: 100px;
             }
@@ -612,59 +654,65 @@
     <main>
         <section class="checkout-section">
             <div class="container">
-                <div id="checkoutForm">
+                <div id="checkoutFormContainer">
                     <h1 class="section-title">Checkout</h1>
                     <p class="section-subtitle">Enter your details to complete your order</p>
-                    
+
                     <div class="checkout-content">
                         <div class="checkout-form">
-                            <form id="orderForm" onsubmit="placeOrder(event)">
-                                <!-- Shipping Information -->
+                            <form id="orderForm">
+
                                 <div class="form-section">
-                                    <h2><i class="fas fa-shipping-fast"></i> Shipping Information</h2>
+                                    <h2><i class="fas fa-user-circle"></i> Contact Details</h2>
                                     <div class="form-grid">
                                         <div class="form-group">
-                                            <label>First Name <span class="required">*</span></label>
-                                            <input type="text" name="firstName" required placeholder="John">
+                                            <label for="firstName">First Name <span class="required">*</span></label>
+                                            <input type="text" id="firstName" name="firstName" required placeholder="Omar">
                                         </div>
                                         <div class="form-group">
-                                            <label>Last Name <span class="required">*</span></label>
-                                            <input type="text" name="lastName" required placeholder="Doe">
+                                            <label for="lastName">Last Name <span class="required">*</span></label>
+                                            <input type="text" id="lastName" name="lastName" required placeholder="Amir">
                                         </div>
                                         <div class="form-group full-width">
-                                            <label>Email <span class="required">*</span></label>
-                                            <input type="email" name="email" required placeholder="john.doe@example.com">
+                                            <label for="email">Email <span class="required">*</span></label>
+                                            <input type="email" id="email" name="email" required placeholder="omar.dev@example.com">
                                         </div>
                                         <div class="form-group full-width">
-                                            <label>Phone Number <span class="required">*</span></label>
-                                            <input type="tel" name="phone" required placeholder="+1 (555) 123-4567">
-                                        </div>
-                                        <div class="form-group full-width">
-                                            <label>Address <span class="required">*</span></label>
-                                            <input type="text" name="address" required placeholder="123 Main Street">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>City <span class="required">*</span></label>
-                                            <input type="text" name="city" required placeholder="New York">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ZIP Code <span class="required">*</span></label>
-                                            <input type="text" name="zip" required placeholder="10001">
-                                        </div>
-                                        <div class="form-group full-width">
-                                            <label>Country <span class="required">*</span></label>
-                                            <select name="country" required>
-                                                <option value="">Select Country</option>
-                                                <option value="US">United States</option>
-                                                <option value="CA">Canada</option>
-                                                <option value="UK">United Kingdom</option>
-                                                <option value="EG">Egypt</option>
-                                            </select>
+                                            <label for="phone">Phone Number <span class="required">*</span></label>
+                                            <input type="tel" id="phone" name="phone" required placeholder="+201280469393">
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Payment Information -->
+                                <div class="form-section">
+                                    <h2><i class="fas fa-shipping-fast"></i> Shipping Address</h2>
+
+                                    <div class="form-group full-width">
+                                        <label for="address-select">Choose a Saved Address or Enter New</label>
+                                        <select id="address-select" name="selected-address-id" class="form-control" required>
+                                        </select>
+                                    </div>
+
+                                    <div id="new-address-fields" class="form-grid">
+                                        <div class="form-group full-width">
+                                            <label for="address-line1">Street Address <span class="required">*</span></label>
+                                            <input type="text" id="address-line1" name="address-line1" required placeholder="e.g. 123 Street Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city">City <span class="required">*</span></label>
+                                            <input type="text" id="city" name="city" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="state-country">State / Country <span class="required">*</span></label>
+                                            <input type="text" id="state-country" name="state-country" required placeholder="e.g. Cairo or Egypt">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="zip-code">ZIP/Postal Code <span class="required">*</span></label>
+                                            <input type="text" id="zip-code" name="zip-code" required>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-section">
                                     <h2><i class="fas fa-credit-card"></i> Payment Method</h2>
                                     <div class="payment-methods">
@@ -693,17 +741,17 @@
 
                                     <div id="card-details">
                                         <div class="form-group">
-                                            <label>Card Number <span class="required">*</span></label>
-                                            <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                            <label for="cardNumber">Card Number <span class="required">*</span></label>
+                                            <input type="text" id="cardNumber" name="cardNumber" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" required>
                                         </div>
                                         <div class="form-grid">
                                             <div class="form-group">
-                                                <label>Expiry Date <span class="required">*</span></label>
-                                                <input type="text" name="expiryDate" placeholder="MM/YY" maxlength="5">
+                                                <label for="expiryDate">Expiry Date <span class="required">*</span></label>
+                                                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>CVV <span class="required">*</span></label>
-                                                <input type="text" name="cvv" placeholder="123" maxlength="3">
+                                                <label for="cvv">CVV <span class="required">*</span></label>
+                                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required pattern="\d{3,4}">
                                             </div>
                                         </div>
                                     </div>
@@ -711,13 +759,11 @@
                             </form>
                         </div>
 
-                        <!-- Order Summary -->
                         <div class="order-summary">
                             <h2>Order Summary</h2>
                             <div id="orderItems">
-                                <!-- Order items will be inserted here -->
-                            </div>
-                            
+                                </div>
+
                             <div class="summary-row">
                                 <span>Subtotal</span>
                                 <span id="subtotal">$0.00</span>
@@ -734,11 +780,11 @@
                                 <span>Total</span>
                                 <span id="total">$0.00</span>
                             </div>
-                            
+
                             <button type="submit" form="orderForm" class="place-order-btn" id="placeOrderBtn">
                                 <i class="fas fa-lock"></i> Place Order
                             </button>
-                            
+
                             <div class="secure-checkout">
                                 <i class="fas fa-shield-alt"></i>
                                 <span>Secure checkout with SSL encryption</span>
@@ -747,7 +793,6 @@
                     </div>
                 </div>
 
-                <!-- Success Message (Hidden by default) -->
                 <div class="success-message" id="successMessage">
                     <i class="fas fa-check-circle"></i>
                     <h2>Order Placed Successfully!</h2>
@@ -824,7 +869,7 @@
                             <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                         </svg>
                     </a>
-                    
+
                     <a href="https://instagram.com/your-instagram-handle" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill="currentColor" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.28.261 2.15.564 2.915.307.788.718 1.458 1.384 2.126s1.338 1.077 2.126 1.384c.765.307 1.635.509 2.915.564C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.28-.06 2.15-.261 2.915-.564.788-.307 1.458-.718 2.126-1.384s1.077-1.338 1.384-2.126c.307-.765.509-1.635.564-2.915.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.28-.261-2.15-.564-2.915-.307-.788-.718-1.458-1.384-2.126s-1.338-1.077-2.126-1.384c-.765-.307-1.635-.509-2.915-.564C15.667.012 15.26 0 12 0zm0 4.1a7.9 7.9 0 1 1 0 15.8 7.9 7.9 0 0 1 0-15.8zm0 3.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zM16.9 7.5c-.7 0-1.2.6-1.2 1.2s.5 1.2 1.2 1.2 1.2-.6 1.2-1.2-.5-1.2-1.2-1.2z"/>
@@ -834,52 +879,213 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <p>&copy; 2025 TechStore. All rights reserved.</p>
+            <p>ﾂｩ 2025 TechStore. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         // ===================================
-        // LOAD CART DATA
+        // CONSTANTS
         // ===================================
+        const TAX_RATE = 0.1;
+        const FREE_SHIPPING_THRESHOLD = 100;
+        const SHIPPING_COST = 9.99;
+        const ADDRESSES_KEY = 'userAddresses';
+
         let cartItems = [];
-        
+
+        // ===================================
+        // ADDRESS MANAGEMENT SETUP (FOR DEMO)
+        // ===================================
+        function seedInitialAddresses() {
+            const savedAddresses = localStorage.getItem(ADDRESSES_KEY);
+            if (!savedAddresses) {
+                // Name and phone are stored but no longer used to populate shipping fields 
+                // to avoid repetition. They are now assumed to be the same as Contact Details.
+                const initialAddresses = [
+                    {
+                        id: 'addr-1',
+                        label: 'Home Address',
+                        name: 'Omar Amir', // Retained in data structure but unused in form
+                        phone: '+201234567890', // Retained in data structure but unused in form
+                        street: '456 Example St, Apt 10A',
+                        city: 'Giza',
+                        state: 'Cairo',
+                        postal: '12345',
+                        isDefault: true
+                    },
+                    {
+                        id: 'addr-2',
+                        label: 'Work Address',
+                        name: 'Omar Amir (Work)', // Retained in data structure but unused in form
+                        phone: '+201111111111', // Retained in data structure but unused in form
+                        street: '789 Business Park Blvd',
+                        city: 'Alexandria',
+                        state: 'Alexandria',
+                        postal: '54321',
+                        isDefault: false
+                    }
+                ];
+                localStorage.setItem(ADDRESSES_KEY, JSON.stringify(initialAddresses));
+            }
+        }
+
+        function getSavedAddresses() {
+            const storedAddresses = localStorage.getItem(ADDRESSES_KEY);
+            return storedAddresses ? JSON.parse(storedAddresses) : [];
+        }
+
+        function renderAddressSelection() {
+            const addresses = getSavedAddresses();
+            const select = document.getElementById('address-select');
+            const newAddressFields = document.getElementById('new-address-fields');
+
+            if (!select || !newAddressFields) return;
+
+            select.innerHTML = '';
+
+            // 1. Option to Enter New Address
+            const newOption = document.createElement('option');
+            newOption.value = 'new';
+            newOption.textContent = '📦 Enter a New Shipping Address';
+            select.appendChild(newOption);
+
+            let defaultAddressFound = false;
+
+            // 2. Saved Addresses Options
+            addresses.forEach(addr => {
+                const option = document.createElement('option');
+                // Store the address data stringified in the value for retrieval
+                option.value = JSON.stringify(addr);
+                option.textContent = `🏠 ${addr.label} - ${addr.street.substring(0, 30)}...` + (addr.isDefault ? ' (Default)' : '');
+
+                if (addr.isDefault) {
+                    option.selected = true;
+                    populateAddressFields(addr);
+                    defaultAddressFound = true;
+                }
+                select.appendChild(option);
+            });
+
+            // Set initial state for fields and required attributes
+            if (defaultAddressFound) {
+                newAddressFields.style.display = 'none';
+                toggleRequiredFields(false);
+            } else {
+                select.value = 'new';
+                newAddressFields.style.display = 'grid';
+                clearAddressFields(); // Ensure new fields are clear
+                toggleRequiredFields(true);
+            }
+
+            select.addEventListener('change', handleAddressSelectionChange);
+        }
+
+        function handleAddressSelectionChange(event) {
+            const selectedValue = event.target.value;
+            const newAddressFields = document.getElementById('new-address-fields');
+
+            if (selectedValue === 'new') {
+                newAddressFields.style.display = 'grid';
+                clearAddressFields();
+                toggleRequiredFields(true);
+            } else {
+                newAddressFields.style.display = 'none';
+                try {
+                    // The value is the stringified JSON address object
+                    const address = JSON.parse(selectedValue);
+                    populateAddressFields(address);
+                    toggleRequiredFields(false);
+                } catch (e) {
+                    console.error("Error parsing selected address JSON:", e);
+                    // Default to new address fields on error
+                    newAddressFields.style.display = 'grid';
+                    clearAddressFields();
+                    toggleRequiredFields(true);
+                }
+            }
+        }
+
+        // MODIFIED: Removed 'full-name-ship' and 'phone-number-ship' logic to avoid repetition.
+        function populateAddressFields(address) {
+            // Name and Phone are taken from the Contact Details section.
+            document.getElementById('address-line1').value = address.street || '';
+            document.getElementById('city').value = address.city || '';
+            document.getElementById('state-country').value = address.state || '';
+            document.getElementById('zip-code').value = address.postal || '';
+        }
+
+        // MODIFIED: Removed 'full-name-ship' and 'phone-number-ship' logic to avoid repetition.
+        function clearAddressFields() {
+            document.getElementById('address-line1').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('state-country').value = '';
+            document.getElementById('zip-code').value = '';
+        }
+
+        // MODIFIED: Updated list of required fields.
+        function toggleRequiredFields(required) {
+            // Toggle required attribute on the manual shipping input fields
+            const fields = ['address-line1', 'city', 'state-country', 'zip-code'];
+            fields.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (required) {
+                        element.setAttribute('required', '');
+                    } else {
+                        element.removeAttribute('required');
+                    }
+                }
+            });
+        }
+
+        // ===================================
+        // CART & ORDER SUMMARY
+        // ===================================
+
         function loadCartData() {
             const savedCart = localStorage.getItem('cartItems');
             if (savedCart) {
                 cartItems = JSON.parse(savedCart);
             } else {
-                // Default items if no cart in localStorage
+                // Default items if no cart in localStorage (for testing purposes)
                 cartItems = [
                     {
                         id: 1,
                         name: 'NVIDIA GeForce RTX 4090',
                         price: 1599.99,
                         quantity: 1,
-                        image: '../images/31.jpg'
+                        image: '../images/31.jpg' // Dummy path
                     },
                     {
                         id: 2,
                         name: 'Corsair K70 RGB Keyboard',
                         price: 129.99,
                         quantity: 2,
-                        image: '../images/108.jpg'
+                        image: '../images/108.jpg' // Dummy path
                     }
                 ];
+                // Update the header cart count with the default
+                document.querySelector('.cart-count').textContent = cartItems.reduce((count, item) => count + item.quantity, 0);
             }
-            
+
             renderOrderItems();
             calculateTotals();
         }
 
-        // ===================================
-        // RENDER ORDER ITEMS
-        // ===================================
         function renderOrderItems() {
             const orderItemsContainer = document.getElementById('orderItems');
+            if (!orderItemsContainer) return;
+
+            if (cartItems.length === 0) {
+                orderItemsContainer.innerHTML = '<p style="text-align: center; color: var(--color-error);">Your cart is empty.</p>';
+                document.getElementById('placeOrderBtn').disabled = true;
+                return;
+            }
+
             let html = '';
-            
             cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
                 html += `
                     <div class="order-item">
                         <div class="order-item-image">
@@ -890,22 +1096,20 @@
                             <div class="order-item-quantity">Qty: ${item.quantity}</div>
                         </div>
                         <div class="order-item-price">
-                            $${(item.price * item.quantity).toFixed(2)}
+                            $${itemTotal.toFixed(2)}
                         </div>
                     </div>
                 `;
             });
-            
+
             orderItemsContainer.innerHTML = html;
+            document.getElementById('placeOrderBtn').disabled = false;
         }
 
-        // ===================================
-        // CALCULATE TOTALS
-        // ===================================
         function calculateTotals() {
             const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal >= 100 ? 0 : 9.99;
-            const tax = subtotal * 0.1;
+            const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+            const tax = subtotal * TAX_RATE;
             const total = subtotal + shipping + tax;
 
             document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
@@ -915,90 +1119,215 @@
         }
 
         // ===================================
-        // PAYMENT METHOD TOGGLE
+        // PAYMENT METHOD & FORMATTING
         // ===================================
+
         function setupPaymentMethods() {
             const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
             const cardDetails = document.getElementById('card-details');
-            
+            const cardInputs = cardDetails ? cardDetails.querySelectorAll('input[required]') : [];
+
+            const toggleCardDetails = (show) => {
+                if (cardDetails) {
+                    cardDetails.style.display = show ? 'block' : 'none';
+                    cardInputs.forEach(input => {
+                        if (show) {
+                            input.setAttribute('required', '');
+                        } else {
+                            input.removeAttribute('required');
+                        }
+                    });
+                }
+            };
+
             paymentRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    if (this.value === 'credit-card') {
-                        cardDetails.style.display = 'block';
-                        cardDetails.querySelectorAll('input').forEach(input => {
-                            input.setAttribute('required', 'required');
-                        });
-                    } else {
-                        cardDetails.style.display = 'none';
-                        cardDetails.querySelectorAll('input').forEach(input => {
-                            input.removeAttribute('required');
-                        });
-                    }
+                    toggleCardDetails(this.value === 'credit-card');
                 });
             });
+
+            // Set initial state on load
+            const initialPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            toggleCardDetails(initialPaymentMethod === 'credit-card');
         }
 
-        // ===================================
-        // FORMAT CARD NUMBER
-        // ===================================
         function formatCardNumber() {
-            const cardInput = document.querySelector('input[name="cardNumber"]');
+            const cardInput = document.getElementById('cardNumber');
             if (cardInput) {
                 cardInput.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\s/g, '');
+                    // Remove all non-digits, then format with spaces
+                    let value = e.target.value.replace(/\D/g, '');
+                    // Format as groups of 4 digits
                     let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-                    e.target.value = formattedValue;
+                    e.target.value = formattedValue.substring(0, 19); // Max length 19 (16 digits + 3 spaces)
+                });
+            }
+        }
+
+        function formatExpiryDate() {
+            const expiryInput = document.getElementById('expiryDate');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+
+                    if (value.length > 2) {
+                        // Max length is 4 digits (MMYY)
+                        value = value.substring(0, 4);
+
+                        // Ensure the month is 01-12
+                        const month = parseInt(value.substring(0, 2), 10);
+                        if (month === 0) { // Disallow 00, enforce 01 if user types 0 at start
+                            value = '01' + value.substring(2);
+                        } else if (month > 12) {
+                            value = '12' + value.substring(2);
+                        }
+
+                        // Add slash after two digits
+                        value = value.substring(0, 2) + '/' + value.substring(2);
+                    }
+
+                    e.target.value = value.substring(0, 5); // Max length 5 (MM/YY)
                 });
             }
         }
 
         // ===================================
+        // FORM VALIDATION
+        // ===================================
+
+        function validateForm(form) {
+            // 1. Native HTML5 validation check
+            if (!form.checkValidity()) {
+                // This triggers browser's built-in error messages and focuses the first invalid field
+                form.reportValidity();
+                return false;
+            }
+
+            // 2. Custom Payment-specific validation
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            if (paymentMethod === 'credit-card') {
+                const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const expiryDate = document.getElementById('expiryDate').value;
+                const cvv = document.getElementById('cvv').value;
+
+                // Card Number Validation (13-19 digits)
+                if (cardNumber.length < 13 || cardNumber.length > 19 || !/^\d+$/.test(cardNumber)) {
+                    alert('Please enter a valid card number (13-19 digits).');
+                    document.getElementById('cardNumber').focus();
+                    return false;
+                }
+                // Expiry Date Validation (MM/YY format and future date check)
+                if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+                    alert('Please enter a valid expiry date in MM/YY format.');
+                    document.getElementById('expiryDate').focus();
+                    return false;
+                }
+
+                // Check if the card has expired
+                const [monthStr, yearStr] = expiryDate.split('/');
+                const expiryMonth = parseInt(monthStr, 10);
+                // Convert YY to YYYY (assuming current century, safe enough for demo)
+                const expiryYear = 2000 + parseInt(yearStr, 10);
+                const now = new Date();
+                const currentYear = now.getFullYear();
+                const currentMonth = now.getMonth() + 1; // getMonth is 0-indexed
+
+                if (expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth)) {
+                    alert('The card expiry date is in the past.');
+                    document.getElementById('expiryDate').focus();
+                    return false;
+                }
+
+                // CVV Validation (3 or 4 digits)
+                if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
+                    alert('Please enter a valid CVV (3 or 4 digits).');
+                    document.getElementById('cvv').focus();
+                    return false;
+                }
+            }
+
+            // 3. Shipping Address required fields check is handled by native form validation
+            // due to the use of toggleRequiredFields function.
+
+            return true;
+        }
+
+        // ===================================
         // PLACE ORDER
         // ===================================
+
         function placeOrder(event) {
             event.preventDefault();
-            
             const form = event.target;
-            const formData = new FormData(form);
+
+            if (cartItems.length === 0) {
+                alert("Your cart is empty. Please add items to place an order.");
+                return;
+            }
+
+            if (!validateForm(form)) {
+                return; // Stop if validation fails
+            }
+
             const placeOrderBtn = document.getElementById('placeOrderBtn');
-            
-            // Disable button
+
+            // Disable button and show spinner
             placeOrderBtn.disabled = true;
             placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            
-            // Simulate API call
+
+            // Simulate a successful API call delay
             setTimeout(() => {
+                // Gather form data (optional in this demo, but good practice)
+                const formData = new FormData(form);
+                const orderData = Object.fromEntries(formData.entries());
+                orderData.cartItems = cartItems; // Include cart items in the final data
+                orderData.total = document.getElementById('total').textContent;
+
+                // Console log for inspection
+                console.log("Order Data Submitted:", orderData);
+
                 // Generate random order number
-                const orderNumber = 'TS' + Math.floor(Math.random() * 1000000);
-                
-                // Hide form and show success message
-                document.getElementById('checkoutForm').style.display = 'none';
-                document.getElementById('successMessage').classList.add('show');
+                const orderNumber = 'TS' + Math.floor(Math.random() * 900000 + 100000); // 6-digit number
+
+                // 1. Hide form and show success message
+                const checkoutFormContainer = document.getElementById('checkoutFormContainer');
+                const successMessage = document.getElementById('successMessage');
+
+                if (checkoutFormContainer) checkoutFormContainer.style.display = 'none';
+                if (successMessage) successMessage.classList.add('show');
                 document.getElementById('orderNumber').textContent = orderNumber;
-                
-                // Clear cart
+
+                // 2. Clear cart and reset local storage (simulating successful transaction)
                 localStorage.removeItem('cartItems');
-                
-                // Scroll to top
+                cartItems = []; // Clear in-memory cart
+
+                // 3. Scroll to top for visibility
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                // Update progress
-                document.querySelectorAll('.progress-step').forEach(step => {
-                    step.classList.add('active');
-                });
-            }, 2000);
+
+            }, 2000); // 2 second delay to simulate network latency
         }
 
         // ===================================
         // INITIALIZE
         // ===================================
         document.addEventListener('DOMContentLoaded', () => {
+            // Setup initial addresses for demo functionality
+            seedInitialAddresses();
+
+            // Setup core functionalities
             loadCartData();
             setupPaymentMethods();
             formatCardNumber();
+            formatExpiryDate();
+            renderAddressSelection(); // Must be called after loadCartData to set initial state
+
+            // Attach main form submission listener
+            const orderForm = document.getElementById('orderForm');
+            if (orderForm) {
+                orderForm.addEventListener('submit', placeOrder);
+            }
         });
     </script>
-
     <script src="../js/main.js"></script>
-</body>
+    </body>
 </html>
